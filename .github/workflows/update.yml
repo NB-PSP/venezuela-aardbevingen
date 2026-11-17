@@ -6,6 +6,11 @@ on:
     - cron: '45 3 1 * *'     # 23:45 HLV op de laatste dag van de vorige maand
     - cron: '0 2 28-31 * *'  # 22:00 HLV op de avond vóór dag 28-31 (extra zekerheid bij maandwissel)
   workflow_dispatch:
+    inputs:
+      forceer:
+        description: 'Ook committen als er geen nieuwe bevingen zijn (test van de keten tot en met Vercel)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -33,7 +38,7 @@ jobs:
       - name: FUNVISIS ophalen
         run: |
           for i in 1 2 3; do
-            node scripts/scrape_funvisis.mjs && exit 0
+            node scripts/scrape_funvisis.mjs ${{ inputs.forceer && '--forceer' || '' }} && exit 0
             [ "$i" = "3" ] && { echo "Na 3 rondes nog steeds mislukt."; exit 1; }
             echo "Ronde $i mislukt; over 2 minuten opnieuw..."
             sleep 120
@@ -42,8 +47,9 @@ jobs:
       - name: Committen als er iets veranderd is
         run: |
           if [ -n "$(git status --porcelain data/)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            # Onder de naam van de repo-eigenaar, zodat Vercel (Hobby) de commit niet blokkeert
+            git config user.name "NB-PSP"
+            git config user.email "198725747+NB-PSP@users.noreply.github.com"
             git add data/
             git commit -m "Gegevens bijgewerkt $(date -u +%Y-%m-%dT%H:%MZ)"
             git push

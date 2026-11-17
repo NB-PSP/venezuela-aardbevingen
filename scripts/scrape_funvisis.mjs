@@ -183,7 +183,7 @@ async function main() {
   const events = [...perId.values()].sort((a, b) => (a.utc < b.utc ? 1 : a.utc > b.utc ? -1 : 0));
   const meta = await leesJson(META_FILE, {});
   const nuIso = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
-  const verouderd = !meta.laatste_controle_utc || Date.now() - Date.parse(meta.laatste_controle_utc) > META_VERVERS_MS;
+  const verouderd = args.includes('--forceer') || !meta.laatste_controle_utc ||Date.now() - Date.parse(meta.laatste_controle_utc) > META_VERVERS_MS;
   const veranderd = nieuw > 0 || gewijzigd > 0;
 
   log(`Nieuw: ${nieuw}, gewijzigd: ${gewijzigd}, totaal opgeslagen: ${events.length}`);
