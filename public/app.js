@@ -296,7 +296,7 @@ function periodBlock(prefix, evs, weeks, months) {
 function statCards(el, st, since, extra = []) {
   const m = st.max, l = st.latest;
   clear(el).append(
-    card('Aantal bevingen', fi(st.n), `sinds ${since}`),
+    card('Aantal bevingen', fi(st.n), since),
     m ? card('Grootste', `M ${f1(m.mag)}`, `${fmtD(m.datum_hlv)} ${m.tijd_hlv} HLV · ${f1(m.diepte_km)} km diep · ${f1(m.afstand)} km van La Guaira`) : card('Grootste', '–'),
     l ? card('Laatste', `M ${f1(l.mag)}`, `${fmtD(l.datum_hlv)} ${l.tijd_hlv} HLV · ${f1(l.diepte_km)} km diep · ${l.plaats}`) : card('Laatste', '–'),
     ...extra);
@@ -348,7 +348,6 @@ function build(cfg, events, off, meta, geo) {
 
   /* Deel 1 */
   $('lg-lead').textContent = `Bevingen binnen ${R} km van 10,60° N, 66,93° W (afstand berekend met de haversine-formule), sinds ${fmtD(first)}.`;
-  statCards($('lg-stats'), stats(lg), fmtD(first));
   legend($('lg-legend')); legend($('r-legend'));
   const sel = $('lg-filter');
   sel.replaceChildren(h('option', { value: 'all' }, 'Alle bevingen'),
@@ -359,13 +358,16 @@ function build(cfg, events, off, meta, geo) {
     const sub = v === 'all' ? lg : lg.filter((e) => (v.startsWith('m:') ? e.mo === v.slice(2) : e.wk === v.slice(2)));
     mapLG($('lg-map'), clear($('lg-detail')).appendChild(h('p', { class: 'note' }, 'Tik of beweeg over een punt voor details.')) && $('lg-detail'), sub, cfg, geo);
     $('lg-count').textContent = `${fi(sub.length)} bevingen getoond`;
+    // Kerncijfers volgen de gekozen periode
+    const label = v === 'all' ? `sinds ${fmtD(first)}` : v.startsWith('m:') ? `in ${monthLabel(v.slice(2))}` : `in ${weeks.find((w) => w.key === v.slice(2)).label}, ${weeks.find((w) => w.key === v.slice(2)).range}`;
+    statCards($('lg-stats'), stats(sub), label);
   };
   sel.addEventListener('change', drawLG); drawLG();
   periodBlock('lg', lg, weeks, months);
   listTable($('lg-list'), lg);
 
   /* Deel 2 */
-  statCards($('r-stats'), stats(rest), fmtD(first), [card('Buurlanden (niet meegeteld)', fi(buur.length), 'bevingen die FUNVISIS ook meldt, net buiten Venezuela')]);
+  statCards($('r-stats'), stats(rest), `sinds ${fmtD(first)}`, [card('Buurlanden (niet meegeteld)', fi(buur.length), 'bevingen die FUNVISIS ook meldt, net buiten Venezuela')]);
   const startReeks = off.start_reeks;
   const vz = events.filter((e) => e.zone !== 'buur');
   const perDag = new Map(); for (const e of vz) if (e.datum_hlv >= startReeks) perDag.set(e.datum_hlv, (perDag.get(e.datum_hlv) || 0) + 1);
