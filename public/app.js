@@ -367,8 +367,17 @@ function showDetail(el, e) {
       h('dt', {}, t('det_src')), h('dd', {}, h('a', { href: e.rapport, rel: 'noopener' }, t('det_report')))));
 }
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeSheet(); });
-/* Safari (iOS) negeert user-scalable=no: blokkeer daar de knijpzoom van de pagina. De kaarten zoomen via pointer-events en blijven werken. */
-for (const type of ['gesturestart', 'gesturechange']) document.addEventListener(type, (ev) => ev.preventDefault(), { passive: false });
+/* Paginazoom op telefoons blokkeren. Safari (iOS) negeert user-scalable=no en touch-action op de pagina,
+   dus: geen gesture-events, geen bewegingen met twee vingers en geen dubbeltik buiten de kaarten.
+   De kaarten zoomen zelf via pointer-events; die blijven werken omdat alleen de standaardactie wordt tegengehouden. */
+for (const type of ['gesturestart', 'gesturechange', 'gestureend']) document.addEventListener(type, (ev) => ev.preventDefault(), { passive: false });
+document.addEventListener('touchmove', (ev) => { if (ev.touches.length > 1 || (ev.scale !== undefined && ev.scale !== 1)) ev.preventDefault(); }, { passive: false });
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (ev) => {
+  const now = Date.now();
+  if (now - lastTouchEnd < 350 && !ev.target.closest?.('.mapbox, a, button, input, select, summary, label, [role=button], [tabindex]')) ev.preventDefault(); // dubbeltik-zoom
+  lastTouchEnd = now;
+}, { passive: false });
 
 /* ---------- satellietbeeld (NASA GIBS Blue Marble, alleen als de bezoeker dat aanzet) ---------- */
 const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8';
