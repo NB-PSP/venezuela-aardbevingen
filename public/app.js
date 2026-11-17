@@ -138,11 +138,31 @@ function pointEl(e, cx, cy, r, detailEl, group) {
   return c;
 }
 
+/* ---------- land en kust (uit data/geo.json) ---------- */
+function landLayer(geoPart, proj, extra = {}) {
+  const g = sv('g', extra);
+  for (const land of geoPart.landen) {
+    const d = land.ringen.map((r) => { let t = ''; for (let i = 0; i < r.length; i += 2) { const [x, y] = proj(r[i], r[i + 1]); t += `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`; } return t + 'Z'; }).join('');
+    g.append(sv('path', { d, class: land.vz ? 'land vz' : 'land', 'fill-rule': 'evenodd' }));
+  }
+  return g;
+}
+function placesLayer(plaatsen, proj, fs, dx) {
+  const g = sv('g');
+  for (const [naam, lat, lon] of plaatsen) {
+    const [x, y] = proj(lon, lat);
+    g.append(sv('circle', { cx: x, cy: y, r: fs * 0.22, style: 'fill:var(--text);opacity:.7' }), sv('text', { x: x + dx, y: y + fs * 0.3, 'font-size': fs, class: 'place' }, naam));
+  }
+  return g;
+}
+
 /* ---------- kaart La Guaira ---------- */
-function mapLG(el, detailEl, evs, cfg) {
+function mapLG(el, detailEl, evs, cfg, geo) {
   const R = cfg.la_guaira.straal_km, { lat: lat0, lon: lon0 } = cfg.la_guaira, k = Math.cos(rad(lat0)) * 111.32;
   const pts = sv('g');
   const svg = sv('svg', { class: 'map', viewBox: `${-R - 8} ${-R - 8} ${2 * R + 16} ${2 * R + 16}`, role: 'img', 'aria-label': `Kaart met ${evs.length} bevingen binnen ${R} km van La Guaira`, style: '--sw:.25' });
+  const projKm = (lon, lat) => [(lon - lon0) * k, -(lat - lat0) * 110.574];
+  if (geo) { svg.append(landLayer(geo.lg, projKm)); svg.append(placesLayer(geo.lg.plaatsen, projKm, 2.6, 1.5)); }
   for (let r = 10; r <= R; r += 10) {
     svg.append(sv('circle', { class: r === R ? 'ring main' : 'ring', cx: 0, cy: 0, r }));
     svg.append(sv('text', { x: r * 0.7071 + .6, y: -r * 0.7071 - .3, 'font-size': 2.6 }, `${r} km`));
@@ -161,15 +181,16 @@ function mapLG(el, detailEl, evs, cfg) {
 }
 
 /* ---------- kaart rest van Venezuela (raster van lengte/breedte) ---------- */
-function mapRest(el, detailEl, evs) {
+function mapRest(el, detailEl, evs, geo) {
   if (!evs.length) { clear(el).append(h('p', { class: 'note' }, 'Geen bevingen.')); return; }
   const lons = evs.map((e) => e.lon), lats = evs.map((e) => e.lat);
-  const minLon = Math.floor(Math.min(...lons)), maxLon = Math.ceil(Math.max(...lons));
-  const minLat = Math.floor(Math.min(...lats)), maxLat = Math.ceil(Math.max(...lats));
+  const minLon = Math.min(-74, Math.floor(Math.min(...lons))), maxLon = Math.max(-59, Math.ceil(Math.max(...lons)));
+  const minLat = Math.min(0, Math.floor(Math.min(...lats))), maxLat = Math.max(13, Math.ceil(Math.max(...lats)));
   const k = Math.cos(rad((minLat + maxLat) / 2)), W = (maxLon - minLon) * k, H = maxLat - minLat, mL = 1.1, mB = 0.9;
   const X = (lon) => (lon - minLon) * k, Y = (lat) => maxLat - lat;
   const svg = sv('svg', { class: 'map', viewBox: `${-mL} -0.3 ${W + mL + 0.3} ${H + mB + 0.3}`, role: 'img', 'aria-label': `Overzichtskaart met ${evs.length} bevingen`, style: '--sw:.03' });
   const line = { style: 'stroke:var(--grid);stroke-width:.03' };
+  if (geo) { svg.append(landLayer(geo.regio, (lo, la) => [X(lo), Y(la)])); }
   for (let lo = minLon; lo <= maxLon; lo++) {
     svg.append(sv('line', { ...line, x1: X(lo), x2: X(lo), y1: 0, y2: H }));
     if (lo % 2 === 0) svg.append(sv('text', { x: X(lo), y: H + 0.7, 'font-size': 0.5, 'text-anchor': 'middle' }, `${Math.abs(lo)}°${lo < 0 ? 'W' : 'O'}`));
@@ -178,6 +199,7 @@ function mapRest(el, detailEl, evs) {
     svg.append(sv('line', { ...line, x1: 0, x2: W, y1: Y(la), y2: Y(la) }));
     svg.append(sv('text', { x: -0.15, y: Y(la) + 0.17, 'font-size': 0.5, 'text-anchor': 'end' }, `${Math.abs(la)}°${la >= 0 ? 'N' : 'Z'}`));
   }
+  if (geo) svg.append(placesLayer(geo.regio.plaatsen, (lo, la) => [X(lo), Y(la)], 0.42, 0.18));
   const pts = sv('g');
   for (const e of [...evs].sort((a, b) => a.mag - b.mag)) pts.append(pointEl(e, +X(e.lon).toFixed(3), +Y(e.lat).toFixed(3), +(0.02 + 0.014 * e.mag).toFixed(3), detailEl, pts));
   svg.append(pts);
@@ -244,12 +266,30 @@ function lineChart(el, official, daily, ariaLabel) {
 }
 
 /* ---------- week/maand-blokken ---------- */
+/* Staafdiagram met een venster van `size` staven en knoppen < en > om 1 week/maand op te schuiven. */
+function windowed(el, items, size, aria, noun, minGap) {
+  let end = items.length;
+  const prev = h('button', { type: 'button', class: 'more navbtn', 'aria-label': `Een ${noun} eerder` }, '‹');
+  const next = h('button', { type: 'button', class: 'more navbtn', 'aria-label': `Een ${noun} later` }, '›');
+  const info = h('span', { class: 'note', 'aria-live': 'polite' });
+  el.parentNode.insertBefore(h('div', { class: 'filter navrow' }, prev, next, info), el);
+  const draw = () => {
+    const start = Math.max(0, end - size), part = items.slice(start, end);
+    barChart(el, part, aria, minGap);
+    info.textContent = `${part[0].span.split(' – ')[0]} t/m ${part[part.length - 1].span.split(' – ').pop()}`;
+    prev.disabled = start <= 0; next.disabled = end >= items.length;
+  };
+  prev.addEventListener('click', () => { end = Math.max(Math.min(size, items.length), end - 1); draw(); });
+  next.addEventListener('click', () => { end = Math.min(items.length, end + 1); draw(); });
+  draw();
+}
+
 function periodBlock(prefix, evs, weeks, months) {
   const wk = buckets(evs, weeks, (e) => e.wk), mo = buckets(evs, months, (e) => e.mo);
   const tipOf = (b, naam) => b.n ? `${naam}: ${fi(b.n)} bevingen, hoogste magnitude ${f1(b.max.mag)}, gemiddelde ${f1(b.avg)}.` : `${naam}: geen bevingen.`;
-  barChart($(`${prefix}-weekchart`), wk.map((b) => ({ value: b.n, tick: b.short, tip: tipOf(b, `${b.label}, ${b.range}`) })), 'Aantal bevingen per week');
+  windowed($(`${prefix}-weekchart`), wk.map((b) => ({ value: b.n, tick: b.short, tip: tipOf(b, `${b.label}, ${b.range}`), span: b.range })), 16, 'Aantal bevingen per week', 'week', 36);
   table($(`${prefix}-weektable`), ['Week', 'Periode', 'Aantal', 'Hoogste mag.'], [...wk].reverse().map((b) => [b.label, b.range, fi(b.n), b.n ? f1(b.max.mag) : '–']));
-  barChart($(`${prefix}-monthchart`), mo.map((b) => ({ value: b.n, tick: MND_KORT[+b.key.slice(5) - 1], tip: tipOf(b, monthLabel(b.key)) })), 'Aantal bevingen per maand', 40);
+  windowed($(`${prefix}-monthchart`), mo.map((b) => ({ value: b.n, tick: MND_KORT[+b.key.slice(5) - 1], tip: tipOf(b, monthLabel(b.key)), span: monthLabel(b.key) })), 6, 'Aantal bevingen per maand', 'maand', 40);
   table($(`${prefix}-monthtable`), ['Maand', 'Aantal', 'Gemiddelde mag.', 'Hoogste mag.'], [...mo].reverse().map((b) => [monthLabel(b.key), fi(b.n), b.n ? f1(b.avg) : '–', b.n ? f1(b.max.mag) : '–']));
 }
 
@@ -265,10 +305,10 @@ function statCards(el, st, since, extra = []) {
 /* ---------- hoofdprogramma ---------- */
 async function load() {
   const get = async (f) => { const r = await fetch(`data/${f}`, { cache: 'no-cache' }); if (!r.ok) throw new Error(`${f}: HTTP ${r.status}`); return r.json(); };
-  return Promise.all([get('config.json'), get('events.json'), get('official.json'), get('meta.json')]);
+  return Promise.all([get('config.json'), get('events.json'), get('official.json'), get('meta.json'), get('geo.json').catch(() => null)]);
 }
 
-function build(cfg, events, off, meta) {
+function build(cfg, events, off, meta, geo) {
   const { lat: la0, lon: lo0, straal_km: R } = cfg.la_guaira;
   const terms = cfg.buurland_plaatsen.map(norm);
   for (const e of events) {
@@ -317,7 +357,7 @@ function build(cfg, events, off, meta) {
   const drawLG = () => {
     const v = sel.value;
     const sub = v === 'all' ? lg : lg.filter((e) => (v.startsWith('m:') ? e.mo === v.slice(2) : e.wk === v.slice(2)));
-    mapLG($('lg-map'), clear($('lg-detail')).appendChild(h('p', { class: 'note' }, 'Tik of beweeg over een punt voor details.')) && $('lg-detail'), sub, cfg);
+    mapLG($('lg-map'), clear($('lg-detail')).appendChild(h('p', { class: 'note' }, 'Tik of beweeg over een punt voor details.')) && $('lg-detail'), sub, cfg, geo);
     $('lg-count').textContent = `${fi(sub.length)} bevingen getoond`;
   };
   sel.addEventListener('change', drawLG); drawLG();
@@ -352,7 +392,7 @@ function build(cfg, events, off, meta) {
   ];
   table($('r-compare'), ['Soort', 'Periode', 'Officieel', 'Losse lijst', 'Verschil', 'Bron'], rows);
 
-  mapRest($('r-map'), $('r-detail'), rest);
+  mapRest($('r-map'), $('r-detail'), rest, geo);
   periodBlock('r', rest, weeks, months);
   listTable($('r-list'), rest);
   $('r-neigh-s').textContent = `Bevingen in buurlanden (${fi(buur.length)}, niet meegeteld)`;
@@ -377,7 +417,7 @@ function initChrome() {
 }
 
 initChrome();
-load().then(([cfg, events, off, meta]) => build(cfg, events, off, meta)).catch((err) => {
+load().then(([cfg, events, off, meta, geo]) => build(cfg, events, off, meta, geo)).catch((err) => {
   console.error(err);
   clear($('ov-cards')).append(h('div', { class: 'warn', role: 'alert' }, `De gegevens konden niet worden geladen (${err.message}). Probeer het later opnieuw.`));
 });
