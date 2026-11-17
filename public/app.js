@@ -291,7 +291,7 @@ function buckets(list, keys, keyOf) {
 
 /* ---------- toestand ---------- */
 const mq = { phone: matchMedia('(max-width: 599px)'), sheet: matchMedia('(max-width: 819px)') };
-const S = { period: { mode: 'all', idx: 0 }, win: {} }; // gekozen periode en venster van de grafieken
+const S = { period: { lg: { mode: 'all', idx: 0 }, r: { mode: 'all', idx: 0 } }, win: {} }; // gekozen periode per deel en venster van de grafieken
 let D = null; // afgeleide gegevens (na het laden)
 const charts = []; // functies die grafieken opnieuw tekenen (bij andere breedte)
 const lists = []; // functies die lijsten opnieuw opbouwen (bij wisselen telefoon/computer)
@@ -695,9 +695,9 @@ function mapLG(el, detailEl, evs) {
 }
 
 /* ---------- kaart rest van Venezuela (uitsnede op de gegevens) ---------- */
-function mapRest(el, detailEl, evs) {
-  if (!evs.length) { clear(el).append(h('p', { class: 'note' }, t('none'))); placeholder(detailEl); return; }
-  const lons = evs.map((e) => e.lon), lats = evs.map((e) => e.lat);
+function mapRest(el, detailEl, evs, extentEvs = evs) {
+  if (!extentEvs.length) { clear(el).append(h('p', { class: 'note' }, t('none'))); placeholder(detailEl); return; }
+  const lons = extentEvs.map((e) => e.lon), lats = extentEvs.map((e) => e.lat);
   const minLon = Math.floor(Math.min(...lons) - 0.5), maxLon = Math.ceil(Math.max(...lons) + 0.5);
   const minLat = Math.floor(Math.min(...lats) - 0.5), maxLat = Math.ceil(Math.max(...lats) + 0.5);
   const k = Math.cos(rad((minLat + maxLat) / 2)), Wd = (maxLon - minLon) * k, Hd = maxLat - minLat;
@@ -913,23 +913,33 @@ function applyStatic() {
 }
 
 /* ---------- tekenen ---------- */
-function periodInfo() {
-  const { mode, idx } = S.period;
-  if (mode === 'm') { const m = D.months[idx]; return { sub: D.lg.filter((e) => e.mo === m.key), cur: monthLabel(m.key), since: t('in_month', { m: monthLabel(m.key) }) }; }
-  if (mode === 'w') { const w = D.weeks[idx]; return { sub: D.lg.filter((e) => e.wk === w.key), cur: `${weekLabel(w)}: ${weekRange(w)}`, since: t('in_week', { w: weekLabel(w), r: weekRange(w) }) }; }
-  return { sub: D.lg, cur: '', since: t('since_first', { d: fmtD(D.first) }) };
+/* Gekozen periode per deel ('lg' = La Guaira, 'r' = rest van Venezuela): filter voor een lijst bevingen. */
+function periodInfo(key, list) {
+  const { mode, idx } = S.period[key], f = (fn) => list.filter(fn);
+  if (mode === 'm') { const m = D.months[idx]; return { pick: (l) => l.filter((e) => e.mo === m.key), sub: f((e) => e.mo === m.key), cur: monthLabel(m.key), since: t('in_month', { m: monthLabel(m.key) }) }; }
+  if (mode === 'w') { const w = D.weeks[idx]; return { pick: (l) => l.filter((e) => e.wk === w.key), sub: f((e) => e.wk === w.key), cur: `${weekLabel(w)}: ${weekRange(w)}`, since: t('in_week', { w: weekLabel(w), r: weekRange(w) }) }; }
+  return { pick: (l) => l, sub: list, cur: '', since: t('since_first', { d: fmtD(D.first) }) };
+}
+function periodBar(key, info) {
+  const { mode, idx } = S.period[key], len = mode === 'm' ? D.months.length : D.weeks.length;
+  for (const b of $(`${key}-seg`).children) b.setAttribute('aria-pressed', String(b.dataset.p === mode));
+  $(`${key}-prev`).parentNode.hidden = mode === 'all';
+  $(`${key}-pcur`).textContent = info.cur;
+  $(`${key}-prev`).disabled = idx <= 0; $(`${key}-next`).disabled = idx >= len - 1;
+  $(`${key}-count`).textContent = t('count_shown', { n: fi(info.sub.length) });
 }
 function drawLG() {
-  const { mode, idx } = S.period, info = periodInfo(), len = mode === 'm' ? D.months.length : D.weeks.length;
-  for (const b of $('lg-seg').children) b.setAttribute('aria-pressed', String(b.dataset.p === mode));
-  document.querySelector('#lg-prev').parentNode.hidden = mode === 'all';
-  $('lg-pcur').textContent = info.cur;
-  $('lg-prev').disabled = idx <= 0; $('lg-next').disabled = idx >= len - 1;
-  $('lg-count').textContent = t('count_shown', { n: fi(info.sub.length) });
+  const info = periodInfo('lg', D.lg);
+  periodBar('lg', info);
   mapLG($('lg-map'), $('lg-detail'), info.sub);
   statCards($('lg-stats'), stats(info.sub), info.since); // kerncijfers volgen de gekozen periode
 }
-function drawRest() { mapRest($('r-map'), $('r-detail'), D.rest); }
+function drawRest() {
+  const info = periodInfo('r', D.rest);
+  periodBar('r', info);
+  mapRest($('r-map'), $('r-detail'), info.sub, D.rest); // uitsnede blijft die van alle bevingen, zodat de kaart niet verspringt
+  statCards($('r-stats'), stats(info.sub), info.since, [card(t('stat_buur'), fi(info.pick(D.buur).length), t('stat_buur_sub'))]);
+}
 
 function renderOverview() {
   const { off, meta, cfg, lastCum, events } = D, curMonth = D.today.slice(0, 7);
@@ -949,7 +959,6 @@ function renderOverview() {
 
 function renderRest() {
   const { rest, buur, vz, cum, wr, meta, first, startReeks, lastDay, lastCum } = D;
-  statCards($('r-stats'), stats(rest), t('since_first', { d: fmtD(first) }), [card(t('stat_buur'), fi(buur.length), t('stat_buur_sub'))]);
   const perDag = new Map(); for (const e of vz) if (e.datum_hlv >= startReeks) perDag.set(e.datum_hlv, (perDag.get(e.datum_hlv) || 0) + 1);
   const countUntil = (d) => vz.filter((e) => e.datum_hlv >= startReeks && e.datum_hlv <= d).length;
   const dailyEnd = lastCum.datum > lastDay ? lastCum.datum : lastDay;
@@ -992,7 +1001,7 @@ function renderAll() {
   legend($('lg-legend')); legend($('r-legend'));
   $('lg-sat').checked = sat.lg; $('r-sat').checked = sat.r;
   drawLG();
-  charts.push(() => mapLG($('lg-map'), $('lg-detail'), periodInfo().sub));
+  charts.push(() => mapLG($('lg-map'), $('lg-detail'), periodInfo('lg', D.lg).sub));
   periodBlock('lg', D.lg);
   const drawL = () => listTable($('lg-list'), D.lg);
   lists.push(drawL); drawL();
@@ -1031,14 +1040,16 @@ function initChrome() {
 
 function initControls() {
   // periodekiezer: Alles / Maand / Week plus ‹ ›
-  for (const b of $('lg-seg').children) b.addEventListener('click', () => {
-    const m = b.dataset.p;
-    S.period = { mode: m, idx: m === 'm' ? D.months.length - 1 : m === 'w' ? D.weeks.length - 1 : 0 };
-    drawLG();
-  });
-  const step = (d) => { const len = S.period.mode === 'm' ? D.months.length : D.weeks.length; S.period.idx = clamp(S.period.idx + d, 0, len - 1); drawLG(); };
-  $('lg-prev').addEventListener('click', () => step(-1));
-  $('lg-next').addEventListener('click', () => step(1));
+  for (const [key, draw] of [['lg', drawLG], ['r', drawRest]]) {
+    for (const b of $(`${key}-seg`).children) b.addEventListener('click', () => {
+      const m = b.dataset.p;
+      S.period[key] = { mode: m, idx: m === 'm' ? D.months.length - 1 : m === 'w' ? D.weeks.length - 1 : 0 };
+      draw();
+    });
+    const step = (d) => { const p = S.period[key], len = p.mode === 'm' ? D.months.length : D.weeks.length; p.idx = clamp(p.idx + d, 0, len - 1); draw(); };
+    $(`${key}-prev`).addEventListener('click', () => step(-1));
+    $(`${key}-next`).addEventListener('click', () => step(1));
+  }
   // satellietbeeld
   for (const [id, key, redraw] of [['lg-sat', 'lg', drawLG], ['r-sat', 'r', drawRest]]) {
     try { sat[key] = localStorage.getItem(`sat-${key}`) === '1'; } catch { /* geen opslag */ }

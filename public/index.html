@@ -109,7 +109,20 @@
       <p class="note" data-i18n="compare_note"></p>
 
       <h3 data-i18n="h_overview_map"></h3>
-      <div class="filter"><label class="switch"><input type="checkbox" id="r-sat"><span class="track" aria-hidden="true"></span><span data-i18n="sat"></span></label></div>
+      <div class="periodbar" role="group" aria-labelledby="r-period-l">
+        <span id="r-period-l" class="plabel" data-i18n="period"></span>
+        <div class="seg" id="r-seg">
+          <button type="button" class="segbtn" data-p="all" data-i18n="p_all"></button>
+          <button type="button" class="segbtn" data-p="m" data-i18n="p_m"></button>
+          <button type="button" class="segbtn" data-p="w" data-i18n="p_w"></button>
+        </div>
+        <div class="stepper">
+          <button type="button" class="more navbtn" id="r-prev" data-i18n-attr="aria-label:p_prev">‹</button>
+          <span class="pcur" id="r-pcur" aria-live="polite"></span>
+          <button type="button" class="more navbtn" id="r-next" data-i18n-attr="aria-label:p_next">›</button>
+        </div>
+      </div>
+      <div class="filter"><span class="note" id="r-count"></span><label class="switch"><input type="checkbox" id="r-sat"><span class="track" aria-hidden="true"></span><span data-i18n="sat"></span></label></div>
       <div class="mapwrap">
         <div><div id="r-map"></div><div class="legend" id="r-legend"></div></div>
         <div class="panel detail" id="r-detail" aria-live="polite"></div>
