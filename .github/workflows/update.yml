@@ -31,7 +31,13 @@ jobs:
             || echo "::warning::funvisis.gob.ve lijkt niet bereikbaar vanaf GitHub-servers; zie README voor het alternatief (Taakplanner)."
 
       - name: FUNVISIS ophalen
-        run: node scripts/scrape_funvisis.mjs
+        run: |
+          for i in 1 2 3; do
+            node scripts/scrape_funvisis.mjs && exit 0
+            [ "$i" = "3" ] && { echo "Na 3 rondes nog steeds mislukt."; exit 1; }
+            echo "Ronde $i mislukt; over 2 minuten opnieuw..."
+            sleep 120
+          done
 
       - name: Committen als er iets veranderd is
         run: |

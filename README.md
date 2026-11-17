@@ -39,7 +39,7 @@ node scripts/scrape_funvisis.mjs --droog    # alleen tonen, niets schrijven
 node scripts/serve.mjs                      # dashboard op http://localhost:8080
 ```
 
-Let op: de FUNVISIS-database valt geregeld even weg ("fuera de servicio"). Het script probeert het dan opnieuw (3 keer, bij `--vanaf` 8 keer).
+Let op: de FUNVISIS-database valt geregeld even weg ("fuera de servicio"). Het script probeert het dan opnieuw (6 keer per pagina, bij `--vanaf` 8 keer, met oplopende pauze), en de workflow doet daarbovenop tot 3 rondes met 2 minuten ertussen. Pas als alles mislukt krijg je een foutmail.
 
 ## Handmatig een update starten
 

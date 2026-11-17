@@ -26,8 +26,8 @@ const args = process.argv.slice(2);
 const droog = args.includes('--droog');
 const vanafIdx = args.indexOf('--vanaf');
 const vanaf = vanafIdx >= 0 ? args[vanafIdx + 1] : null;
-// FUNVISIS' database valt geregeld even weg. Normale run: 3 pogingen; backfill: meer geduld.
-const POGINGEN = vanaf ? 8 : 3;
+// FUNVISIS' database valt geregeld even weg. Daarom meer dan 3 pogingen met oplopende pauze.
+const POGINGEN = vanaf ? 8 : 6;
 
 const log = (...a) => console.log(...a);
 const slaap = (ms) => new Promise((r) => setTimeout(r, ms));
