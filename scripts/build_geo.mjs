@@ -82,10 +82,43 @@ function bouw(bbox, tol, dec) {
   return { bbox, landen };
 }
 
-// Plaatsen ter oriëntatie (lat, lon)
-const plaatsRegio = [['Caracas', 10.48, -66.90], ['Maracaibo', 10.64, -71.64], ['Valencia', 10.16, -68.00], ['Barquisimeto', 10.07, -69.32], ['San Felipe', 10.34, -68.74], ['Mérida', 8.59, -71.15], ['San Cristóbal', 7.77, -72.22], ['Cumaná', 10.46, -64.18], ['Maturín', 9.75, -63.18], ['Ciudad Bolívar', 8.12, -63.55], ['Puerto Ayacucho', 5.66, -67.62]];
-const plaatsLG = [['Caracas', 10.4806, -66.9036], ['Los Teques', 10.3443, -67.0426], ['Naiguatá', 10.615, -66.74], ['Guarenas', 10.47, -66.61], ['La Guaira', 10.601, -66.933, 'w']];
-// Vierde element 'w' = label links van het punt. Macuto (10.607, -66.893) ontbreekt bewust: het valt samen met het huis-label van het middelpunt.
+// Plaatsen ter oriëntatie. rang: 1 = stad, 2 = plaats, 3 = dorp (hoogste rang krijgt voorrang bij overlappende labels op de kaart);
+// zijde: 'w' = label links van het punt (standaard rechts). Coördinaten van OpenStreetMap (Nominatim), gecontroleerd tegen de kaart.
+// Macuto ligt vlak bij het huis (middelpunt); de kaart laat het label vanzelf weg als het botst met het huis-icoon.
+const plaatsRegio = [{ naam: "Caracas", lat: 10.48, lon: -66.9, rang: 1 },
+  { naam: "Maracaibo", lat: 10.64, lon: -71.64, rang: 1 },
+  { naam: "Valencia", lat: 10.16, lon: -68, rang: 1 },
+  { naam: "Barquisimeto", lat: 10.07, lon: -69.32, rang: 1 },
+  { naam: "Ciudad Bolívar", lat: 8.12, lon: -63.55, rang: 1 },
+  { naam: "Maturín", lat: 9.75, lon: -63.18, rang: 1 },
+  { naam: "Maracay", lat: 10.2469, lon: -67.5958, rang: 2 },
+  { naam: "San Felipe", lat: 10.34, lon: -68.74, rang: 2 },
+  { naam: "Mérida", lat: 8.59, lon: -71.15, rang: 2 },
+  { naam: "San Cristóbal", lat: 7.77, lon: -72.22, rang: 2 },
+  { naam: "Cumaná", lat: 10.46, lon: -64.18, rang: 2 },
+  { naam: "Barcelona", lat: 10.1333, lon: -64.6833, rang: 2 },
+  { naam: "Coro", lat: 11.4045, lon: -69.6734, rang: 2 },
+  { naam: "Puerto Ayacucho", lat: 5.66, lon: -67.62, rang: 2 }];
+const plaatsLG = [{ naam: "Caraballeda", lat: 10.6128, lon: -66.8498, rang: 1, zijde: "e" },
+  { naam: "La Guaira", lat: 10.6, lon: -66.9296, rang: 1, zijde: "w" },
+  { naam: "Caracas", lat: 10.5061, lon: -66.9146, rang: 1 },
+  { naam: "Los Teques", lat: 10.3437, lon: -67.0453, rang: 1 },
+  { naam: "Guarenas", lat: 10.4663, lon: -66.6078, rang: 1 },
+  { naam: "Maiquetía", lat: 10.5966, lon: -66.9598, rang: 2, zijde: "w" },
+  { naam: "Catia La Mar", lat: 10.5993, lon: -67.0145, rang: 2, zijde: "w" },
+  { naam: "Macuto", lat: 10.6065, lon: -66.8923, rang: 2 },
+  { naam: "Naiguatá", lat: 10.6205, lon: -66.7395, rang: 2 },
+  { naam: "Petare", lat: 10.4787, lon: -66.8072, rang: 2 },
+  { naam: "Guatire", lat: 10.4685, lon: -66.5431, rang: 2 },
+  { naam: "San Antonio de los Altos", lat: 10.3789, lon: -66.96, rang: 2 },
+  { naam: "El Junquito", lat: 10.4614, lon: -67.0806, rang: 2 },
+  { naam: "Carayaca", lat: 10.5294, lon: -67.1204, rang: 2 },
+  { naam: "Tanaguarena", lat: 10.6119, lon: -66.8269, rang: 3 },
+  { naam: "Camurí Grande", lat: 10.6207, lon: -66.7152, rang: 3 },
+  { naam: "Los Caracas", lat: 10.6245, lon: -66.5717, rang: 3 },
+  { naam: "Puerto Carayaca", lat: 10.5673, lon: -67.1322, rang: 3 },
+  { naam: "Oricao", lat: 10.5533, lon: -67.1841, rang: 3 },
+  { naam: "Chichiriviche", lat: 10.5466, lon: -67.242, rang: 3 }];
 
 const geo = {
   bron: 'Natural Earth (publiek domein) via world-atlas 2.0.2',

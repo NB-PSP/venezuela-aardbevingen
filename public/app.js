@@ -56,7 +56,9 @@ const I18N = {
     neigh_note: 'FUNVISIS meldt ook bevingen net buiten Venezuela. Die tellen hierboven niet mee. De plaatsnamen waarop dit gebeurt staan in <code>data/config.json</code> (<code>buurland_plaatsen</code>).',
     f1: '<strong>Bron:</strong> FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas), <a href="http://www.funvisis.gob.ve/old/sis_mes.php" rel="noopener">sis_mes.php</a>. Officiële totalen en weekrapporten zijn handmatig overgenomen uit berichten van FUNVISIS via de media; de bronvermelding staat in <code>data/official.json</code>.',
     f2: '<strong>Tijdzone:</strong> HLV = Hora Legal de Venezuela = UTC−4, het hele jaar (geen zomertijd). Dagen, weken en maanden zijn op die tijd gebaseerd. Locaties en magnitudes kunnen later door FUNVISIS worden aangepast.',
-    f3: '<strong>Kaartgegevens:</strong> kust en landgrenzen van <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (publiek domein), vereenvoudigd; de kustlijn is een grove weergave. Het optionele satellietbeeld is een wolkenvrij NASA-composiet (Blue Marble, ca. 500 m per pixel) en wordt pas van <code>gibs.earthdata.nasa.gov</code> geladen als je het aanzet. Plaatsnamen dienen alleen ter oriëntatie.',
+    f3: '<strong>Kaartgegevens:</strong> de achtergrondkaart (kust, wegen, bebouwing) bestaat uit tegels van <a href="https://www.esri.com/" rel="noopener">Esri</a> (World Light/Dark Gray Base, met gegevens van <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>-bijdragers), geladen van <code>server.arcgisonline.com</code>. Zet je het satellietbeeld aan, dan worden in plaats daarvan Sentinel-2 cloudless-tegels van <a href="https://s2maps.eu" rel="noopener">EOX</a> geladen (<code>tiles.maps.eox.at</code>; bevat aangepaste Copernicus Sentinel-gegevens 2023). Daarbij zien die servers je IP-adres en welk gebied je bekijkt. Zolang de tegels niet binnen zijn (of zonder internet) toont de kaart een vereenvoudigde kust en landgrenzen van <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (publiek domein). De plaatsnamen zijn handmatig gekozen (coördinaten van OpenStreetMap) en dienen alleen ter oriëntatie.',
+    attr_base: '© <a href="https://www.esri.com/" rel="noopener">Esri</a>, HERE, Garmin, © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-bijdragers</a> en de GIS-gebruikersgemeenschap',
+    attr_sat: '<a href="https://s2maps.eu" rel="noopener">Sentinel-2 cloudless – s2maps.eu</a> door <a href="https://eox.at" rel="noopener">EOX</a> (bevat aangepaste Copernicus Sentinel-gegevens 2023)',
     f4: 'Deze pagina is een onofficieel, niet-commercieel overzicht en geen waarschuwingsdienst.',
     centre_fallback: 'het middelpunt',
     warn_old: 'Let op: de gegevens zijn {age} niet bijgewerkt (meer dan {limit} dagen). De getoonde cijfers kunnen achterlopen.',
@@ -147,7 +149,9 @@ const I18N = {
     neigh_note: 'FUNVISIS también reporta sismos justo fuera de Venezuela. Esos no se cuentan arriba. Los nombres de lugar con los que se detecta esto están en <code>data/config.json</code> (<code>buurland_plaatsen</code>).',
     f1: '<strong>Fuente:</strong> FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas), <a href="http://www.funvisis.gob.ve/old/sis_mes.php" rel="noopener">sis_mes.php</a>. Los totales oficiales y los informes semanales se transcribieron manualmente de comunicados de FUNVISIS difundidos por los medios; la fuente de cada cifra figura en <code>data/official.json</code>.',
     f2: '<strong>Zona horaria:</strong> HLV = Hora Legal de Venezuela = UTC−4, todo el año (sin horario de verano). Los días, semanas y meses se basan en esa hora. FUNVISIS puede ajustar más adelante las ubicaciones y magnitudes.',
-    f3: '<strong>Datos del mapa:</strong> costa y fronteras de <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (dominio público), simplificadas; la línea de costa es una representación aproximada. La imagen satelital opcional es un compuesto de la NASA sin nubes (Blue Marble, unos 500 m por píxel) y solo se carga desde <code>gibs.earthdata.nasa.gov</code> si la activas. Los nombres de lugar sirven solo de orientación.',
+    f3: '<strong>Datos del mapa:</strong> el mapa de fondo (costa, carreteras, zonas urbanas) se compone de teselas de <a href="https://www.esri.com/" rel="noopener">Esri</a> (World Light/Dark Gray Base, con datos de colaboradores de <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>), cargadas desde <code>server.arcgisonline.com</code>. Si activas la imagen satelital, se cargan en su lugar teselas Sentinel-2 cloudless de <a href="https://s2maps.eu" rel="noopener">EOX</a> (<code>tiles.maps.eox.at</code>; contiene datos modificados de Copernicus Sentinel 2023). Esos servidores ven tu dirección IP y la zona que miras. Mientras no lleguen las teselas (o sin internet) el mapa muestra una costa y fronteras simplificadas de <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (dominio público). Los nombres de lugar se eligieron a mano (coordenadas de OpenStreetMap) y sirven solo de orientación.',
+    attr_base: '© <a href="https://www.esri.com/" rel="noopener">Esri</a>, HERE, Garmin, © colaboradores de <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> y la comunidad de usuarios de GIS',
+    attr_sat: '<a href="https://s2maps.eu" rel="noopener">Sentinel-2 cloudless – s2maps.eu</a> por <a href="https://eox.at" rel="noopener">EOX</a> (contiene datos modificados de Copernicus Sentinel 2023)',
     f4: 'Esta página es un resumen no oficial y sin fines comerciales; no es un servicio de alerta.',
     centre_fallback: 'el punto central',
     warn_old: 'Atención: los datos no se han actualizado desde hace {age} (más de {limit} días). Las cifras mostradas pueden estar desactualizadas.',
@@ -379,18 +383,63 @@ document.addEventListener('touchend', (ev) => {
   lastTouchEnd = now;
 }, { passive: false });
 
-/* ---------- satellietbeeld (NASA GIBS Blue Marble, alleen als de bezoeker dat aanzet) ---------- */
-const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8';
-function satLayer([w, s, e, n], z, proj) {
-  const N = 2 ** z, lonX = (lo) => Math.floor((lo + 180) / 360 * N), latY = (la) => Math.floor((1 - Math.asinh(Math.tan(rad(la))) / Math.PI) / 2 * N);
-  const tLon = (x) => x / N * 360 - 180, tLat = (y) => Math.atan(Math.sinh(Math.PI * (1 - 2 * y / N))) * 180 / Math.PI;
-  const g = sv('g', { 'aria-hidden': 'true' });
-  for (let y = latY(n); y <= latY(s); y++) for (let x = lonX(w); x <= lonX(e); x++) {
-    const [x0, y0] = proj(tLon(x), tLat(y)), [x1, y1] = proj(tLon(x + 1), tLat(y + 1));
-    const ex = Math.abs(x1 - x0) * 0.004, ey = Math.abs(y1 - y0) * 0.004;
-    g.append(sv('image', { href: `${GIBS}/${z}/${y}/${x}.jpeg`, x: Math.min(x0, x1) - ex, y: Math.min(y0, y1) - ey, width: Math.abs(x1 - x0) + 2 * ex, height: Math.abs(y1 - y0) + 2 * ey, preserveAspectRatio: 'none' }));
+/* ---------- achtergrondkaart: tegels (Esri Light/Dark Gray Base, of EOX Sentinel-2 cloudless bij satellietbeeld) ---------- */
+const effTheme = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const ESRI = (v) => `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${v}_Gray_Base/MapServer/tile`;
+const TILE_SRC = { // max = hoogste zoomniveau met echte tegels (Esri: z17 geeft een lege tegel; EOX: z19 geeft 404)
+  light: { max: 16, url: (z, x, y) => `${ESRI('Light')}/${z}/${y}/${x}` },
+  dark: { max: 16, url: (z, x, y) => `${ESRI('Dark')}/${z}/${y}/${x}` },
+  sat: { max: 17, url: (z, x, y) => `https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2023_3857/default/g/${z}/${y}/${x}.jpg` },
+};
+const mapTiles = []; // per kaart: functie die de tegels ververst (bijv. na wisselen van thema)
+const TILE_CAP = 36;
+/* Laadt alleen tegels voor het zichtbare deel (+ marge), plaatst ze via de kaartprojectie (hoeken van de tegel)
+   en laat de oude tegels staan tot de nieuwe binnen zijn. */
+function makeTiles({ svg, host, proj, inv, view, isSat }) {
+  const NN = (z) => 2 ** z;
+  const lonX = (lo, z) => Math.floor((lo + 180) / 360 * NN(z)), latY = (la, z) => Math.floor((1 - Math.asinh(Math.tan(rad(la))) / Math.PI) / 2 * NN(z));
+  const tLon = (x, z) => x / NN(z) * 360 - 180, tLat = (y, z) => Math.atan(Math.sinh(Math.PI * (1 - 2 * y / NN(z)))) * 180 / Math.PI;
+  let gen = 0, timer = 0, pending = [], curKey = '';
+  function plan() {
+    const v = view(), key = isSat ? 'sat' : effTheme(), src = TILE_SRC[key], mx = v.w * 0.2, my = v.h * 0.2;
+    const [lonA] = inv(v.x, v.y), [lonB] = inv(v.x + v.w, v.y);
+    const [lonW, latN] = inv(v.x - mx, v.y - my), [lonE, latS] = inv(v.x + v.w + mx, v.y + v.h + my);
+    const wpx = svg.getBoundingClientRect().width || 343, dpr = window.devicePixelRatio || 1;
+    const zf = Math.log2(wpx * 360 / (Math.abs(lonB - lonA) * 256));
+    let z = clamp(Math.round(zf + (dpr >= 1.5 ? 0.5 : 0)), 3, src.max);
+    const range = (zz) => ({ x0: clamp(lonX(lonW, zz), 0, NN(zz) - 1), x1: clamp(lonX(lonE, zz), 0, NN(zz) - 1), y0: clamp(latY(latN, zz), 0, NN(zz) - 1), y1: clamp(latY(latS, zz), 0, NN(zz) - 1) });
+    let r = range(z);
+    while ((r.x1 - r.x0 + 1) * (r.y1 - r.y0 + 1) > TILE_CAP && z > 3) r = range(--z);
+    const tiles = []; for (let y = r.y0; y <= r.y1; y++) for (let x = r.x0; x <= r.x1; x++) tiles.push({ x, y });
+    return { src, z, tiles, key: `${key}/${z}/${r.x0},${r.x1},${r.y0},${r.y1}` };
   }
-  return g;
+  function swap(p, ok) {
+    if (!ok.length) return; // niets geladen (offline): oude tegels of de vector-kust blijven staan
+    const ng = sv('g');
+    for (const { t, im } of ok) {
+      const [x0, y0] = proj(tLon(t.x, p.z), tLat(t.y, p.z)), [x1, y1] = proj(tLon(t.x + 1, p.z), tLat(t.y + 1, p.z));
+      const ex = Math.abs(x1 - x0) * 0.004, ey = Math.abs(y1 - y0) * 0.004;
+      ng.append(sv('image', { href: im.src, x: Math.min(x0, x1) - ex, y: Math.min(y0, y1) - ey, width: Math.abs(x1 - x0) + 2 * ex, height: Math.abs(y1 - y0) + 2 * ey, preserveAspectRatio: 'none' }));
+    }
+    host.prepend(ng);
+    for (const c of [...host.children]) if (c !== ng) c.remove();
+  }
+  function run() {
+    const p = plan(); if (p.key === curKey) return;
+    curKey = p.key; const mine = ++gen;
+    for (const im of pending) { im.onload = im.onerror = null; im.src = ''; } // verouderde laadacties afbreken
+    pending = [];
+    const ok = []; let left = p.tiles.length, fin = false;
+    const finish = () => { if (fin || mine !== gen) return; fin = true; swap(p, ok); };
+    for (const t of p.tiles) {
+      const im = new Image(); im.decoding = 'async';
+      im.onload = () => { ok.push({ t, im }); if (--left <= 0) finish(); };
+      im.onerror = () => { if (--left <= 0) finish(); };
+      im.src = p.src.url(p.z, t.x, t.y); pending.push(im);
+    }
+    setTimeout(finish, 10000);
+  }
+  return { update(now) { clearTimeout(timer); if (now) { curKey = ''; run(); } else timer = setTimeout(run, 150); } };
 }
 
 /* ---------- land en kust (uit data/geo.json) ---------- */
@@ -405,7 +454,7 @@ function landLayer(geoPart, proj, extra = {}) {
 
 /* Tekst op de kaart: lettergrootte in schermpixels (via u = kaarteenheden per pixel), krimpt een beetje mee bij inzoomen. */
 function mapText(sc, u, x, y, px, text, o = {}) {
-  const el = sv('text', { 'text-anchor': o.anchor || 'start', class: o.cls || null, style: o.style || null }, text);
+  const el = sv('text', { 'text-anchor': o.anchor || 'start', class: o.cls || null, style: o.style || null, 'data-obs': '' }, text);
   sc((z) => {
     const f = z ** -0.6, fs = px * u * f;
     el.setAttribute('font-size', fs.toFixed(4));
@@ -415,15 +464,39 @@ function mapText(sc, u, x, y, px, text, o = {}) {
   });
   return el;
 }
-function placesLayer(plaatsen, proj, sc, u) {
-  const g = sv('g');
-  for (const [naam, lat, lon, side] of plaatsen) {
-    const [x, y] = proj(lon, lat), west = side === 'w';
-    const dot = sv('circle', { cx: x, cy: y, style: 'fill:var(--text);opacity:.7' });
-    sc((z) => dot.setAttribute('r', (2.4 * u * z ** -0.6).toFixed(4)));
-    g.append(dot, mapText(sc, u, x, y, 10.5, naam, { cls: 'place', dx: west ? -5 : 5, anchor: west ? 'end' : 'start', halo: 2.5 }));
+/* Plaatslabels met botsingsregels: hoogste rang eerst; een label vervalt als het een eerder label, een obstakel
+   (markering, knoppen, schaalbalk, gradenlabels) of de kaartrand raakt. Vaste grootte in schermpixels;
+   wordt opnieuw berekend bij elke zoom of verschuiving, zodat bij inzoomen meer dorpen verschijnen. */
+function labelsLayer(plaatsen, proj, px = 10.5) {
+  const g = sv('g'), items = plaatsen.map((p, i) => ({ p, i })).sort((a, b) => (a.p.rang ?? 2) - (b.p.rang ?? 2) || a.i - b.i).map(({ p }) => {
+    const [x, y] = proj(p.lon, p.lat), dot = sv('circle', { class: 'pdot', visibility: 'hidden' }), txt = sv('text', { class: 'place', visibility: 'hidden' }, p.naam);
+    g.append(dot, txt);
+    return { p, x, y, dot, txt, ratio: 0 };
+  });
+  const hit = (b, list, pad) => list.some((o) => b.l < o.r + pad && b.r > o.l - pad && b.t < o.b + pad && b.b > o.t - pad);
+  function layout(v, rect, obs) {
+    const s = rect.width / v.w, placed = [];
+    for (const it of items) {
+      if (!it.ratio) { it.txt.setAttribute('font-size', 10); it.ratio = (it.txt.getComputedTextLength() || it.p.naam.length * 6) / 10; }
+      const sx = rect.left + (it.x - v.x) * s, sy = rect.top + (it.y - v.y) * s;
+      let done = false;
+      if (sx > rect.left + 6 && sx < rect.right - 6 && sy > rect.top + 6 && sy < rect.bottom - 6) {
+        const w = it.ratio * px, hh = px * 1.3, dot = { l: sx - 4, r: sx + 4, t: sy - 4, b: sy + 4 };
+        for (const side of it.p.zijde === 'w' ? ['w', 'e'] : ['e', 'w']) {
+          const l = side === 'e' ? sx + 6 : sx - 6 - w, b = { l, r: l + w, t: sy - hh / 2, b: sy + hh / 2 };
+          if (b.l < rect.left + 3 || b.r > rect.right - 3 || b.t < rect.top + 3 || b.b > rect.bottom - 3) continue;
+          if (hit(b, placed, 3) || hit(b, obs, 2) || hit(dot, placed, 0)) continue;
+          placed.push(b, dot);
+          it.txt.setAttribute('font-size', (px / s).toFixed(4)); it.txt.setAttribute('x', (it.x + (side === 'e' ? 6 : -6) / s).toFixed(4)); it.txt.setAttribute('y', (it.y + px * 0.35 / s).toFixed(4));
+          it.txt.setAttribute('text-anchor', side === 'e' ? 'start' : 'end'); it.txt.style.strokeWidth = (2.5 / s).toFixed(4);
+          it.dot.setAttribute('cx', it.x.toFixed(4)); it.dot.setAttribute('cy', it.y.toFixed(4)); it.dot.setAttribute('r', (3.2 / s).toFixed(4));
+          done = true; break;
+        }
+      }
+      it.txt.setAttribute('visibility', done ? 'visible' : 'hidden'); it.dot.setAttribute('visibility', done ? 'visible' : 'hidden');
+    }
   }
-  return g;
+  return { g, layout, shown: () => items.filter((it) => it.txt.getAttribute('visibility') === 'visible').map((it) => it.p.naam) };
 }
 
 /* ---------- eigen markeringen (huis, zwembad) ---------- */
@@ -436,7 +509,7 @@ function markersLayer(markers, proj, sc, u) {
   for (const m of markers || []) {
     if (typeof m.lat !== 'number' || typeof m.lon !== 'number' || !GLYPH[m.icoon]) continue;
     const [x, y] = proj(m.lon, m.lat);
-    const mg = sv('g', { role: 'img', 'aria-label': m.naam },
+    const mg = sv('g', { role: 'img', 'aria-label': m.naam, 'data-obs': '' },
       sv('title', {}, m.naam),
       sv('circle', { r: 14, style: 'fill:var(--card);stroke:var(--text);stroke-width:1.6' }),
       sv('g', { transform: 'translate(-12 -12)' }, GLYPH[m.icoon]()));
@@ -457,7 +530,9 @@ function interactiveMap(el, detailEl, o) {
   if (o.satellite) svg.classList.add('satview');
   const scalers = [];
   const sc = (fn) => { scalers.push(fn); fn(1); };
-  o.back(svg, sc);
+  const tileHost = sv('g', { 'aria-hidden': 'true' });
+  const lab = o.back(svg, sc, tileHost);
+  let tiles = null;
   const g = sv('g'), items = [];
   for (const e of [...o.evs].sort((a, b) => a.mag - b.mag)) {
     const [x, y] = o.pos(e), c = sv('circle', { class: `pt ${depthClass(e.diepte_km)}`, cx: +x.toFixed(3), cy: +y.toFixed(3) });
@@ -472,11 +547,18 @@ function interactiveMap(el, detailEl, o) {
   const box = h('div', { class: 'mapbox', tabindex: 0, role: 'group', 'aria-label': `${o.aria}. ${t('map_kbd')}` }, svg);
   const btn = (txt, label, fn) => h('button', { type: 'button', 'aria-label': label, title: label, onclick: fn }, txt);
   const zin = btn('+', t('zoom_in'), () => zoomC(1.6)), zout = btn('−', t('zoom_out'), () => zoomC(1 / 1.6)), zreset = btn('↺', t('zoom_reset'), () => setView(base.x, base.y, 1));
-  clear(el).append(h('div', { class: 'mapfrm' }, box, h('div', { class: `mapctl ${o.ctl || 'bottom'}` }, zin, zout, zreset)));
+  const ctl = h('div', { class: `mapctl ${o.ctl || 'bottom'}` }, zin, zout, zreset);
+  const attr = h('p', { class: 'mapattr' }); attr.innerHTML = t(o.satellite ? 'attr_sat' : 'attr_base');
+  clear(el).append(h('div', { class: 'mapfrm' }, h('div', { class: 'mapstage' }, box, ctl), attr));
+  const rectObs = (e) => { const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom }; };
+  const obsEls = [...svg.querySelectorAll('[data-obs]')];
+  const doLayout = () => { if (lab) lab.layout(v, rectOf(), [...obsEls, ctl].filter((e) => e.getBoundingClientRect().width).map(rectObs)); };
+  box.__labels = lab;
   placeholder(detailEl);
 
   /* weergave */
   const v = { ...base }; let z = 1, scaledZ = 1, raf = 0;
+  if (o.tiles) { tiles = makeTiles({ svg, host: tileHost, view: () => v, isSat: !!o.satellite, ...o.tiles }); mapTiles.push(() => tiles.update(true)); }
   const rectOf = () => svg.getBoundingClientRect();
   function setView(nx, ny, nz) {
     nz = clamp(nz, 1, MAXZ);
@@ -488,7 +570,8 @@ function interactiveMap(el, detailEl, o) {
     box.style.touchAction = zoomed ? 'none' : 'pan-y'; // ingezoomd: slepen = kaart verschuiven; anders blijft de pagina scrollbaar
     box.classList.toggle('zoomed', zoomed);
     zout.disabled = zreset.disabled = !zoomed; zin.disabled = z >= MAXZ - 0.001;
-    if (!raf) raf = requestAnimationFrame(() => { raf = 0; if (scaledZ !== z) { scaledZ = z; for (const f of scalers) f(z); } });
+    if (!raf) raf = requestAnimationFrame(() => { raf = 0; if (scaledZ !== z) { scaledZ = z; for (const f of scalers) f(z); } doLayout(); });
+    tiles?.update();
   }
   function zoomAt(cx, cy, nz) {
     nz = clamp(nz, 1, MAXZ);
@@ -497,6 +580,7 @@ function interactiveMap(el, detailEl, o) {
   }
   function zoomC(f) { const r = rectOf(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, z * f); }
   setView(base.x, base.y, 1);
+  tiles?.update(true);
 
   /* selectie */
   let cur = null, ki = -1;
@@ -584,11 +668,13 @@ function mapLG(el, detailEl, evs) {
   const projKm = (lon, lat) => [(lon - lon0) * k, -(lat - lat0) * 110.574];
   interactiveMap(el, detailEl, {
     base: { x: -R - 8, y: -R - 8, w: W, h: W }, u, evs, satellite: sat.lg,
+    tiles: { proj: projKm, inv: (x, y) => [lon0 + x / k, lat0 - y / 110.574] },
     aria: t('map_aria_lg', { n: evs.length, R, c: P.c }),
     pos: (e) => projKm(e.lon, e.lat), rpx: (e) => 2 + 0.7 * e.mag,
-    back(svg, sc) {
-      if (sat.lg) { svg.append(satLayer([lon0 - 0.6, lat0 - 0.6, lon0 + 0.6, lat0 + 0.6], 8, projKm)); svg.classList.add('nocoast'); }
-      if (D.geo) { svg.append(landLayer(D.geo.lg, projKm)); svg.append(placesLayer(D.geo.lg.plaatsen, projKm, sc, u)); }
+    back(svg, sc, tileHost) {
+      if (D.geo) svg.append(landLayer(D.geo.lg, projKm));
+      svg.append(tileHost);
+      const labels = D.geo ? labelsLayer(D.geo.lg.plaatsen, projKm) : null;
       const step = R <= 20 ? 5 : 10;
       for (let r = step; r <= R + 1e-9; r += step) {
         svg.append(sv('circle', { class: Math.abs(r - R) < 1e-9 ? 'ring main' : 'ring', cx: 0, cy: 0, r }));
@@ -600,6 +686,9 @@ function mapLG(el, detailEl, evs) {
       svg.append(na, mapText(sc, u, R + 3, -R + 1, 11, 'N', { anchor: 'middle', dy: 21, base: true }));
       const sb = sv('path', { d: `M${-R - 4} ${R + 3}h10m-10 -1v2m10 -2v2`, stroke: 'var(--text)', 'stroke-width': 1.4, fill: 'none', 'vector-effect': 'non-scaling-stroke' });
       svg.append(sb, mapText(sc, u, -R - 4, R + 3, 10.5, '10 km', { dy: 14, base: true, halo: 2, cls: 'place' }));
+      na.setAttribute('data-obs', ''); sb.setAttribute('data-obs', '');
+      if (labels) svg.append(labels.g);
+      return labels;
     },
     front: (svg, sc) => svg.append(markersLayer(cfg.markers, projKm, sc, u)),
   });
@@ -618,11 +707,12 @@ function mapRest(el, detailEl, evs) {
   const pxPerDeg = k / u, lonStep = Math.max(1, Math.ceil(34 / pxPerDeg)), latStep = Math.max(1, Math.ceil(20 / (1 / u)));
   interactiveMap(el, detailEl, {
     base, u, evs, satellite: sat.r, ctl: 'top',
+    tiles: { proj, inv: (x, y) => [minLon + x / k, maxLat - y] },
     aria: t('map_aria_r', { n: evs.length }),
     pos: (e) => [X(e.lon), Y(e.lat)], rpx: (e) => 1.5 + 0.35 * e.mag,
-    back(svg, sc) {
-      if (sat.r) svg.append(satLayer([minLon, minLat, maxLon, maxLat], 7, proj));
+    back(svg, sc, tileHost) {
       if (D.geo) svg.append(landLayer(D.geo.regio, proj));
+      svg.append(tileHost);
       for (let lo = minLon; lo <= maxLon; lo++) {
         svg.append(sv('line', { class: 'mgrid', x1: X(lo), x2: X(lo), y1: 0, y2: Hd }));
         if ((lo - minLon) % lonStep === 0) svg.append(mapText(sc, u, X(lo), Hd, 10.5, `${Math.abs(lo)}°${lo < 0 ? t('dir_w') : t('dir_e')}`, { anchor: 'middle', dy: 13, base: true }));
@@ -631,7 +721,9 @@ function mapRest(el, detailEl, evs) {
         svg.append(sv('line', { class: 'mgrid', x1: 0, x2: Wd, y1: Y(la), y2: Y(la) }));
         if ((la - minLat) % latStep === 0) svg.append(mapText(sc, u, 0, Y(la), 10.5, `${Math.abs(la)}°${la >= 0 ? t('dir_n') : t('dir_s')}`, { anchor: 'end', dx: -4 }));
       }
-      if (D.geo) svg.append(placesLayer(D.geo.regio.plaatsen, proj, sc, u));
+      const labels = D.geo ? labelsLayer(D.geo.regio.plaatsen, proj) : null;
+      if (labels) svg.append(labels.g);
+      return labels;
     },
   });
 }
@@ -894,7 +986,7 @@ function renderRest() {
 function renderAll() {
   if (!D) { setFormats(); applyStatic(); return; }
   closeSheet();
-  charts.length = 0; lists.length = 0;
+  charts.length = 0; lists.length = 0; mapTiles.length = 0;
   setFormats(); setParams(); applyStatic();
   renderOverview();
   legend($('lg-legend')); legend($('r-legend'));
@@ -912,15 +1004,15 @@ let refreshThemeBtn = null;
 function initChrome() {
   const root = document.documentElement, btn = $('themeBtn');
   try { const x = localStorage.getItem('thema'); if (x === 'light' || x === 'dark') root.dataset.theme = x; } catch { /* geen opslag */ }
-  const eff = () => root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const eff = effTheme;
   refreshThemeBtn = () => {
     btn.textContent = eff() === 'dark' ? '☀' : '☾';
     btn.title = eff() === 'dark' ? t('theme_to_light') : t('theme_to_dark');
     btn.setAttribute('aria-label', btn.title);
     for (const m of document.querySelectorAll('meta[name="theme-color"]')) m.setAttribute('content', eff() === 'dark' ? '#19212b' : '#ffffff'); // kopbalk volgt het gekozen thema
   };
-  btn.addEventListener('click', () => { root.dataset.theme = eff() === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('thema', root.dataset.theme); } catch { /* */ } refreshThemeBtn(); });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => refreshThemeBtn());
+  btn.addEventListener('click', () => { root.dataset.theme = eff() === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('thema', root.dataset.theme); } catch { /* */ } refreshThemeBtn(); for (const f of mapTiles) f(); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { refreshThemeBtn(); for (const f of mapTiles) f(); });
 
   $('langBtn').addEventListener('click', () => {
     lang = lang === 'nl' ? 'es' : 'nl';
