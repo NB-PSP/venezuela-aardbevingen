@@ -367,6 +367,8 @@ function showDetail(el, e) {
       h('dt', {}, t('det_src')), h('dd', {}, h('a', { href: e.rapport, rel: 'noopener' }, t('det_report')))));
 }
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeSheet(); });
+/* Safari (iOS) negeert user-scalable=no: blokkeer daar de knijpzoom van de pagina. De kaarten zoomen via pointer-events en blijven werken. */
+for (const type of ['gesturestart', 'gesturechange']) document.addEventListener(type, (ev) => ev.preventDefault(), { passive: false });
 
 /* ---------- satellietbeeld (NASA GIBS Blue Marble, alleen als de bezoeker dat aanzet) ---------- */
 const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8';
