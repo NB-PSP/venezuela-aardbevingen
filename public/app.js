@@ -138,6 +138,21 @@ function pointEl(e, cx, cy, r, detailEl, group) {
   return c;
 }
 
+/* ---------- satellietbeeld (NASA GIBS Blue Marble, alleen als de bezoeker dat aanzet) ---------- */
+const sat = { lg: false, r: false };
+const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8';
+function satLayer([w, s, e, n], z, proj) {
+  const N = 2 ** z, lonX = (lo) => Math.floor((lo + 180) / 360 * N), latY = (la) => Math.floor((1 - Math.asinh(Math.tan(rad(la))) / Math.PI) / 2 * N);
+  const tLon = (x) => x / N * 360 - 180, tLat = (y) => Math.atan(Math.sinh(Math.PI * (1 - 2 * y / N))) * 180 / Math.PI;
+  const g = sv('g', { 'aria-hidden': 'true' });
+  for (let y = latY(n); y <= latY(s); y++) for (let x = lonX(w); x <= lonX(e); x++) {
+    const [x0, y0] = proj(tLon(x), tLat(y)), [x1, y1] = proj(tLon(x + 1), tLat(y + 1));
+    const ex = Math.abs(x1 - x0) * 0.004, ey = Math.abs(y1 - y0) * 0.004;
+    g.append(sv('image', { href: `${GIBS}/${z}/${y}/${x}.jpeg`, x: Math.min(x0, x1) - ex, y: Math.min(y0, y1) - ey, width: Math.abs(x1 - x0) + 2 * ex, height: Math.abs(y1 - y0) + 2 * ey, preserveAspectRatio: 'none' }));
+  }
+  return g;
+}
+
 /* ---------- land en kust (uit data/geo.json) ---------- */
 function landLayer(geoPart, proj, extra = {}) {
   const g = sv('g', extra);
@@ -162,6 +177,7 @@ function mapLG(el, detailEl, evs, cfg, geo) {
   const pts = sv('g');
   const svg = sv('svg', { class: 'map', viewBox: `${-R - 8} ${-R - 8} ${2 * R + 16} ${2 * R + 16}`, role: 'img', 'aria-label': `Kaart met ${evs.length} bevingen binnen ${R} km van La Guaira`, style: '--sw:.25' });
   const projKm = (lon, lat) => [(lon - lon0) * k, -(lat - lat0) * 110.574];
+  if (sat.lg) { svg.append(satLayer([lon0 - 0.6, lat0 - 0.6, lon0 + 0.6, lat0 + 0.6], 8, projKm)); svg.classList.add('satview', 'nocoast'); }
   if (geo) { svg.append(landLayer(geo.lg, projKm)); svg.append(placesLayer(geo.lg.plaatsen, projKm, 2.6, 1.5)); }
   for (let r = 10; r <= R; r += 10) {
     svg.append(sv('circle', { class: r === R ? 'ring main' : 'ring', cx: 0, cy: 0, r }));
@@ -190,6 +206,7 @@ function mapRest(el, detailEl, evs, geo) {
   const X = (lon) => (lon - minLon) * k, Y = (lat) => maxLat - lat;
   const svg = sv('svg', { class: 'map', viewBox: `${-mL} -0.3 ${W + mL + 0.3} ${H + mB + 0.3}`, role: 'img', 'aria-label': `Overzichtskaart met ${evs.length} bevingen`, style: '--sw:.03' });
   const line = { style: 'stroke:var(--grid);stroke-width:.03' };
+  if (sat.r) { svg.append(satLayer([minLon, minLat, maxLon, maxLat], 7, (lo, la) => [X(lo), Y(la)])); svg.classList.add('satview'); }
   if (geo) { svg.append(landLayer(geo.regio, (lo, la) => [X(lo), Y(la)])); }
   for (let lo = minLon; lo <= maxLon; lo++) {
     svg.append(sv('line', { ...line, x1: X(lo), x2: X(lo), y1: 0, y2: H }));
@@ -363,6 +380,7 @@ function build(cfg, events, off, meta, geo) {
     statCards($('lg-stats'), stats(sub), label);
   };
   sel.addEventListener('change', drawLG); drawLG();
+  bindSat('lg-sat', 'lg', drawLG);
   periodBlock('lg', lg, weeks, months);
   listTable($('lg-list'), lg);
 
@@ -394,11 +412,21 @@ function build(cfg, events, off, meta, geo) {
   ];
   table($('r-compare'), ['Soort', 'Periode', 'Officieel', 'Losse lijst', 'Verschil', 'Bron'], rows);
 
-  mapRest($('r-map'), $('r-detail'), rest, geo);
+  const drawRest = () => mapRest($('r-map'), clear($('r-detail')).appendChild(h('p', { class: 'note' }, 'Tik of beweeg over een punt voor details.')) && $('r-detail'), rest, geo);
+  drawRest();
+  bindSat('r-sat', 'r', drawRest);
   periodBlock('r', rest, weeks, months);
   listTable($('r-list'), rest);
   $('r-neigh-s').textContent = `Bevingen in buurlanden (${fi(buur.length)}, niet meegeteld)`;
   listTable($('r-neigh'), buur);
+}
+
+function bindSat(id, key, redraw) {
+  const box = $(id);
+  try { sat[key] = localStorage.getItem(`sat-${key}`) === '1'; } catch { /* geen opslag */ }
+  box.checked = sat[key];
+  if (sat[key]) redraw();
+  box.addEventListener('change', () => { sat[key] = box.checked; try { localStorage.setItem(`sat-${key}`, box.checked ? '1' : '0'); } catch { /* */ } redraw(); });
 }
 
 function initChrome() {

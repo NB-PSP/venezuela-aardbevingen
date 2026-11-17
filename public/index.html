@@ -53,7 +53,7 @@
       <div class="cards" id="lg-stats"></div>
 
       <h3>Kaart</h3>
-      <div class="filter"><label for="lg-filter">Periode:</label><select id="lg-filter"></select><span class="note" id="lg-count"></span></div>
+      <div class="filter"><label for="lg-filter">Periode:</label><select id="lg-filter"></select><span class="note" id="lg-count"></span><label class="chk"><input type="checkbox" id="lg-sat"> Satellietbeeld</label></div>
       <div class="mapwrap">
         <div><div id="lg-map"></div><div class="legend" id="lg-legend"></div></div>
         <div class="panel" id="lg-detail" aria-live="polite"><p class="note">Tik of beweeg over een punt voor details.</p></div>
@@ -92,6 +92,7 @@
       <p class="note">Een verschil kan komen door een andere telling bij FUNVISIS, door bevingen in buurlanden, of doordat de losse lijst ontbrekende of later toegevoegde bevingen heeft. De cijfers zijn niet bijgesteld.</p>
 
       <h3>Overzichtskaart</h3>
+      <div class="filter"><label class="chk"><input type="checkbox" id="r-sat"> Satellietbeeld</label></div>
       <div class="mapwrap">
         <div><div id="r-map"></div><div class="legend" id="r-legend"></div></div>
         <div class="panel" id="r-detail" aria-live="polite"><p class="note">Tik of beweeg over een punt voor details.</p></div>
@@ -120,7 +121,7 @@
 <footer>
   <p><strong>Bron:</strong> FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas), <a href="http://www.funvisis.gob.ve/old/sis_mes.php" rel="noopener">sis_mes.php</a>. Officiële totalen en weekrapporten zijn handmatig overgenomen uit berichten van FUNVISIS via de media; de bronvermelding staat in <code>data/official.json</code>.</p>
   <p><strong>Tijdzone:</strong> HLV = Hora Legal de Venezuela = UTC−4, het hele jaar (geen zomertijd). Dagen, weken en maanden zijn op die tijd gebaseerd. Locaties en magnitudes kunnen later door FUNVISIS worden aangepast.</p>
-  <p><strong>Kaartgegevens:</strong> kust en landgrenzen van <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (publiek domein), vereenvoudigd; de kustlijn is een grove weergave. Plaatsnamen dienen alleen ter oriëntatie.</p>
+  <p><strong>Kaartgegevens:</strong> kust en landgrenzen van <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (publiek domein), vereenvoudigd; de kustlijn is een grove weergave. Het optionele satellietbeeld is een wolkenvrij NASA-composiet (Blue Marble, ca. 500 m per pixel) en wordt pas van <code>gibs.earthdata.nasa.gov</code> geladen als je het aanzet. Plaatsnamen dienen alleen ter oriëntatie.</p>
   <p>Deze pagina is een onofficieel, niet-commercieel overzicht en geen waarschuwingsdienst.</p>
 </footer>
 

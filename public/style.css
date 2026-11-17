@@ -96,6 +96,15 @@ button.navbtn:disabled { opacity: .35; cursor: default; }
 .land { fill: var(--land); stroke: var(--border); stroke-width: 1px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
 .land.vz { fill: var(--land-vz); }
 text.place { fill: var(--muted); font-weight: 600; paint-order: stroke; stroke: var(--sea); stroke-width: .12px; stroke-linejoin: round; }
+label.chk { display: inline-flex; align-items: center; gap: 6px; font-size: .92rem; margin-left: auto; cursor: pointer; }
+label.chk input { width: 18px; height: 18px; }
+.satview .land { fill: none; stroke: rgba(255,255,255,.75); }
+.nocoast .land { display: none; }
+.satview .ring { stroke: rgba(255,255,255,.55); }
+.satview .ring.main { stroke: #fff; }
+.satview text { fill: #fff; }
+.satview text.place { fill: #fff; stroke: rgba(0,0,0,.75); stroke-width: .18px; }
+.satview .pt { stroke: rgba(0,0,0,.55); }
 select, button.more { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); }
 button.more { cursor: pointer; margin-top: 8px; }
 
