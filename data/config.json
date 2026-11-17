@@ -1,0 +1,10 @@
+{
+  "_uitleg": "Instellingen voor het dashboard. 'buurland_plaatsen': bevingen waarvan de plaatsnaam een van deze woorden bevat (hoofdletter- en accentongevoelig) tellen niet mee voor Venezuela en staan in een aparte lijst. Voeg gerust namen toe.",
+  "la_guaira": { "lat": 10.60, "lon": -66.93, "straal_km": 50 },
+  "waarschuwing_na_dagen": 9,
+  "buurland_plaatsen": [
+    "Bucaramanga", "Buscaramanga", "Valledupar", "Maicao", "Santa Marta",
+    "Barbados", "Tobago", "Scarborough", "Guayaguayare", "Puerto Esp", "Arima",
+    "Aruba", "Curazao", "Bonaire"
+  ]
+}

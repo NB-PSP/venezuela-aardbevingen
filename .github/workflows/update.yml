@@ -1,0 +1,46 @@
+name: Gegevens bijwerken
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'     # elke maandag 12:00 UTC
+    - cron: '45 3 1 * *'     # 23:45 HLV op de laatste dag van de vorige maand
+    - cron: '0 2 28-31 * *'  # 22:00 HLV op de avond vóór dag 28-31 (extra zekerheid bij maandwissel)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test of funvisis.gob.ve bereikbaar is vanaf GitHub
+        run: |
+          curl -sS -m 30 -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" http://www.funvisis.gob.ve/old/sis_mes.php \
+            || echo "::warning::funvisis.gob.ve lijkt niet bereikbaar vanaf GitHub-servers; zie README voor het alternatief (Taakplanner)."
+
+      - name: FUNVISIS ophalen
+        run: node scripts/scrape_funvisis.mjs
+
+      - name: Committen als er iets veranderd is
+        run: |
+          if [ -n "$(git status --porcelain data/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/
+            git commit -m "Gegevens bijgewerkt $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          else
+            echo "Geen wijzigingen."
+          fi

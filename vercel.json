@@ -1,0 +1,7 @@
+{
+  "buildCommand": "mkdir -p public/data && cp data/*.json public/data/",
+  "outputDirectory": "public",
+  "headers": [
+    { "source": "/data/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "laatste_controle_utc": "2026-11-17T22:17:49Z",
+  "laatste_wijziging_utc": "2026-11-17T22:17:49Z",
+  "aantal_events": 4470,
+  "nieuwste_beving_utc": "2026-11-17T20:47:00Z",
+  "controle_per_maand": {
+    "2026-01": {
+      "funvisis_teller": 132,
+      "geparsed": 132,
+      "unieke_ids": 132,
+      "klopt": true
+    },
+    "2026-02": {
+      "funvisis_teller": 112,
+      "geparsed": 112,
+      "unieke_ids": 112,
+      "klopt": true
+    },
+    "2026-03": {
+      "funvisis_teller": 199,
+      "geparsed": 199,
+      "unieke_ids": 199,
+      "klopt": true
+    },
+    "2026-04": {
+      "funvisis_teller": 256,
+      "geparsed": 256,
+      "unieke_ids": 256,
+      "klopt": true
+    },
+    "2026-05": {
+      "funvisis_teller": 274,
+      "geparsed": 274,
+      "unieke_ids": 274,
+      "klopt": true
+    },
+    "2026-06": {
+      "funvisis_teller": 899,
+      "geparsed": 899,
+      "unieke_ids": 899,
+      "klopt": true
+    },
+    "2026-07": {
+      "funvisis_teller": 1092,
+      "geparsed": 1092,
+      "unieke_ids": 1092,
+      "klopt": true
+    },
+    "2026-08": {
+      "funvisis_teller": 522,
+      "geparsed": 522,
+      "unieke_ids": 522,
+      "klopt": true
+    },
+    "2026-09": {
+      "funvisis_teller": 449,
+      "geparsed": 449,
+      "unieke_ids": 449,
+      "klopt": true
+    },
+    "2026-10": {
+      "funvisis_teller": 353,
+      "geparsed": 353,
+      "unieke_ids": 353,
+      "klopt": true
+    },
+    "2026-11": {
+      "funvisis_teller": 182,
+      "geparsed": 182,
+      "unieke_ids": 182,
+      "klopt": true
+    }
+  },
+  "bronnen": {
+    "lopende_maand": "http://www.funvisis.gob.ve/old/sis_mes.php",
+    "archief": "http://www.funvisis.gob.ve/old/sis_ant.php",
+    "rapport_voorbeeld": "http://www.funvisis.gob.ve/old/images/reportes/JJJJ/MM/reporte_<ID>.gif"
+  },
+  "tijdzone": "HLV = UTC-4 (geen zomertijd)"
+}

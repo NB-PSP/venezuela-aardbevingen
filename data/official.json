@@ -1,0 +1,44 @@
+{
+  "_uitleg": "Officiële FUNVISIS-cijfers, handmatig bij te houden. Zie README voor het toevoegen van nieuwe cijfers. Elk cijfer heeft een bronvermelding (bron, bron_url, datum). Zet 'ca' op true als het cijfer als 'circa' werd gemeld.",
+  "start_reeks": "2026-06-24",
+  "hoofdbevingen": [
+    {
+      "datum_hlv": "2026-06-24",
+      "tijd_hlv": "18:04",
+      "mag": 7.2,
+      "diepte_km": 21.9,
+      "omschrijving": "25 km ten oosten van San Felipe",
+      "bron": "FUNVISIS",
+      "bron_url": "",
+      "datum": "2026-06-24"
+    },
+    {
+      "datum_hlv": "2026-06-24",
+      "tijd_hlv": "18:05",
+      "mag": 7.5,
+      "diepte_km": 10,
+      "omschrijving": "La Guaira",
+      "bron": "FUNVISIS",
+      "bron_url": "",
+      "datum": "2026-06-24"
+    }
+  ],
+  "cumulatief": [
+    { "datum": "2026-07-08", "aantal": 1115, "ca": false, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-07-18", "aantal": 1368, "ca": false, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-07-30", "aantal": 1600, "ca": false, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-09-04", "aantal": 1915, "ca": true, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-09-27", "aantal": 2099, "ca": true, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-10-02", "aantal": 2152, "ca": true, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-10-15", "aantal": 2222, "ca": false, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-10-22", "aantal": 2286, "ca": false, "bron": "FUNVISIS, via media", "bron_url": "" },
+    { "datum": "2026-11-12", "aantal": 2372, "ca": false, "bron": "FUNVISIS, via media", "bron_url": "" }
+  ],
+  "weekrapporten": [
+    { "van": "2026-08-28", "tot": "2026-09-03", "aantal": 96, "bron": "FUNVISIS weekrapport, via media", "bron_url": "" },
+    { "van": "2026-09-04", "tot": "2026-09-10", "aantal": 105, "bron": "FUNVISIS weekrapport, via media", "bron_url": "" },
+    { "van": "2026-10-09", "tot": "2026-10-15", "aantal": 90, "bron": "FUNVISIS weekrapport, via media", "bron_url": "" },
+    { "van": "2026-10-16", "tot": "2026-10-22", "aantal": 109, "bron": "FUNVISIS weekrapport, via media", "bron_url": "" },
+    { "van": "2026-11-06", "tot": "2026-11-12", "aantal": 80, "bron": "FUNVISIS weekrapport, via media", "bron_url": "" }
+  ]
+}
