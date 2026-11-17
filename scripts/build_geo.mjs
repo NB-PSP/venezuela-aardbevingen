@@ -84,7 +84,8 @@ function bouw(bbox, tol, dec) {
 
 // Plaatsen ter oriëntatie (lat, lon)
 const plaatsRegio = [['Caracas', 10.48, -66.90], ['Maracaibo', 10.64, -71.64], ['Valencia', 10.16, -68.00], ['Barquisimeto', 10.07, -69.32], ['San Felipe', 10.34, -68.74], ['Mérida', 8.59, -71.15], ['San Cristóbal', 7.77, -72.22], ['Cumaná', 10.46, -64.18], ['Maturín', 9.75, -63.18], ['Ciudad Bolívar', 8.12, -63.55], ['Puerto Ayacucho', 5.66, -67.62]];
-const plaatsLG = [['Caracas', 10.4806, -66.9036], ['Los Teques', 10.3443, -67.0426], ['Naiguatá', 10.615, -66.74], ['Guarenas', 10.47, -66.61]];
+const plaatsLG = [['Caracas', 10.4806, -66.9036], ['Los Teques', 10.3443, -67.0426], ['Naiguatá', 10.615, -66.74], ['Guarenas', 10.47, -66.61], ['La Guaira', 10.601, -66.933, 'w']];
+// Vierde element 'w' = label links van het punt. Macuto (10.607, -66.893) ontbreekt bewust: het valt samen met het huis-label van het middelpunt.
 
 const geo = {
   bron: 'Natural Earth (publiek domein) via world-atlas 2.0.2',

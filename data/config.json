@@ -1,9 +1,10 @@
 {
-  "_uitleg": "Instellingen voor het dashboard. 'buurland_plaatsen': bevingen waarvan de plaatsnaam een van deze woorden bevat (hoofdletter- en accentongevoelig) tellen niet mee voor Venezuela en staan in een aparte lijst. Voeg gerust namen toe.",
+  "_uitleg": "Instellingen voor het dashboard. 'la_guaira': middelpunt (lat/lon), 'naam' (waarvandaan afstanden worden gemeten) en straal in km van het gebied 'La Guaira en omgeving'. 'buurland_plaatsen': bevingen waarvan de plaatsnaam een van deze woorden bevat (hoofdletter- en accentongevoelig) tellen niet mee voor Venezuela en staan in een aparte lijst. Voeg gerust namen toe.",
   "la_guaira": {
-    "lat": 10.6,
-    "lon": -66.93,
-    "straal_km": 50
+    "naam": "KUTO Motors (Macuto)",
+    "lat": 10.6064,
+    "lon": -66.8906,
+    "straal_km": 30
   },
   "waarschuwing_na_dagen": 9,
   "buurland_plaatsen": [
@@ -33,9 +34,8 @@
       "naam": "Zwembad",
       "icoon": "zwembad",
       "lat": 10.5784,
-      "lon": -66.901461,
-      "label": "onder"
+      "lon": -66.901461
     }
   ],
-  "_markers_uitleg": "Eigen punten op de La Guaira-kaart. icoon: 'huis' of 'zwembad'. label: 'onder' zet de naam onder het icoon (standaard rechts). Zonder lat/lon (null) wordt het punt niet getoond."
+  "_markers_uitleg": "Eigen punten op de La Guaira-kaart. icoon: 'huis' of 'zwembad'. De naam wordt niet op de kaart getoond maar staat wel in de schermlezer-tekst en de tooltip van het icoon. Zonder lat/lon (null) wordt het punt niet getoond."
 }

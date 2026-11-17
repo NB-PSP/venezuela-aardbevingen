@@ -1,6 +1,6 @@
 # Aardbevingen Venezuela – dashboard
 
-Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de openbare tabellen van FUNVISIS. De site werkt zichzelf automatisch bij via GitHub Actions en wordt gepubliceerd door Vercel. Alle teksten op de site zijn Nederlands.
+Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de openbare tabellen van FUNVISIS. De site werkt zichzelf automatisch bij via GitHub Actions en wordt gepubliceerd door Vercel. De site is tweetalig: Nederlands en Spaans (knop NL/ES rechtsboven). Ze is ontworpen voor gebruik op een telefoon en werkt ook op een computer.
 
 ## Wat het systeem doet
 
@@ -23,7 +23,7 @@ De losse gegevens zijn ingevoerd **vanaf 1 januari 2026** (januari t/m november 
 | `data/events.json` | alle losse bevingen (alleen toevoegen/bijwerken) |
 | `data/official.json` | officiële totalen en weekrapporten (handmatig bij te houden) |
 | `data/meta.json` | laatste controle, aantallen, controle per maand, bron-URL's |
-| `data/config.json` | instellingen: La Guaira-straal, buurlandplaatsen, waarschuwingsdrempel |
+| `data/config.json` | instellingen: middelpunt (met naam) en straal van het La Guaira-gebied, buurlandplaatsen, waarschuwingsdrempel, eigen markeringen |
 | `public/` | het dashboard (`index.html`, `style.css`, `app.js`) |
 | `vercel.json` | kopieert `data/*.json` naar `public/data/` bij het publiceren |
 | `.github/workflows/update.yml` | de automatische updates |
@@ -60,6 +60,23 @@ Regels:
 - Datums zijn `JJJJ-MM-DD`. Zet `"ca": true` als het cijfer als "circa" werd gemeld.
 - Vul altijd `bron` in. `bron_url` mag leeg blijven (`""`) als er geen link is, maar vul de link in als je die hebt.
 - Verzin niets: alleen cijfers met een herkenbare bron.
+
+## Taal (Nederlands / Spaans)
+
+- De knop rechtsboven wisselt tussen Nederlands en Spaans (de knop toont de taal waarnaar je schakelt: **ES** of **NL**). De keuze wordt onthouden in de browser. Zonder keuze volgt de site de browsertaal (Spaans als die met `es` begint, anders Nederlands). Met `?lang=es` of `?lang=nl` achter de link forceer je een taal.
+- **Alle teksten staan op één plek:** het woordenboek `I18N` bovenaan `public/app.js`. De vaste tekst in `index.html` wordt daaruit gevuld (`data-i18n`, `data-i18n-html`, `data-i18n-attr`). Een nieuwe tekst of vertaling toevoegen = één sleutel in `nl` en in `es`. Getallen en datums gebruiken `nl-NL` of `es-VE`; de maandnamen staan ook in het woordenboek.
+- **Gegevens in `data/official.json`** zijn Nederlands. Voeg optioneel een Spaanse variant toe met het achtervoegsel `_es`, bijvoorbeeld `omschrijving_es` (bij `hoofdbevingen`) of `bron_es` (bij `cumulatief` en `weekrapporten`). Is er geen `_es`-veld, dan toont de Spaanse versie het Nederlandse veld. Plaatsnamen van FUNVISIS zijn al Spaans en worden niet vertaald. Ook de namen van eigen markeringen in `config.json` worden zoals ingevuld getoond.
+
+## Gebied "La Guaira en omgeving"
+
+In `data/config.json` staat onder `la_guaira` het middelpunt (`lat`, `lon`), de `naam` waarvandaan afstanden worden gemeten en de `straal_km` (nu 30 km, gecentreerd op KUTO Motors in Macuto). Alle teksten op de site (kopjes, afstanden, kaart) volgen die instellingen; pas je ze aan, dan hoeft er in de code niets te veranderen. Bevingen buiten die straal staan in "Rest van Venezuela". Oriëntatieplaatsen op de kaart staan in `data/geo.json` (`lg.plaatsen`, gemaakt door `scripts/build_geo.mjs`).
+
+## Gebruik op telefoon
+
+- Alle knoppen hebben een tikgebied van minstens 44 px; de periodekiezer (Alles / Maand / Week met ‹ ›) vervangt de lange keuzelijst.
+- Op de kaarten kun je inzoomen met + / − / ↺, met twee vingers (knijpen), met dubbeltikken en slepen. Zolang je niet ingezoomd bent blijft de pagina gewoon scrollbaar; ingezoomd verschuift een veeg de kaart (gebruik ↺ of de ruimte naast de kaart om weer te scrollen). Een tik op een punt kiest de dichtstbijzijnde beving binnen ca. 22 px; de details verschijnen op een telefoon als paneel onderin het scherm (sluiten met × of Esc).
+- Lijsten met bevingen zijn op een telefoon compacte rijen (tik om coördinaten en het FUNVISIS-rapport te zien, 20 per keer); week- en maandtabellen staan achter "Toon als tabel".
+- Toetsenbord: Tab naar een kaart, dan pijltjestoetsen (volgende/vorige beving), + en − (zoomen), 0 (terugzetten), Esc (detailpaneel sluiten).
 
 ## Wat te doen bij een foutmail
 

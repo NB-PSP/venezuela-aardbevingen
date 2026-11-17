@@ -4,42 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aardbevingen Venezuela</title>
-<meta name="description" content="Overzicht van aardbevingen in Venezuela sinds 24 juni 2026, op basis van openbare FUNVISIS-gegevens.">
+<meta name="description" content="Overzicht van aardbevingen in Venezuela, op basis van openbare FUNVISIS-gegevens.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#19212b" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23d95f02'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#overzicht">Direct naar de inhoud</a>
+<!-- Alle zichtbare tekst komt uit het woordenboek (I18N) in app.js: data-i18n = tekst, data-i18n-html = tekst met opmaak, data-i18n-attr = attributen. -->
+<a class="skip" href="#overzicht" data-i18n="skip"></a>
 
 <header class="top">
-  <nav aria-label="Onderdelen van de pagina">
+  <nav data-i18n-attr="aria-label:nav_aria">
     <div class="tabs">
-      <a class="tab" href="#overzicht" data-s="overzicht">Overzicht</a>
-      <a class="tab" href="#la-guaira" data-s="la-guaira">La Guaira</a>
-      <a class="tab" href="#rest" data-s="rest">Rest van Venezuela</a>
+      <a class="tab" href="#overzicht" data-s="overzicht" data-i18n-attr="aria-label:tab_ov"><span class="l-long" data-i18n="tab_ov" aria-hidden="true"></span><span class="l-short" data-i18n="tab_ov_s" aria-hidden="true"></span></a>
+      <a class="tab" href="#la-guaira" data-s="la-guaira" data-i18n-attr="aria-label:tab_lg"><span class="l-long" data-i18n="tab_lg" aria-hidden="true"></span><span class="l-short" data-i18n="tab_lg_s" aria-hidden="true"></span></a>
+      <a class="tab" href="#rest" data-s="rest" data-i18n-attr="aria-label:tab_r"><span class="l-long" data-i18n="tab_r" aria-hidden="true"></span><span class="l-short" data-i18n="tab_r_s" aria-hidden="true"></span></a>
     </div>
-    <button class="themebtn" id="themeBtn" type="button" aria-label="Wissel tussen licht en donker thema">Thema</button>
+    <button class="themebtn" id="themeBtn" type="button" data-i18n-attr="aria-label:theme_aria">Thema</button>
+    <button class="themebtn langbtn" id="langBtn" type="button"><span id="langTxt">ES</span></button>
   </nav>
 </header>
 
 <main>
   <section id="overzicht" class="deel" aria-labelledby="h-ov">
     <div class="inner">
-      <p class="kicker">Overzicht</p>
-      <h1 id="h-ov">Aardbevingen Venezuela</h1>
-      <p class="lead">Gegevens van FUNVISIS (Venezolaanse seismologische dienst) sinds de hoofdbevingen van 24 juni 2026.</p>
+      <p class="kicker" data-i18n="kicker_ov"></p>
+      <h1 id="h-ov" data-i18n="h1"></h1>
+      <p class="lead" id="ov-lead" data-i18n="lead_ov"></p>
       <div id="ov-warn"></div>
-      <div class="cards" id="ov-cards"><p class="note">Gegevens laden…</p></div>
+      <div class="cards" id="ov-cards"><p class="note" data-i18n="loading"></p></div>
       <p class="note" id="ov-upd"></p>
       <details>
-        <summary>Zo gebruik je deze pagina</summary>
+        <summary data-i18n="help_sum"></summary>
         <ul>
-          <li>Gebruik de knoppen bovenaan om naar een deel te springen.</li>
-          <li><strong>La Guaira</strong>: alle bevingen binnen 50 km van La Guaira, met kaart, grafieken per week en maand en een volledige lijst.</li>
-          <li><strong>Rest van Venezuela</strong>: alles daarbuiten, plus de officiële totalen van FUNVISIS.</li>
-          <li>Tik of beweeg over een punt op de kaart of een staaf in een grafiek voor details. Met het toetsenbord: Tab en Enter.</li>
-          <li>Tijden zijn Venezolaanse tijd (HLV, UTC−4). Weken lopen van maandag t/m zondag, maanden volgen de Venezolaanse kalender.</li>
-          <li>De pagina bevat alleen gemeten feiten: geen schadeclaims en geen voorspellingen.</li>
+          <li data-i18n="help_1"></li>
+          <li data-i18n-html="help_2"></li>
+          <li data-i18n-html="help_3"></li>
+          <li data-i18n="help_4"></li>
+          <li data-i18n="help_5"></li>
+          <li data-i18n="help_6"></li>
         </ul>
       </details>
     </div>
@@ -47,71 +51,84 @@
 
   <section id="la-guaira" class="deel" aria-labelledby="h-lg">
     <div class="inner">
-      <p class="kicker">Deel 1</p>
-      <h2 id="h-lg">La Guaira en omgeving (binnen 50 km)</h2>
-      <p class="lead" id="lg-lead"></p>
+      <p class="kicker" data-i18n="kicker_1"></p>
+      <h2 id="h-lg" data-i18n="h_lg"></h2>
+      <p class="lead" id="lg-lead" data-i18n="lead_lg"></p>
       <div class="cards" id="lg-stats"></div>
 
-      <h3>Kaart</h3>
-      <div class="filter"><label for="lg-filter">Periode:</label><select id="lg-filter"></select><span class="note" id="lg-count"></span><label class="chk"><input type="checkbox" id="lg-sat"> Satellietbeeld</label></div>
+      <h3 data-i18n="h_map"></h3>
+      <div class="periodbar" role="group" aria-labelledby="lg-period-l">
+        <span id="lg-period-l" class="plabel" data-i18n="period"></span>
+        <div class="seg" id="lg-seg">
+          <button type="button" class="segbtn" data-p="all" data-i18n="p_all"></button>
+          <button type="button" class="segbtn" data-p="m" data-i18n="p_m"></button>
+          <button type="button" class="segbtn" data-p="w" data-i18n="p_w"></button>
+        </div>
+        <div class="stepper">
+          <button type="button" class="more navbtn" id="lg-prev" data-i18n-attr="aria-label:p_prev">‹</button>
+          <span class="pcur" id="lg-pcur" aria-live="polite"></span>
+          <button type="button" class="more navbtn" id="lg-next" data-i18n-attr="aria-label:p_next">›</button>
+        </div>
+      </div>
+      <div class="filter"><span class="note" id="lg-count"></span><label class="switch"><input type="checkbox" id="lg-sat"><span class="track" aria-hidden="true"></span><span data-i18n="sat"></span></label></div>
       <div class="mapwrap">
         <div><div id="lg-map"></div><div class="legend" id="lg-legend"></div></div>
-        <div class="panel" id="lg-detail" aria-live="polite"><p class="note">Tik of beweeg over een punt voor details.</p></div>
+        <div class="panel detail" id="lg-detail" aria-live="polite"></div>
       </div>
 
-      <h3>Per week</h3>
+      <h3 data-i18n="h_week"></h3>
       <div class="panel"><div id="lg-weekchart"></div></div>
-      <div class="tablewrap" id="lg-weektable"></div>
+      <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="lg-weektable"></div></details>
 
-      <h3>Per maand</h3>
+      <h3 data-i18n="h_month"></h3>
       <div class="panel"><div id="lg-monthchart"></div></div>
-      <div class="tablewrap" id="lg-monthtable"></div>
+      <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="lg-monthtable"></div></details>
 
-      <h3>Alle bevingen (nieuwste eerst)</h3>
+      <h3 data-i18n="h_all"></h3>
       <div id="lg-list"></div>
     </div>
   </section>
 
   <section id="rest" class="deel deel2" aria-labelledby="h-r">
     <div class="inner">
-      <p class="kicker">Deel 2</p>
-      <h2 id="h-r">Rest van Venezuela (buiten 50 km van La Guaira)</h2>
-      <p class="lead">Hier staan de officiële FUNVISIS-totalen en de losse bevingen buiten het La Guaira-gebied.</p>
+      <p class="kicker" data-i18n="kicker_2"></p>
+      <h2 id="h-r" data-i18n="h_r"></h2>
+      <p class="lead" data-i18n="lead_r"></p>
       <div class="cards" id="r-stats"></div>
 
-      <h3>Officieel totaal sinds 24 juni</h3>
+      <h3 data-i18n="h_cum"></h3>
       <div class="panel"><div id="r-cumchart"></div></div>
-      <p class="note" id="r-cumnote"></p>
+      <p class="note" id="r-cumnote" data-i18n="cum_note"></p>
 
-      <h3>Weekrapporten FUNVISIS (heel het land)</h3>
+      <h3 data-i18n="h_report"></h3>
       <div class="panel"><div id="r-reportchart"></div></div>
 
-      <h3>Losse lijst versus officiële cijfers</h3>
+      <h3 data-i18n="h_compare"></h3>
       <p class="note" id="r-complete"></p>
-      <div class="tablewrap" id="r-compare"></div>
-      <p class="note">Een verschil kan komen door een andere telling bij FUNVISIS, door bevingen in buurlanden, of doordat de losse lijst ontbrekende of later toegevoegde bevingen heeft. De cijfers zijn niet bijgesteld.</p>
+      <div id="r-compare"></div>
+      <p class="note" data-i18n="compare_note"></p>
 
-      <h3>Overzichtskaart</h3>
-      <div class="filter"><label class="chk"><input type="checkbox" id="r-sat"> Satellietbeeld</label></div>
+      <h3 data-i18n="h_overview_map"></h3>
+      <div class="filter"><label class="switch"><input type="checkbox" id="r-sat"><span class="track" aria-hidden="true"></span><span data-i18n="sat"></span></label></div>
       <div class="mapwrap">
         <div><div id="r-map"></div><div class="legend" id="r-legend"></div></div>
-        <div class="panel" id="r-detail" aria-live="polite"><p class="note">Tik of beweeg over een punt voor details.</p></div>
+        <div class="panel detail" id="r-detail" aria-live="polite"></div>
       </div>
 
-      <h3>Per week</h3>
+      <h3 data-i18n="h_week"></h3>
       <div class="panel"><div id="r-weekchart"></div></div>
-      <div class="tablewrap" id="r-weektable"></div>
+      <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="r-weektable"></div></details>
 
-      <h3>Per maand</h3>
+      <h3 data-i18n="h_month"></h3>
       <div class="panel"><div id="r-monthchart"></div></div>
-      <div class="tablewrap" id="r-monthtable"></div>
+      <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="r-monthtable"></div></details>
 
-      <h3>Alle bevingen (nieuwste eerst)</h3>
+      <h3 data-i18n="h_all"></h3>
       <div id="r-list"></div>
 
       <details id="r-neigh-d">
-        <summary id="r-neigh-s">Bevingen in buurlanden</summary>
-        <p class="note">FUNVISIS meldt ook bevingen net buiten Venezuela. Die tellen hierboven niet mee. De plaatsnamen waarop dit gebeurt staan in <code>data/config.json</code> (<code>buurland_plaatsen</code>).</p>
+        <summary id="r-neigh-s" data-i18n="neigh_sum"></summary>
+        <p class="note" data-i18n-html="neigh_note"></p>
         <div id="r-neigh"></div>
       </details>
     </div>
@@ -119,10 +136,10 @@
 </main>
 
 <footer>
-  <p><strong>Bron:</strong> FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas), <a href="http://www.funvisis.gob.ve/old/sis_mes.php" rel="noopener">sis_mes.php</a>. Officiële totalen en weekrapporten zijn handmatig overgenomen uit berichten van FUNVISIS via de media; de bronvermelding staat in <code>data/official.json</code>.</p>
-  <p><strong>Tijdzone:</strong> HLV = Hora Legal de Venezuela = UTC−4, het hele jaar (geen zomertijd). Dagen, weken en maanden zijn op die tijd gebaseerd. Locaties en magnitudes kunnen later door FUNVISIS worden aangepast.</p>
-  <p><strong>Kaartgegevens:</strong> kust en landgrenzen van <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (publiek domein), vereenvoudigd; de kustlijn is een grove weergave. Het optionele satellietbeeld is een wolkenvrij NASA-composiet (Blue Marble, ca. 500 m per pixel) en wordt pas van <code>gibs.earthdata.nasa.gov</code> geladen als je het aanzet. Plaatsnamen dienen alleen ter oriëntatie.</p>
-  <p>Deze pagina is een onofficieel, niet-commercieel overzicht en geen waarschuwingsdienst.</p>
+  <p data-i18n-html="f1"></p>
+  <p data-i18n-html="f2"></p>
+  <p data-i18n-html="f3"></p>
+  <p data-i18n="f4"></p>
 </footer>
 
 <script src="app.js"></script>
