@@ -185,7 +185,8 @@ function markersLayer(markers, proj, scale) {
       sv('title', {}, m.naam),
       sv('circle', { r: 14, style: 'fill:var(--card);stroke:var(--text);stroke-width:1.6' }),
       sv('g', { transform: 'translate(-12 -12)' }, GLYPH[m.icoon]())));
-    g.append(sv('text', { x: x + 2.9, y: y + 1, 'font-size': 2.6, class: 'place', style: 'font-weight:700' }, m.naam));
+    const onder = m.label === 'onder';
+    g.append(sv('text', { x: onder ? x : x + 2.4, y: onder ? y + 5 : y + 1, 'text-anchor': onder ? 'middle' : 'start', 'font-size': 2.6, class: 'place', style: 'font-weight:700' }, m.naam));
   }
   return g;
 }
@@ -211,7 +212,7 @@ function mapLG(el, detailEl, evs, cfg, geo) {
     pts.append(pointEl(e, +((e.lon - lon0) * k).toFixed(2), +(-(e.lat - lat0) * 110.574).toFixed(2), +(0.3 + 0.22 * e.mag).toFixed(2), detailEl, pts));
   }
   svg.append(pts);
-  svg.append(markersLayer(cfg.markers, projKm, 0.17));
+  svg.append(markersLayer(cfg.markers, projKm, 0.13));
   clear(el).append(svg);
 }
 

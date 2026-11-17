@@ -33,8 +33,9 @@
       "naam": "Zwembad",
       "icoon": "zwembad",
       "lat": 10.5784,
-      "lon": -66.901461
+      "lon": -66.901461,
+      "label": "onder"
     }
   ],
-  "_markers_uitleg": "Eigen punten op de La Guaira-kaart. icoon: 'huis' of 'zwembad'. Zonder lat/lon (null) wordt het punt niet getoond."
+  "_markers_uitleg": "Eigen punten op de La Guaira-kaart. icoon: 'huis' of 'zwembad'. label: 'onder' zet de naam onder het icoon (standaard rechts). Zonder lat/lon (null) wordt het punt niet getoond."
 }
