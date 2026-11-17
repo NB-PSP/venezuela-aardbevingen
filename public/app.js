@@ -171,6 +171,25 @@ function placesLayer(plaatsen, proj, fs, dx) {
   return g;
 }
 
+/* ---------- eigen markeringen (huis, zwembad) ---------- */
+const GLYPH = {
+  huis: () => sv('path', { d: 'M12 4 3 12h3v8h5v-5h2v5h5v-8h3z', style: 'fill:var(--text)' }),
+  zwembad: () => sv('path', { d: 'M8 13V5.5A2.5 2.5 0 0 1 13 5.5M14 13V5.5A2.5 2.5 0 0 1 19 5.5M8 9H14M2 16.5c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0', style: 'fill:none;stroke:var(--text);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round' }),
+};
+function markersLayer(markers, proj, scale) {
+  const g = sv('g');
+  for (const m of markers || []) {
+    if (typeof m.lat !== 'number' || typeof m.lon !== 'number' || !GLYPH[m.icoon]) continue;
+    const [x, y] = proj(m.lon, m.lat);
+    g.append(sv('g', { transform: `translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${scale})`, role: 'img', 'aria-label': m.naam },
+      sv('title', {}, m.naam),
+      sv('circle', { r: 14, style: 'fill:var(--card);stroke:var(--text);stroke-width:1.6' }),
+      sv('g', { transform: 'translate(-12 -12)' }, GLYPH[m.icoon]())));
+    g.append(sv('text', { x: x + 2.9, y: y + 1, 'font-size': 2.6, class: 'place', style: 'font-weight:700' }, m.naam));
+  }
+  return g;
+}
+
 /* ---------- kaart La Guaira ---------- */
 function mapLG(el, detailEl, evs, cfg, geo) {
   const R = cfg.la_guaira.straal_km, { lat: lat0, lon: lon0 } = cfg.la_guaira, k = Math.cos(rad(lat0)) * 111.32;
@@ -184,7 +203,6 @@ function mapLG(el, detailEl, evs, cfg, geo) {
     svg.append(sv('text', { x: r * 0.7071 + .6, y: -r * 0.7071 - .3, 'font-size': 2.6 }, `${r} km`));
   }
   svg.append(sv('path', { d: 'M-2.5 0H2.5M0 -2.5V2.5', stroke: 'var(--text)', 'stroke-width': .5 }));
-  svg.append(sv('text', { x: 2.2, y: 5.2, 'font-size': 3, style: 'fill:var(--text);font-weight:700' }, 'La Guaira'));
   svg.append(sv('g', { transform: `translate(${R + 3} ${-R + 1})` },
     sv('path', { d: 'M0 -6L2.2 1L0 -.6L-2.2 1Z', style: 'fill:var(--text)' }), sv('text', { x: 0, y: 5, 'font-size': 3, 'text-anchor': 'middle' }, 'N')));
   svg.append(sv('g', { transform: `translate(${-R - 4} ${R + 3})` },
@@ -193,6 +211,7 @@ function mapLG(el, detailEl, evs, cfg, geo) {
     pts.append(pointEl(e, +((e.lon - lon0) * k).toFixed(2), +(-(e.lat - lat0) * 110.574).toFixed(2), +(0.3 + 0.22 * e.mag).toFixed(2), detailEl, pts));
   }
   svg.append(pts);
+  svg.append(markersLayer(cfg.markers, projKm, 0.17));
   clear(el).append(svg);
 }
 

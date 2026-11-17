@@ -1,10 +1,40 @@
 {
   "_uitleg": "Instellingen voor het dashboard. 'buurland_plaatsen': bevingen waarvan de plaatsnaam een van deze woorden bevat (hoofdletter- en accentongevoelig) tellen niet mee voor Venezuela en staan in een aparte lijst. Voeg gerust namen toe.",
-  "la_guaira": { "lat": 10.60, "lon": -66.93, "straal_km": 50 },
+  "la_guaira": {
+    "lat": 10.6,
+    "lon": -66.93,
+    "straal_km": 50
+  },
   "waarschuwing_na_dagen": 9,
   "buurland_plaatsen": [
-    "Bucaramanga", "Buscaramanga", "Valledupar", "Maicao", "Santa Marta",
-    "Barbados", "Tobago", "Scarborough", "Guayaguayare", "Puerto Esp", "Arima",
-    "Aruba", "Curazao", "Bonaire"
-  ]
+    "Bucaramanga",
+    "Buscaramanga",
+    "Valledupar",
+    "Maicao",
+    "Santa Marta",
+    "Barbados",
+    "Tobago",
+    "Scarborough",
+    "Guayaguayare",
+    "Puerto Esp",
+    "Arima",
+    "Aruba",
+    "Curazao",
+    "Bonaire"
+  ],
+  "markers": [
+    {
+      "naam": "KUTO Motors (Macuto)",
+      "icoon": "huis",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "naam": "Zwembad",
+      "icoon": "zwembad",
+      "lat": 10.5784,
+      "lon": -66.901461
+    }
+  ],
+  "_markers_uitleg": "Eigen punten op de La Guaira-kaart. icoon: 'huis' of 'zwembad'. Zonder lat/lon (null) wordt het punt niet getoond."
 }
