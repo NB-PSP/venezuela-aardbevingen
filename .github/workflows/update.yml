@@ -2,7 +2,7 @@ name: Gegevens bijwerken
 
 on:
   schedule:
-    - cron: '0 12 * * 1'     # elke maandag 12:00 UTC
+    - cron: '0 12 * * *'     # elke dag 12:00 UTC (08:00 HLV)
     - cron: '45 3 1 * *'     # 23:45 HLV op de laatste dag van de vorige maand
     - cron: '0 2 28-31 * *'  # 22:00 HLV op de avond vóór dag 28-31 (extra zekerheid bij maandwissel)
   workflow_dispatch:

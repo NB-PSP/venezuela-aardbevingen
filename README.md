@@ -5,7 +5,7 @@ Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de op
 ## Wat het systeem doet
 
 1. **GitHub Actions** draait `scripts/scrape_funvisis.mjs`:
-   - elke **maandag 12:00 UTC**;
+   - **elke dag om 12:00 UTC** (08:00 Venezolaanse tijd);
    - op de **laatste avond van elke maand** (23:45 Venezolaanse tijd, via cron `45 3 1 * *`, plus een extra ronde via `0 2 28-31 * *`);
    - en **handmatig** (zie hieronder).
 2. Het script haalt de vorige en de lopende maand op bij FUNVISIS, voegt nieuwe bevingen toe aan `data/events.json` en werkt gewijzigde bevingen bij (met een `gewijzigd`-datum). Er wordt **nooit iets gewist**.
@@ -85,8 +85,8 @@ GitHub mailt als de Action mislukt. Open de link in de mail en bekijk de log bij
 - **"fuera de servicio" / timeout / HTTP-fout**: FUNVISIS is tijdelijk onbereikbaar. Wacht en start de Action later handmatig opnieuw. Er is niets kapot en er gaan geen gegevens verloren, want elke run haalt ook de vorige maand opnieuw op.
 - **"Kop … niet gevonden" of "Ongeldig getal/datum"**: FUNVISIS heeft iets in de pagina of de gegevens veranderd. Het script stopt dan bewust. Kijk in de log welk rapport het betreft; kleine typefouten van FUNVISIS (zoals `10:41` of `--72.4`) worden al opgevangen.
 - **Aantal klopt niet met de FUNVISIS-teller**: dit wordt alleen gelogd en staat in `data/meta.json` onder `controle_per_maand`.
-- **Waarschuwing op de site dat de gegevens ouder zijn dan 9 dagen**: de automatische update is gestopt. Check het tabblad Actions. GitHub zet geplande workflows uit na 60 dagen zonder activiteit in de repository; de wekelijkse commit met `laatste_controle_utc` voorkomt dat meestal. Klik anders in Actions op **Enable workflow**.
-- **GitHub-servers kunnen funvisis.gob.ve niet bereiken** (de stap "Test of funvisis.gob.ve bereikbaar is" geeft een waarschuwing): gebruik dan de Windows Taakplanner. Maak een taak die wekelijks `node scripts/scrape_funvisis.mjs` draait in de projectmap, gevolgd door `git add data && git commit -m "Gegevens bijgewerkt" && git push`. Als je laptop uit staat op het geplande moment, wordt de update overgeslagen (of uitgesteld als je "Taak zo snel mogelijk uitvoeren na een gemiste start" aanvinkt); de site toont dan na 9 dagen een waarschuwing.
+- **Waarschuwing op de site dat de gegevens ouder zijn dan 9 dagen**: de automatische update is gestopt. Check het tabblad Actions. GitHub zet geplande workflows uit na 60 dagen zonder activiteit in de repository; de dagelijkse commit met `laatste_controle_utc` voorkomt dat meestal. Klik anders in Actions op **Enable workflow**.
+- **GitHub-servers kunnen funvisis.gob.ve niet bereiken** (de stap "Test of funvisis.gob.ve bereikbaar is" geeft een waarschuwing): gebruik dan de Windows Taakplanner. Maak een taak die dagelijks `node scripts/scrape_funvisis.mjs` draait in de projectmap, gevolgd door `git add data && git commit -m "Gegevens bijgewerkt" && git push`. Als je laptop uit staat op het geplande moment, wordt de update overgeslagen (of uitgesteld als je "Taak zo snel mogelijk uitvoeren na een gemiste start" aanvinkt); de site toont dan na 9 dagen een waarschuwing.
 
 ## Projectnaam en link wijzigen
 
