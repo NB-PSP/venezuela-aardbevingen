@@ -22,7 +22,11 @@
       <a class="tab" href="#rest" data-s="rest" data-i18n-attr="aria-label:tab_r"><span class="l-long" data-i18n="tab_r" aria-hidden="true"></span><span class="l-short" data-i18n="tab_r_s" aria-hidden="true"></span></a>
     </div>
     <button class="themebtn" id="themeBtn" type="button" data-i18n-attr="aria-label:theme_aria">Thema</button>
-    <button class="themebtn langbtn" id="langBtn" type="button"><span id="langTxt">ES</span></button>
+    <div class="langseg" role="group" data-i18n-attr="aria-label:lang_group">
+      <button class="themebtn langopt" type="button" data-l="nl" lang="nl" aria-pressed="false" aria-label="Nederlands" title="Nederlands">NL</button>
+      <button class="themebtn langopt" type="button" data-l="en" lang="en" aria-pressed="false" aria-label="English" title="English">EN</button>
+      <button class="themebtn langopt" type="button" data-l="es" lang="es" aria-pressed="false" aria-label="Español" title="Español">ES</button>
+    </div>
   </nav>
 </header>
 
@@ -89,7 +93,7 @@
     </div>
   </section>
 
-  <section id="rest" class="deel deel2" aria-labelledby="h-r">
+  <section id="rest" class="deel deel2" aria-labelledby="h-r" hidden>
     <div class="inner">
       <p class="kicker" data-i18n="kicker_2"></p>
       <h2 id="h-r" data-i18n="h_r"></h2>

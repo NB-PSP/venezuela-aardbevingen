@@ -1,15 +1,15 @@
 # Aardbevingen Venezuela – dashboard
 
-Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de openbare tabellen van FUNVISIS. De site werkt zichzelf automatisch bij via GitHub Actions en wordt gepubliceerd door Vercel. De site is tweetalig: Nederlands en Spaans (knop NL/ES rechtsboven). Ze is ontworpen voor gebruik op een telefoon en werkt ook op een computer.
+Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de openbare tabellen van FUNVISIS. De site werkt zichzelf automatisch bij via GitHub Actions en wordt gepubliceerd door [statichost.eu](https://www.statichost.eu) (Zweeds, binnen de EU, gratis Hobby-abonnement) op https://venezuela-earthquakes.statichost.page. De site is drietalig: Nederlands, Engels en Spaans (taalkeuze rechtsboven; standaard volgt de site de browsertaal, met Engels als terugval). Ze is ontworpen voor gebruik op een telefoon en werkt ook op een computer.
 
 ## Wat het systeem doet
 
 1. **GitHub Actions** draait `scripts/scrape_funvisis.mjs`:
-   - **elke dag om 12:00 UTC** (08:00 Venezolaanse tijd);
-   - op de **laatste avond van elke maand** (23:45 Venezolaanse tijd, via cron `45 3 1 * *`, plus een extra ronde via `0 2 28-31 * *`);
+   - **elke dag om 00:00 en 12:00 Nederlandse tijd** (het hele jaar door, ook bij zomer- en wintertijd; de workflow staat op twee UTC-tijden per run en slaat de verkeerde over);
+   - op de **laatste avond van elke maand** (23:45 Venezolaanse tijd, via cron `45 3 1 * *`, plus een extra ronde via `0 2 28-31 * *`); deze twee lopen altijd, ook buiten 00:00/12:00 Nederlandse tijd;
    - en **handmatig** (zie hieronder).
 2. Het script haalt de vorige en de lopende maand op bij FUNVISIS, voegt nieuwe bevingen toe aan `data/events.json` en werkt gewijzigde bevingen bij (met een `gewijzigd`-datum). Er wordt **nooit iets gewist**.
-3. Is er iets veranderd, dan commit de Action de gegevens naar `main`. **Vercel publiceert dan automatisch opnieuw.**
+3. Is er iets veranderd, dan commit de Action de gegevens naar `main`. **statichost.eu bouwt en publiceert dan automatisch opnieuw** (via een GitHub-webhook bij elke push).
 4. Mislukt het ophalen of parsen, dan wordt er **niets overschreven**; het script stopt met een foutcode en GitHub mailt jou.
 
 De losse gegevens zijn ingevoerd **vanaf 1 januari 2026** (januari t/m november zijn opgehaald en per maand gecontroleerd tegen de FUNVISIS-teller). Het script haalt nooit iets van vóór januari 2026 op.
@@ -25,7 +25,8 @@ De losse gegevens zijn ingevoerd **vanaf 1 januari 2026** (januari t/m november 
 | `data/meta.json` | laatste controle, aantallen, controle per maand, bron-URL's |
 | `data/config.json` | instellingen: middelpunt (met naam) en straal van het La Guaira-gebied, buurlandplaatsen, waarschuwingsdrempel, eigen markeringen |
 | `public/` | het dashboard (`index.html`, `style.css`, `app.js`) |
-| `vercel.json` | kopieert `data/*.json` naar `public/data/` bij het publiceren |
+| `statichost.yml` | bouwinstructie voor statichost.eu: kopieert `data/*.json` naar `public/data/` bij het publiceren |
+| `public/_headers` | cache-instelling voor `/data/*` (altijd opnieuw controleren, zodat nieuwe gegevens direct zichtbaar zijn) |
 | `.github/workflows/update.yml` | de automatische updates |
 
 ## Lokaal draaien
@@ -45,7 +46,7 @@ Let op: de FUNVISIS-database valt geregeld even weg ("fuera de servicio"). Het s
 
 1. Ga op GitHub naar je repository → tabblad **Actions** → **Gegevens bijwerken**.
 2. Klik **Run workflow** → **Run workflow**.
-3. Na ongeveer een minuut staat er een nieuwe commit (als er iets nieuws was) en publiceert Vercel binnen een minuut opnieuw.
+3. Na ongeveer een minuut staat er een nieuwe commit (als er iets nieuws was) en publiceert statichost.eu binnen een minuut opnieuw.
 
 ## Officiële totalen toevoegen
 
@@ -61,11 +62,11 @@ Regels:
 - Vul altijd `bron` in. `bron_url` mag leeg blijven (`""`) als er geen link is, maar vul de link in als je die hebt.
 - Verzin niets: alleen cijfers met een herkenbare bron.
 
-## Taal (Nederlands / Spaans)
+## Taal (Nederlands / Engels / Spaans)
 
-- De knop rechtsboven wisselt tussen Nederlands en Spaans (de knop toont de taal waarnaar je schakelt: **ES** of **NL**). De keuze wordt onthouden in de browser. Zonder keuze volgt de site de browsertaal (Spaans als die met `es` begint, anders Nederlands). Met `?lang=es` of `?lang=nl` achter de link forceer je een taal.
-- **Alle teksten staan op één plek:** het woordenboek `I18N` bovenaan `public/app.js`. De vaste tekst in `index.html` wordt daaruit gevuld (`data-i18n`, `data-i18n-html`, `data-i18n-attr`). Een nieuwe tekst of vertaling toevoegen = één sleutel in `nl` en in `es`. Getallen en datums gebruiken `nl-NL` of `es-VE`; de maandnamen staan ook in het woordenboek.
-- **Gegevens in `data/official.json`** zijn Nederlands. Voeg optioneel een Spaanse variant toe met het achtervoegsel `_es`, bijvoorbeeld `omschrijving_es` (bij `hoofdbevingen`) of `bron_es` (bij `cumulatief` en `weekrapporten`). Is er geen `_es`-veld, dan toont de Spaanse versie het Nederlandse veld. Plaatsnamen van FUNVISIS zijn al Spaans en worden niet vertaald. Ook de namen van eigen markeringen in `config.json` worden zoals ingevuld getoond.
+- De taalkeuze rechtsboven wisselt tussen Nederlands, Engels en Spaans. De keuze wordt onthouden in de browser. Zonder keuze volgt de site de browsertaal (Nederlands als die met `nl` begint, Spaans bij `es`, anders Engels). Met `?lang=nl`, `?lang=en` of `?lang=es` achter de link forceer je een taal.
+- **Alle teksten staan op één plek:** het woordenboek `I18N` bovenaan `public/app.js`. De vaste tekst in `index.html` wordt daaruit gevuld (`data-i18n`, `data-i18n-html`, `data-i18n-attr`). Een nieuwe tekst of vertaling toevoegen = één sleutel in `nl`, `en` en `es`. Getallen en datums volgen de gekozen taal (`nl-NL`, `en-GB` of `es-VE`); de maandnamen staan ook in het woordenboek.
+- **Gegevens in `data/official.json`** zijn Nederlands. Voeg optioneel een Spaanse of Engelse variant toe met het achtervoegsel `_es` of `_en`, bijvoorbeeld `omschrijving_es` (bij `hoofdbevingen`) of `bron_en` (bij `cumulatief` en `weekrapporten`). Is er geen veld voor de gekozen taal, dan toont de site het Nederlandse veld. Plaatsnamen van FUNVISIS zijn al Spaans en worden niet vertaald. Ook de namen van eigen markeringen in `config.json` worden zoals ingevuld getoond.
 
 ## Gebied "La Guaira en omgeving"
 
@@ -91,14 +92,21 @@ GitHub mailt als de Action mislukt. Open de link in de mail en bekijk de log bij
 - **"fuera de servicio" / timeout / HTTP-fout**: FUNVISIS is tijdelijk onbereikbaar. Wacht en start de Action later handmatig opnieuw. Er is niets kapot en er gaan geen gegevens verloren, want elke run haalt ook de vorige maand opnieuw op.
 - **"Kop … niet gevonden" of "Ongeldig getal/datum"**: FUNVISIS heeft iets in de pagina of de gegevens veranderd. Het script stopt dan bewust. Kijk in de log welk rapport het betreft; kleine typefouten van FUNVISIS (zoals `10:41` of `--72.4`) worden al opgevangen.
 - **Aantal klopt niet met de FUNVISIS-teller**: dit wordt alleen gelogd en staat in `data/meta.json` onder `controle_per_maand`.
-- **Waarschuwing op de site dat de gegevens ouder zijn dan 9 dagen**: de automatische update is gestopt. Check het tabblad Actions. GitHub zet geplande workflows uit na 60 dagen zonder activiteit in de repository; de dagelijkse commit met `laatste_controle_utc` voorkomt dat meestal. Klik anders in Actions op **Enable workflow**.
+- **Waarschuwing op de site dat de gegevens ouder zijn dan 9 dagen**: de automatische update is gestopt. Check het tabblad Actions. GitHub zet geplande workflows uit na 60 dagen zonder activiteit in de repository; de commit bij elke update met `laatste_controle_utc` voorkomt dat meestal. Klik anders in Actions op **Enable workflow**.
 - **GitHub-servers kunnen funvisis.gob.ve niet bereiken** (de stap "Test of funvisis.gob.ve bereikbaar is" geeft een waarschuwing): gebruik dan de Windows Taakplanner. Maak een taak die dagelijks `node scripts/scrape_funvisis.mjs` draait in de projectmap, gevolgd door `git add data && git commit -m "Gegevens bijgewerkt" && git push`. Als je laptop uit staat op het geplande moment, wordt de update overgeslagen (of uitgesteld als je "Taak zo snel mogelijk uitvoeren na een gemiste start" aanvinkt); de site toont dan na 9 dagen een waarschuwing.
 
 ## Projectnaam en link wijzigen
 
-- **Vercel-link**: Vercel → je project → **Settings → Domains** → de `*.vercel.app`-naam bewerken. Deel daarna de nieuwe link; de oude werkt dan niet meer.
-- **Projectnaam**: Vercel → **Settings → General → Project Name**.
-- **Repositorynaam** (optioneel): GitHub → **Settings → General → Repository name**. Vercel blijft gekoppeld, maar controleer daarna even of het project nog bij de juiste repo staat.
+- **Link van de site**: de naam van de site bepaalt het adres. Ga in het dashboard van statichost.eu (builder.statichost.eu) naar je site en pas de sitenaam aan; de site krijgt dan een nieuw `*.statichost.page`-adres. Deel daarna de nieuwe link; de oude werkt dan niet meer.
+- **Webhook bijwerken**: de webhook-URL op GitHub bevat de sitenaam (`https://builder.statichost.eu/<sitenaam>`). Verander je de sitenaam, pas dan op GitHub **Settings → Webhooks** de payload-URL aan, anders bouwt de site niet meer bij een push.
+- **Repositorynaam** (optioneel): GitHub → **Settings → General → Repository name**. Controleer daarna in statichost.eu of de site nog bij de juiste repo staat (GitHub stuurt de oude link door, maar pas de repository-link in statichost.eu liever aan) en of de webhook nog werkt.
+
+## Opzet statichost.eu
+
+1. Maak in [builder.statichost.eu](https://builder.statichost.eu) een site aan met de naam `venezuela-earthquakes` en de HTTPS-link van de GitHub-repository (`https://github.com/NB-PSP/venezuela-aardbevingen.git`). De bouwinstructie staat in `statichost.yml`.
+2. De repository is openbaar, dus een deploy key is niet nodig. Maak je de repository ooit privé, gebruik dan de SSH-link en zet de deploy key (alleen lezen) die statichost.eu toont op GitHub: repository → **Settings → Deploy keys → Add deploy key**.
+3. Maak een webhook: repository → **Settings → Webhooks → Add webhook** met payload-URL `https://builder.statichost.eu/venezuela-earthquakes`, content type `application/json` en alleen het **push**-event.
+4. Daarna bouwt statichost.eu de site bij elke push naar `main`, ook bij de commits van de automatische update.
 
 ## Buurlanden
 

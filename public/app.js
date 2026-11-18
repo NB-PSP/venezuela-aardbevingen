@@ -22,7 +22,7 @@ const I18N = {
     nav_aria: 'Onderdelen van de pagina',
     tab_ov: 'Overzicht', tab_ov_s: 'Overzicht', tab_lg: 'La Guaira', tab_lg_s: 'La Guaira', tab_r: 'Rest van Venezuela', tab_r_s: 'Rest',
     theme_aria: 'Wissel tussen licht en donker thema', theme_to_light: 'Schakel naar licht thema', theme_to_dark: 'Schakel naar donker thema',
-    lang_btn: 'ES', lang_label: 'Schakel naar Spaans (Español)',
+    lang_group: 'Taal',
     kicker_ov: 'Overzicht', h1: 'Aardbevingen Venezuela',
     lead_ov: 'Gegevens van FUNVISIS (Venezolaanse seismologische dienst). De officiële totalen tellen vanaf de hoofdbevingen van {since}; de losse lijst met bevingen op deze pagina loopt vanaf {first}, de eerste beving in de gegevens.',
     loading: 'Gegevens laden…',
@@ -104,6 +104,99 @@ const I18N = {
     cmp_all: 'Toon alle ({n})', kind_total: 'Totaal', kind_week: 'Week', cmp_range: '{a} t/m {b}{ca}',
     err: 'De gegevens konden niet worden geladen ({m}). Probeer het later opnieuw.',
   },
+  en: {
+    locale: 'en-GB', dateSep: '/',
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    mshort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    long_dm: '{d} {m}', long_dmy: '{dm} {y}',
+    meta_title: 'Earthquakes in Venezuela',
+    meta_desc: 'Overview of earthquakes in Venezuela, based on public FUNVISIS data.',
+    skip: 'Skip to content',
+    nav_aria: 'Page sections',
+    lang_group: 'Language',
+    tab_ov: 'Overview', tab_ov_s: 'Overview', tab_lg: 'La Guaira', tab_lg_s: 'La Guaira', tab_r: 'Rest of Venezuela', tab_r_s: 'Rest',
+    theme_aria: 'Switch between light and dark theme', theme_to_light: 'Switch to light theme', theme_to_dark: 'Switch to dark theme',
+    kicker_ov: 'Overview', h1: 'Earthquakes in Venezuela',
+    lead_ov: 'Data from FUNVISIS (the Venezuelan seismological service). The official totals count from the main shocks of {since}; the detailed list of earthquakes on this page starts on {first}, the first earthquake in the data.',
+    loading: 'Loading data…',
+    help_sum: 'How to use this page',
+    help_1: 'Use the buttons at the top to jump to a section.',
+    help_2: '<strong>La Guaira</strong>: all earthquakes within {R} km of {c}, with a map, charts by week and month, and a full list.',
+    help_3: '<strong>Rest of Venezuela</strong>: everything else, plus the official FUNVISIS totals.',
+    help_4: 'Tap a point on the map or a bar in a chart for details (on a computer, hovering also works). On the map, zoom with the + and − buttons, with two fingers or by double-clicking, and drag to pan. With the keyboard: Tab to the map or chart and use the arrow keys (map: + and − to zoom, Esc to close the details panel).',
+    help_5: 'Times are Venezuelan time (HLV, UTC−4). Weeks run from Monday to Sunday; months follow the Venezuelan calendar.',
+    help_6: 'This page contains measured facts only: no damage claims and no predictions.',
+    kicker_1: 'Part 1', kicker_2: 'Part 2',
+    h_lg: 'La Guaira and surroundings (within {R} km)',
+    lead_lg: 'Earthquakes within {R} km of {c} ({coord}). The distance is calculated with the haversine formula; all distances on this page are measured from that centre point. The detailed list starts on {first}.',
+    h_map: 'Map',
+    period: 'Period:', p_all: 'All', p_m: 'Month', p_w: 'Week', p_prev: 'Previous period', p_next: 'Next period', p_all_label: 'All earthquakes',
+    count_shown: '{n} earthquakes shown',
+    sat: 'Satellite imagery',
+    map_hint: 'Tap or hover over a point for details.',
+    map_kbd: 'Keyboard: arrow keys select an earthquake, + and − zoom, 0 resets the map.',
+    zoom_in: 'Zoom in', zoom_out: 'Zoom out', zoom_reset: 'Reset map', close: 'Close',
+    h_week: 'By week', h_month: 'By month', show_table: 'Show as table', h_all: 'All earthquakes (newest first)',
+    h_r: 'Rest of Venezuela (beyond {R} km)',
+    lead_r: 'Here you will find the official FUNVISIS totals and the individual earthquakes outside the La Guaira area.',
+    h_cum: 'Official total since {since_dm}',
+    cum_note: 'Official figures were copied by hand and are not available for every date; the line between the points is only a connector, not a measurement.',
+    h_report: 'FUNVISIS weekly reports (whole country)',
+    h_compare: 'Detailed list versus official figures',
+    compare_note: 'A difference may be due to a different count at FUNVISIS, to earthquakes in neighbouring countries, or to the detailed list having missing or later-added earthquakes. The figures have not been adjusted.',
+    h_overview_map: 'Overview map',
+    neigh_sum: 'Earthquakes in neighbouring countries ({nBuur}, not counted)',
+    neigh_note: 'FUNVISIS also reports earthquakes just outside Venezuela. These are not counted above. The place names used to detect them are listed in <code>data/config.json</code> (<code>buurland_plaatsen</code>).',
+    f1: '<strong>Source:</strong> FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas), <a href="http://www.funvisis.gob.ve/old/sis_mes.php" rel="noopener">sis_mes.php</a>. Official totals and weekly reports were copied by hand from FUNVISIS statements published in the media; the source of each figure is listed in <code>data/official.json</code>.',
+    f2: '<strong>Time zone:</strong> HLV = Hora Legal de Venezuela = UTC−4, all year round (no daylight saving time). Days, weeks and months are based on that time. Locations and magnitudes may later be revised by FUNVISIS.',
+    f3: '<strong>Map data:</strong> the background map (coast, roads, built-up areas) is made of tiles from <a href="https://www.esri.com/" rel="noopener">Esri</a> (World Light/Dark Gray Base, with data from <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors), loaded from <code>server.arcgisonline.com</code>. If you switch on satellite imagery, Sentinel-2 cloudless tiles from <a href="https://s2maps.eu" rel="noopener">EOX</a> are loaded instead (<code>tiles.maps.eox.at</code>; contains modified Copernicus Sentinel data 2023). Those servers then see your IP address and the area you are viewing. Until the tiles have loaded (or when offline) the map shows a simplified coast and country borders from <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a> (public domain). The place names were chosen by hand (coordinates from OpenStreetMap) and serve only for orientation.',
+    attr_base: '© <a href="https://www.esri.com/" rel="noopener">Esri</a>, HERE, Garmin, © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors, and the GIS user community',
+    attr_sat: '<a href="https://s2maps.eu" rel="noopener">Sentinel-2 cloudless – s2maps.eu</a> by <a href="https://eox.at" rel="noopener">EOX</a> (contains modified Copernicus Sentinel data 2023)',
+    f4: 'This page is an unofficial, non-commercial overview and not a warning service.',
+    centre_fallback: 'the centre point',
+    warn_old: 'Note: the data has not been updated for {age} (more than {limit} days). The figures shown may be out of date.',
+    age_days: '{n} days', age_unknown: 'an unknown length of time',
+    card_total: 'Total since {since_dm}', approx: 'approx., ', asof: 'as of {d} · {b}',
+    card_main: 'Main shock {n}',
+    card_cur: 'Current month ({m})',
+    card_cur_sub: 'individual earthquakes in Venezuela, {b} in neighbouring countries not counted',
+    upd: 'Last updated: {a} HLV ({b} UTC). Latest earthquake in the list: {c}.',
+    upd_unknown: 'Last update unknown.',
+    depth_km: '{v} km deep',
+    stat_n: 'Number of earthquakes', stat_max: 'Largest', stat_last: 'Latest',
+    stat_max_sub: '{when} HLV · {depth} km deep · {dist} km from {c}',
+    stat_last_sub: '{when} HLV · {depth} km deep · {place}',
+    since_first: 'since {d}', in_month: 'in {m}', in_week: 'in {w}, {r}',
+    stat_buur: 'Neighbouring countries (not counted)', stat_buur_sub: 'earthquakes that FUNVISIS also reports, just outside Venezuela',
+    none: 'No earthquakes.',
+    map_aria_lg: 'Map with {n} earthquakes within {R} km of {c}',
+    map_aria_r: 'Overview map with {n} earthquakes',
+    det_title: 'Magnitude {m}', det_hlv: 'Time (HLV)', det_utc: 'Time (UTC)', det_depth: 'Depth', fixed: ' (fixed)',
+    det_dist: 'Distance', det_dist_v: '{d} km from {c}', det_coord: 'Coordinates', det_place: 'Location', det_src: 'Source', det_report: 'FUNVISIS report',
+    dir_n: 'N', dir_s: 'S', dir_e: 'E', dir_w: 'W',
+    leg_d1: 'depth < 20 km', leg_d2: '20–70 km', leg_d3: '70–150 km', leg_d4: '> 150 km', leg_size: 'Size = magnitude',
+    th_date: 'Date (HLV)', th_time: 'Time (HLV)', th_mag: 'Mag.', th_depth: 'Depth (km)', th_dist: 'Distance (km)', th_dist_t: 'Distance from {c}',
+    th_place: 'Location', th_lat: 'Latitude', th_lon: 'Longitude', th_rep: 'Report', rep_link: 'report', fixed_s: ' (fixed)',
+    more: 'Show more ({n} to go)', count_list: '{n} earthquakes · distances from {c}',
+    ev_depth: 'Depth {v} km', ev_dist: 'Distance {v} km', ev_link: 'View the FUNVISIS report',
+    th_week: 'Week', th_period: 'Period', th_count: 'Count', th_max: 'Highest mag.', th_month: 'Month', th_avg: 'Average mag.',
+    week_label: 'week {n} ({y})',
+    tip_bucket: '{name}: {n} earthquakes, highest magnitude {max}, average {avg}.', tip_none: '{name}: no earthquakes.',
+    chart_week: 'Number of earthquakes per week', chart_month: 'Number of earthquakes per month',
+    prev_week: 'One week earlier', next_week: 'One week later', prev_month: 'One month earlier', next_month: 'One month later',
+    range_info: '{a} to {b}',
+    bar_hint: 'Tap a bar for details.', pt_hint: 'Tap a point for details.',
+    cum_aria: 'Cumulative number of earthquakes since {since_dm}',
+    cum_tip: '{d}: {n} earthquakes since {since_dm}{ca}. Source: {b}.', ca: ' (approx.)',
+    leg_off: '● official FUNVISIS total (open circle = “approx.”)', leg_list: '- - count from the detailed list (excluding neighbouring countries)',
+    wr_tip: 'Week {a} to {b}: {n} earthquakes (FUNVISIS, whole country). Source: {s}.', wr_aria: 'Number of earthquakes per weekly report',
+    complete: 'The detailed list starts on {first}. {part} ({ok} of {tot} months checked{no}).',
+    part_from: 'From {d} the monthly count matches the FUNVISIS counter', part_none: 'No month matches the FUNVISIS counter',
+    no_counter: ', {n} without a counter', no_checks: 'No monthly checks are available yet.',
+    cmp_kind: 'Type', cmp_period: 'Period', cmp_off: 'Official', cmp_list: 'Detailed list', cmp_diff: 'Difference', cmp_src: 'Source',
+    cmp_all: 'Show all ({n})', kind_total: 'Total', kind_week: 'Week', cmp_range: '{a} to {b}{ca}',
+    err: 'The data could not be loaded ({m}). Please try again later.',
+  },
   es: {
     locale: 'es-VE', dateSep: '/',
     months: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
@@ -115,7 +208,7 @@ const I18N = {
     nav_aria: 'Secciones de la página',
     tab_ov: 'Resumen', tab_ov_s: 'Resumen', tab_lg: 'La Guaira', tab_lg_s: 'La Guaira', tab_r: 'Resto de Venezuela', tab_r_s: 'Resto',
     theme_aria: 'Cambiar entre tema claro y oscuro', theme_to_light: 'Cambiar a tema claro', theme_to_dark: 'Cambiar a tema oscuro',
-    lang_btn: 'NL', lang_label: 'Cambiar a neerlandés (Nederlands)',
+    lang_group: 'Idioma',
     kicker_ov: 'Resumen', h1: 'Sismos en Venezuela',
     lead_ov: 'Datos de FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas). Los totales oficiales cuentan desde los sismos principales del {since}; la lista detallada de esta página comienza el {first}, el primer sismo de los datos.',
     loading: 'Cargando datos…',
@@ -208,10 +301,15 @@ function t(key, p = {}, html = false) {
   if (typeof v === 'function') return v(p);
   return String(v).replace(/\{(\w+)\}/g, (_, n) => { const x = p[n] ?? P[n] ?? '…'; return html ? esc(x) : x; });
 }
+const LANGS = ['nl', 'en', 'es'];
 function detectLang() {
-  try { const q = new URLSearchParams(location.search).get('lang'); if (q === 'es' || q === 'nl') return q; } catch { /* */ }
-  try { const s = localStorage.getItem('taal'); if (s === 'es' || s === 'nl') return s; } catch { /* geen opslag */ }
-  return /^es/i.test(navigator.language || '') ? 'es' : 'nl';
+  try { const q = new URLSearchParams(location.search).get('lang'); if (LANGS.includes(q)) return q; } catch { /* */ }
+  try { const s = localStorage.getItem('taal'); if (LANGS.includes(s)) return s; } catch { /* geen opslag */ }
+  for (const l of navigator.languages?.length ? navigator.languages : [navigator.language || '']) { // eerste browsertaal die we kennen
+    const p = String(l).toLowerCase().split('-')[0];
+    if (LANGS.includes(p)) return p;
+  }
+  return 'en';
 }
 
 /* ---------- DOM-hulpjes ---------- */
@@ -230,7 +328,7 @@ const h = (tag, a = {}, ...kids) => { const e = document.createElement(tag); set
 const sv = (tag, a = {}, ...kids) => { const e = document.createElementNS(NS, tag); setAttrs(e, a); return add(e, kids); };
 const clear = (el) => { el.replaceChildren(); return el; };
 
-/* ---------- opmaak (nl-NL of es-VE) ---------- */
+/* ---------- opmaak (nl-NL, en-GB of es-VE) ---------- */
 let nf, n1, n2;
 function setFormats() {
   const loc = I18N[lang].locale, mk = (d) => new Intl.NumberFormat(loc, { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -246,7 +344,7 @@ const isoDay = (ms) => new Date(ms).toISOString().slice(0, 10);
 const fmtMs = (ms, off) => { const d = new Date(ms + off * 3600e3), x = I18N[lang].dateSep; return `${p2(d.getUTCDate())}${x}${p2(d.getUTCMonth() + 1)}${x}${d.getUTCFullYear()} ${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())}`; };
 const monthLabel = (k) => `${MONTHS()[+k.slice(5, 7) - 1]} ${k.slice(0, 4)}`;
 const signed = (v) => (v > 0 ? '+' : v < 0 ? '−' : '±') + fi(Math.abs(v));
-const loc = (o, f) => (lang === 'es' && o[`${f}_es`]) || o[f];
+const loc = (o, f) => (lang !== 'nl' && o[`${f}_${lang}`]) || o[f]; // eigen veld per taal (_es, _en), anders het Nederlandse basisveld
 
 /* ---------- tijd en weken (Venezolaanse tijd) ---------- */
 const parseD = (s) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
@@ -296,6 +394,15 @@ let D = null; // afgeleide gegevens (na het laden)
 const charts = []; // functies die grafieken opnieuw tekenen (bij andere breedte)
 const lists = []; // functies die lijsten opnieuw opbouwen (bij wisselen telefoon/computer)
 const sat = { lg: false, r: false };
+/* Deel 1 (La Guaira) en deel 2 (rest) staan nooit tegelijk in beeld. Een verborgen deel heeft breedte 0, dus tekenfuncties
+   krijgen het deel waartoe ze horen mee (.sec); wat verborgen is getekend of van maat veranderd, wordt 'stale' en opnieuw
+   getekend zodra het deel zichtbaar wordt. */
+let regSec = 'lg'; // deel waarvoor nu tekenfuncties worden geregistreerd
+const SECID = { lg: 'la-guaira', r: 'rest' };
+const stale = { lg: false, r: false };
+const secHidden = (s) => $(SECID[s]).hidden;
+const track = (arr, ...fns) => { for (const f of fns) { f.sec = regSec; arr.push(f); } };
+const runFor = (arr) => { for (const f of [...arr]) { if (secHidden(f.sec)) stale[f.sec] = true; else f(); } }; // alleen zichtbare delen tekenen
 
 /* ---------- componenten ---------- */
 const card = (lbl, val, sub) => h('div', { class: 'card' }, h('div', { class: 'lbl' }, lbl), h('div', { class: 'val' }, val), sub ? h('div', { class: 'sub' }, sub) : null);
@@ -558,7 +665,7 @@ function interactiveMap(el, detailEl, o) {
 
   /* weergave */
   const v = { ...base }; let z = 1, scaledZ = 1, raf = 0;
-  if (o.tiles) { tiles = makeTiles({ svg, host: tileHost, view: () => v, isSat: !!o.satellite, ...o.tiles }); mapTiles.push(() => tiles.update(true)); }
+  if (o.tiles) { tiles = makeTiles({ svg, host: tileHost, view: () => v, isSat: !!o.satellite, ...o.tiles }); const mt = () => tiles.update(true); mt.sec = el.id.startsWith('lg') ? 'lg' : 'r'; mt.host = el; for (let i = mapTiles.length; i--;) if (mapTiles[i].host === el) mapTiles.splice(i, 1); mapTiles.push(mt); }
   const rectOf = () => svg.getBoundingClientRect();
   function setView(nx, ny, nz) {
     nz = clamp(nz, 1, MAXZ);
@@ -822,7 +929,7 @@ function windowed(el, items, small, big, aria, noun) {
   };
   prev.addEventListener('click', () => { S.win[id] = Math.max(size(), (S.win[id] ?? items.length) - 1); draw(); });
   next.addEventListener('click', () => { S.win[id] = Math.min(items.length, (S.win[id] ?? items.length) + 1); draw(); });
-  charts.push(draw);
+  track(charts, draw);
   draw();
 }
 
@@ -908,7 +1015,7 @@ function applyStatic() {
   for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
   for (const el of document.querySelectorAll('[data-i18n-html]')) el.innerHTML = t(el.dataset.i18nHtml, {}, true);
   for (const el of document.querySelectorAll('[data-i18n-attr]')) for (const pair of el.dataset.i18nAttr.split(';')) { const [a, k] = pair.split(':'); el.setAttribute(a, t(k)); }
-  const lb = $('langBtn'); $('langTxt').textContent = t('lang_btn'); lb.setAttribute('aria-label', t('lang_label')); lb.title = t('lang_label');
+  for (const b of document.querySelectorAll('[data-l]')) b.setAttribute('aria-pressed', String(b.dataset.l === lang));
   refreshThemeBtn?.();
 }
 
@@ -969,7 +1076,7 @@ function renderRest() {
   const drawCum = () => lineChart(cumEl, cumPts, daily, t('cum_aria'));
   const reportItems = wr.map((w) => ({ value: w.aantal, tick: fmtShort(w.van), tip: t('wr_tip', { a: fmtD(w.van), b: fmtD(w.tot), n: fi(w.aantal), s: loc(w, 'bron') }) }));
   const drawRep = () => barChart(repEl, reportItems, t('wr_aria'));
-  charts.push(drawCum, drawRep); drawCum(); drawRep();
+  track(charts, drawCum, drawRep); drawCum(); drawRep();
 
   // afwijkingen
   const mc = Object.entries(meta.controle_per_maand || {}).sort(([a], [b]) => a.localeCompare(b));
@@ -984,12 +1091,12 @@ function renderRest() {
     ...wr.map((w) => { const l = vz.filter((e) => e.datum_hlv >= w.van && e.datum_hlv <= w.tot).length; return { date: w.tot, kind: t('kind_week'), period: t('cmp_range', { a: fmtD(w.van), b: fmtD(w.tot), ca: '' }), off: w.aantal, list: l, diff: l - w.aantal, src: loc(w, 'bron') }; }),
   ];
   const drawCmp = () => compare($('r-compare'), rows);
-  lists.push(drawCmp); drawCmp();
+  track(lists, drawCmp); drawCmp();
 
-  drawRest(); charts.push(drawRest);
+  drawRest(); track(charts, drawRest);
   periodBlock('r', rest);
   const drawL = () => listTable($('r-list'), rest), drawN = () => listTable($('r-neigh'), buur);
-  lists.push(drawL, drawN); drawL(); drawN();
+  track(lists, drawL, drawN); drawL(); drawN();
 }
 
 function renderAll() {
@@ -997,15 +1104,18 @@ function renderAll() {
   closeSheet();
   charts.length = 0; lists.length = 0; mapTiles.length = 0;
   setFormats(); setParams(); applyStatic();
+  regSec = 'lg';
   renderOverview();
   legend($('lg-legend')); legend($('r-legend'));
   $('lg-sat').checked = sat.lg; $('r-sat').checked = sat.r;
   drawLG();
-  charts.push(() => mapLG($('lg-map'), $('lg-detail'), periodInfo('lg', D.lg).sub));
+  track(charts, () => mapLG($('lg-map'), $('lg-detail'), periodInfo('lg', D.lg).sub));
   periodBlock('lg', D.lg);
   const drawL = () => listTable($('lg-list'), D.lg);
-  lists.push(drawL); drawL();
+  track(lists, drawL); drawL();
+  regSec = 'r';
   renderRest();
+  for (const k of ['lg', 'r']) stale[k] = secHidden(k); // wat nu verborgen is getekend, is op breedte 0 gemeten
 }
 
 /* ---------- besturing ---------- */
@@ -1020,23 +1130,47 @@ function initChrome() {
     btn.setAttribute('aria-label', btn.title);
     for (const m of document.querySelectorAll('meta[name="theme-color"]')) m.setAttribute('content', eff() === 'dark' ? '#19212b' : '#ffffff'); // kopbalk volgt het gekozen thema
   };
-  btn.addEventListener('click', () => { root.dataset.theme = eff() === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('thema', root.dataset.theme); } catch { /* */ } refreshThemeBtn(); for (const f of mapTiles) f(); });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { refreshThemeBtn(); for (const f of mapTiles) f(); });
+  btn.addEventListener('click', () => { root.dataset.theme = eff() === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('thema', root.dataset.theme); } catch { /* */ } refreshThemeBtn(); runFor(mapTiles); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { refreshThemeBtn(); runFor(mapTiles); });
 
-  $('langBtn').addEventListener('click', () => {
-    lang = lang === 'nl' ? 'es' : 'nl';
+  for (const b of document.querySelectorAll('[data-l]')) b.addEventListener('click', () => {
+    if (b.dataset.l === lang) return;
+    lang = b.dataset.l;
     try { localStorage.setItem('taal', lang); } catch { /* */ }
-    renderAll();
+    renderAll(); // zet ook document.documentElement.lang en aria-pressed
   });
 
+  /* Overzicht staat altijd bovenaan; daaronder is maar één deel zichtbaar (La Guaira of rest), gekozen via tab of #hash. */
   const tabs = [...document.querySelectorAll('.tab')];
   const mark = (id) => tabs.forEach((x) => x.setAttribute('aria-current', String(x.dataset.s === id)));
-  mark('overzicht');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) mark(x.target.id); }), { rootMargin: '-35% 0px -60% 0px' });
-    document.querySelectorAll('main > section').forEach((s) => io.observe(s));
-  }
+  let pair = 'la-guaira', io = null;
+  const observe = () => {
+    if (!('IntersectionObserver' in window)) return;
+    io?.disconnect();
+    io = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) mark(x.target.id === 'overzicht' ? 'overzicht' : pair); }), { rootMargin: '-35% 0px -60% 0px' });
+    for (const id of ['overzicht', pair]) io.observe($(id)); // alleen zichtbare delen observeren
+  };
+  const fromHash = () => { const x = decodeURIComponent(location.hash.slice(1)); return x === 'rest' || x === 'la-guaira' ? x : null; };
+  showSection = (id, { scroll = true, hash = true } = {}) => {
+    pair = id;
+    $('la-guaira').hidden = id !== 'la-guaira'; $('rest').hidden = id !== 'rest';
+    closeSheet();
+    const sec = id === 'rest' ? 'r' : 'lg';
+    if (D && stale[sec]) { stale[sec] = false; for (const f of [...charts, ...lists]) if (f.sec === sec) f(); } // nu zichtbaar, dus meetbaar
+    mark(id); observe();
+    if (hash) try { history.replaceState(null, '', '#' + id); } catch { /* */ }
+    if (scroll) $(id).scrollIntoView();
+  };
+  for (const a of tabs) a.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    if (a.dataset.s === 'overzicht') { scrollTo(0, 0); mark('overzicht'); return; }
+    showSection(a.dataset.s);
+  });
+  addEventListener('hashchange', () => { const x = fromHash(); if (x) showSection(x, { hash: false }); });
+  showSection(fromHash() || 'la-guaira', { scroll: false, hash: false });
+  initialHash = fromHash();
 }
+let showSection = () => {}, initialHash = null;
 
 function initControls() {
   // periodekiezer: Alles / Maand / Week plus ‹ ›
@@ -1059,11 +1193,11 @@ function initControls() {
   let lastW = 0, timer = 0;
   const onResize = () => {
     clearTimeout(timer);
-    timer = setTimeout(() => { const w = Math.round($('overzicht').clientWidth); if (w && w !== lastW) { lastW = w; for (const f of charts) f(); } }, 150);
+    timer = setTimeout(() => { const w = Math.round($('overzicht').clientWidth); if (w && w !== lastW) { lastW = w; runFor(charts); } }, 150);
   };
   lastW = Math.round($('overzicht').clientWidth);
   if ('ResizeObserver' in window) new ResizeObserver(onResize).observe(document.querySelector('main')); else addEventListener('resize', onResize);
-  mq.phone.addEventListener('change', () => { for (const f of lists) f(); for (const f of charts) f(); });
+  mq.phone.addEventListener('change', () => { runFor(lists); runFor(charts); });
 }
 
 lang = detectLang();
@@ -1074,6 +1208,7 @@ load().then(([cfg, events, off, meta, geo]) => {
   D = derive(cfg, events, off, meta, geo);
   initControls();
   renderAll();
+  if (initialHash) $(initialHash).scrollIntoView(); // gedeelde link met #rest of #la-guaira: pas scrollen als de inhoud er staat
 }).catch((err) => {
   console.error(err);
   clear($('ov-cards')).append(h('div', { class: 'warn', role: 'alert' }, t('err', { m: err.message })));

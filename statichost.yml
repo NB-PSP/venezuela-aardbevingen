@@ -1,0 +1,4 @@
+# Bouwt de site op statichost.eu: kopieert de gegevens naast het dashboard
+image: alpine:3.20
+command: mkdir -p public/data && cp data/*.json public/data/
+public: public

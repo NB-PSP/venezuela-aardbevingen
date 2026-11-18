@@ -42,6 +42,12 @@ a { color: var(--accent); }
 .tab[aria-current="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 .themebtn { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 0 10px; cursor: pointer; font: inherit; font-size: .95rem; font-weight: 600; }
 .l-short { display: none; }
+.langseg { flex: none; display: inline-flex; }
+.langopt { min-width: 32px; padding: 0 6px; border-radius: 0; margin-left: -1px; font-size: .8rem; }
+.langopt:first-child { border-radius: 999px 0 0 999px; margin-left: 0; padding-left: 10px; }
+.langopt:last-child { border-radius: 0 999px 999px 0; padding-right: 10px; }
+.langopt[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); position: relative; }
+section[hidden] { display: none; } /* ook als een .deel-regel later een eigen display krijgt */
 @media (max-width: 480px) {
   .top nav { padding: 4px 8px; gap: 4px; }
   .top .tabs { gap: 4px; }
@@ -49,6 +55,9 @@ a { color: var(--accent); }
   .l-long { display: none; }
   .l-short { display: inline; }
   .themebtn { padding: 0; }
+  .langopt { min-width: 30px; padding: 0 5px; font-size: .76rem; }
+  .langopt:first-child { padding-left: 8px; }
+  .langopt:last-child { padding-right: 8px; }
 }
 
 @media (max-width: 360px) { .top nav { padding: 4px 6px; gap: 3px; } .top .tabs { gap: 3px; } .tab { padding: 0 7px; font-size: .8rem; } }
