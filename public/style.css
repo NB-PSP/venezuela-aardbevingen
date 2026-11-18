@@ -1,4 +1,5 @@
 :root {
+  --topH: 53px; --chipH: 57px; /* hoogte van de bovenbalk (computer) en de rij snelkoppelingen */
   --bg: #f6f7f9; --bg2: #fbf3e6; --card: #ffffff; --card2: #fffdf8;
   --text: #1c2430; --muted: #566273; --line: #d9dee6; --accent: #1d5fa8; --accent-text: #ffffff;
   --bar: #2f7bc4; --bar-sel: #0e3f78; --grid: #d9dee6; --warn-bg: #fde8e6; --warn-text: #8a1c12; --warn-line: #e08a82;
@@ -39,31 +40,18 @@ a { color: var(--accent); }
 .top .tabs { display: flex; gap: 6px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .top .tabs::-webkit-scrollbar { display: none; }
 .tab { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; color: var(--text); white-space: nowrap; font-weight: 600; font-size: .95rem; }
-.tab[aria-current="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.tab[aria-current="page"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 .themebtn { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 0 10px; cursor: pointer; font: inherit; font-size: .95rem; font-weight: 600; }
-.l-short { display: none; }
 .langseg { flex: none; display: inline-flex; }
 .langopt { min-width: 32px; padding: 0 6px; border-radius: 0; margin-left: -1px; font-size: .8rem; }
 .langopt:first-child { border-radius: 999px 0 0 999px; margin-left: 0; padding-left: 10px; }
 .langopt:last-child { border-radius: 0 999px 999px 0; padding-right: 10px; }
 .langopt[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); position: relative; }
 section[hidden] { display: none; } /* ook als een .deel-regel later een eigen display krijgt */
-@media (max-width: 480px) {
-  .top nav { padding: 4px 8px; gap: 4px; }
-  .top .tabs { gap: 4px; }
-  .tab { padding: 0 9px; font-size: .84rem; }
-  .l-long { display: none; }
-  .l-short { display: inline; }
-  .themebtn { padding: 0; }
-  .langopt { min-width: 30px; padding: 0 5px; font-size: .76rem; }
-  .langopt:first-child { padding-left: 8px; }
-  .langopt:last-child { padding-right: 8px; }
-}
-
-@media (max-width: 360px) { .top nav { padding: 4px 6px; gap: 3px; } .top .tabs { gap: 3px; } .tab { padding: 0 7px; font-size: .8rem; } }
+@media (max-width: 819px) { .top { display: none; } } /* op telefoon staat de navigatie onderin (.btabs) en in het Meer-paneel */
 
 main { max-width: 1100px; margin: 0 auto; }
-.deel { padding: 24px 16px 32px; scroll-margin-top: 60px; }
+.deel { padding: 24px 16px 32px; }
 .deel2 { background: var(--bg2); border-top: 6px solid var(--d1); max-width: none; }
 .deel2 > .inner, .deel > .inner { max-width: 1100px; margin: 0 auto; }
 h1 { font-size: 1.6rem; margin: 0 0 4px; line-height: 1.2; }
@@ -162,6 +150,9 @@ button.more { font: inherit; padding: 8px 12px; min-height: 44px; border-radius:
 
 /* detailvenster: naast de kaart op groot scherm, vast onderaan (bottom sheet) op telefoon */
 .sheetclose { display: none; }
+h3[id] { scroll-margin-top: calc(var(--topH) + var(--chipH) + 10px); }
+h3[id]:focus { outline: none; }
+@media (max-width: 819px) { :root { --topH: 0px; } }
 @media (max-width: 819px) {
   .panel.detail.open { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; margin: 0; max-height: 46vh; overflow: auto; border-radius: 14px 14px 0 0; border-width: 1px 0 0; padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 18px var(--shade); }
   .panel.detail.open .sheetclose { display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; border: 0; background: transparent; color: var(--text); font-size: 1.6rem; line-height: 1; cursor: pointer; }
@@ -250,3 +241,39 @@ dl.det dd a { display: inline-block; padding: 12px 0; }
 footer { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; color: var(--muted); font-size: .88rem; }
 footer p { margin: 6px 0; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .evlist summary::after { transition: none; } }
+
+/* ---------- snelkoppelingen (chips) en filterknoppen ---------- */
+.chips { position: sticky; top: var(--topH); z-index: 40; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px 8px; padding: 6px 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.deel2 .chips { background: var(--bg2); }
+.chips::-webkit-scrollbar { display: none; }
+.chip, .fchip { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--text); font: inherit; font-size: .92rem; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; }
+.chip[aria-current], .fchip[aria-pressed="true"] { background: var(--seg-on); color: var(--accent-text); border-color: var(--seg-on); }
+.fbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
+
+/* ---------- tabbalk onderin en Meer-paneel (telefoon) ---------- */
+.btabs, .moreback, .moresheet { display: none; }
+@media (max-width: 819px) {
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+  .btabs { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; background: var(--card); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+  .btab { position: relative; flex: 1 1 0; min-width: 0; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px 2px; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: .72rem; font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer; }
+  .btab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btab svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .btab svg circle[r="1.7"] { fill: currentColor; stroke: none; }
+  .btab[aria-current="page"], .btab[aria-expanded="true"] { color: var(--accent); }
+  .btab[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 22%; right: 22%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
+  .btab[aria-current="page"] span { font-weight: 800; }
+  .btab:focus-visible { outline-offset: -4px; }
+  .moreback:not([hidden]) { display: block; position: fixed; inset: 0; z-index: 70; background: var(--shade); }
+  .moresheet:not([hidden]) { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 71; max-height: 86vh; overflow: auto; overscroll-behavior: contain; background: var(--card); border-top: 1px solid var(--line); border-radius: 14px 14px 0 0; padding: 14px 16px calc(16px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 18px var(--shade); }
+  .moresheet:focus { outline: none; }
+  .moresheet h2 { padding-right: 44px; margin: 0 0 4px; }
+  .moresheet .mh { margin: 16px 0 8px; font-size: .95rem; }
+  .moresheet .mclose { position: absolute; top: 2px; right: 2px; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 0; background: transparent; color: var(--text); font-size: 1.7rem; line-height: 1; cursor: pointer; }
+  .mseg { display: flex; gap: 8px; }
+  .mbtn { flex: 1 1 0; min-width: 0; min-height: 48px; padding: 0 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  .mbtn[aria-pressed="true"] { background: var(--seg-on); color: var(--accent-text); border-color: var(--seg-on); }
+  #moreHelp { margin-top: 16px; }
+  .moresheet details { background: var(--bg); }
+  .mh2 { margin: 8px 0 0; }
+  .morelink { display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; }
+}

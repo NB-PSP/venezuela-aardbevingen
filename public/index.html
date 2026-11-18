@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Aardbevingen Venezuela</title>
 <meta name="description" content="Overzicht van aardbevingen in Venezuela, op basis van openbare FUNVISIS-gegevens.">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
@@ -12,14 +12,14 @@
 </head>
 <body>
 <!-- Alle zichtbare tekst komt uit het woordenboek (I18N) in app.js: data-i18n = tekst, data-i18n-html = tekst met opmaak, data-i18n-attr = attributen. -->
-<a class="skip" href="#overzicht" data-i18n="skip"></a>
+<a class="skip" href="#main" id="skipLink" data-i18n="skip"></a>
 
 <header class="top">
   <nav data-i18n-attr="aria-label:nav_aria">
     <div class="tabs">
-      <a class="tab" href="#overzicht" data-s="overzicht" data-i18n-attr="aria-label:tab_ov"><span class="l-long" data-i18n="tab_ov" aria-hidden="true"></span><span class="l-short" data-i18n="tab_ov_s" aria-hidden="true"></span></a>
-      <a class="tab" href="#la-guaira" data-s="la-guaira" data-i18n-attr="aria-label:tab_lg"><span class="l-long" data-i18n="tab_lg" aria-hidden="true"></span><span class="l-short" data-i18n="tab_lg_s" aria-hidden="true"></span></a>
-      <a class="tab" href="#rest" data-s="rest" data-i18n-attr="aria-label:tab_r"><span class="l-long" data-i18n="tab_r" aria-hidden="true"></span><span class="l-short" data-i18n="tab_r_s" aria-hidden="true"></span></a>
+      <a class="tab" href="#overzicht" data-s="overzicht" data-i18n="tab_ov"></a>
+      <a class="tab" href="#la-guaira" data-s="la-guaira" data-i18n="tab_lg"></a>
+      <a class="tab" href="#rest" data-s="rest" data-i18n="tab_r"></a>
     </div>
     <button class="themebtn" id="themeBtn" type="button" data-i18n-attr="aria-label:theme_aria">Thema</button>
     <div class="langseg" role="group" data-i18n-attr="aria-label:lang_group">
@@ -30,7 +30,7 @@
   </nav>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
   <section id="overzicht" class="deel" aria-labelledby="h-ov">
     <div class="inner">
       <p class="kicker" data-i18n="kicker_ov"></p>
@@ -39,7 +39,7 @@
       <div id="ov-warn"></div>
       <div class="cards" id="ov-cards"><p class="note" data-i18n="loading"></p></div>
       <p class="note" id="ov-upd"></p>
-      <details>
+      <div id="ovHelp"><details id="help">
         <summary data-i18n="help_sum"></summary>
         <ul>
           <li data-i18n="help_1"></li>
@@ -49,18 +49,24 @@
           <li data-i18n="help_5"></li>
           <li data-i18n="help_6"></li>
         </ul>
-      </details>
+      </details></div>
     </div>
   </section>
 
-  <section id="la-guaira" class="deel" aria-labelledby="h-lg">
+  <section id="la-guaira" class="deel" aria-labelledby="h-lg" hidden>
     <div class="inner">
       <p class="kicker" data-i18n="kicker_1"></p>
       <h2 id="h-lg" data-i18n="h_lg"></h2>
       <p class="lead" id="lg-lead" data-i18n="lead_lg"></p>
+      <nav class="chips" data-i18n-attr="aria-label:chips_aria">
+        <a class="chip" href="#lg-kaart" data-i18n="h_map"></a>
+        <a class="chip" href="#lg-week" data-i18n="h_week"></a>
+        <a class="chip" href="#lg-maand" data-i18n="h_month"></a>
+        <a class="chip" href="#lg-lijst" data-i18n="chip_list"></a>
+      </nav>
       <div class="cards" id="lg-stats"></div>
 
-      <h3 data-i18n="h_map"></h3>
+      <h3 id="lg-kaart" tabindex="-1" data-i18n="h_map"></h3>
       <div class="periodbar" role="group" aria-labelledby="lg-period-l">
         <span id="lg-period-l" class="plabel" data-i18n="period"></span>
         <div class="seg" id="lg-seg">
@@ -80,15 +86,15 @@
         <div class="panel detail" id="lg-detail" aria-live="polite"></div>
       </div>
 
-      <h3 data-i18n="h_week"></h3>
+      <h3 id="lg-week" tabindex="-1" data-i18n="h_week"></h3>
       <div class="panel"><div id="lg-weekchart"></div></div>
       <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="lg-weektable"></div></details>
 
-      <h3 data-i18n="h_month"></h3>
+      <h3 id="lg-maand" tabindex="-1" data-i18n="h_month"></h3>
       <div class="panel"><div id="lg-monthchart"></div></div>
       <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="lg-monthtable"></div></details>
 
-      <h3 data-i18n="h_all"></h3>
+      <h3 id="lg-lijst" tabindex="-1" data-i18n="h_all"></h3>
       <div id="lg-list"></div>
     </div>
   </section>
@@ -98,21 +104,30 @@
       <p class="kicker" data-i18n="kicker_2"></p>
       <h2 id="h-r" data-i18n="h_r"></h2>
       <p class="lead" data-i18n="lead_r"></p>
+      <nav class="chips" data-i18n-attr="aria-label:chips_aria">
+        <a class="chip" href="#r-off" data-i18n="chip_off"></a>
+        <a class="chip" href="#r-rep" data-i18n="chip_rep"></a>
+        <a class="chip" href="#r-cmp" data-i18n="chip_cmp"></a>
+        <a class="chip" href="#r-kaart" data-i18n="h_map"></a>
+        <a class="chip" href="#r-week" data-i18n="h_week"></a>
+        <a class="chip" href="#r-maand" data-i18n="h_month"></a>
+        <a class="chip" href="#r-lijst" data-i18n="chip_list"></a>
+      </nav>
       <div class="cards" id="r-stats"></div>
 
-      <h3 data-i18n="h_cum"></h3>
+      <h3 id="r-off" tabindex="-1" data-i18n="h_cum"></h3>
       <div class="panel"><div id="r-cumchart"></div></div>
       <p class="note" id="r-cumnote" data-i18n="cum_note"></p>
 
-      <h3 data-i18n="h_report"></h3>
+      <h3 id="r-rep" tabindex="-1" data-i18n="h_report"></h3>
       <div class="panel"><div id="r-reportchart"></div></div>
 
-      <h3 data-i18n="h_compare"></h3>
+      <h3 id="r-cmp" tabindex="-1" data-i18n="h_compare"></h3>
       <p class="note" id="r-complete"></p>
       <div id="r-compare"></div>
       <p class="note" data-i18n="compare_note"></p>
 
-      <h3 data-i18n="h_overview_map"></h3>
+      <h3 id="r-kaart" tabindex="-1" data-i18n="h_overview_map"></h3>
       <div class="periodbar" role="group" aria-labelledby="r-period-l">
         <span id="r-period-l" class="plabel" data-i18n="period"></span>
         <div class="seg" id="r-seg">
@@ -132,15 +147,15 @@
         <div class="panel detail" id="r-detail" aria-live="polite"></div>
       </div>
 
-      <h3 data-i18n="h_week"></h3>
+      <h3 id="r-week" tabindex="-1" data-i18n="h_week"></h3>
       <div class="panel"><div id="r-weekchart"></div></div>
       <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="r-weektable"></div></details>
 
-      <h3 data-i18n="h_month"></h3>
+      <h3 id="r-maand" tabindex="-1" data-i18n="h_month"></h3>
       <div class="panel"><div id="r-monthchart"></div></div>
       <details class="tabledet"><summary data-i18n="show_table"></summary><div class="tablewrap" id="r-monthtable"></div></details>
 
-      <h3 data-i18n="h_all"></h3>
+      <h3 id="r-lijst" tabindex="-1" data-i18n="h_all"></h3>
       <div id="r-list"></div>
 
       <details id="r-neigh-d">
@@ -152,12 +167,38 @@
   </section>
 </main>
 
-<footer>
+<footer id="bronnen">
   <p data-i18n-html="f1"></p>
   <p data-i18n-html="f2"></p>
   <p data-i18n-html="f3"></p>
   <p data-i18n="f4"></p>
 </footer>
+
+<!-- Tabbalk onderin (alleen telefoon) en "Meer"-paneel -->
+<nav class="btabs" data-i18n-attr="aria-label:nav_aria">
+  <a class="btab" href="#overzicht" data-s="overzicht"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7v7H4zM13 5h7v4h-7zM13 11h7v8h-7zM4 14h7v5H4z"/></svg><span data-i18n="tab_ov_s"></span></a>
+  <a class="btab" href="#la-guaira" data-s="la-guaira"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.6 6-10.5a6 6 0 0 0-12 0C6 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg><span data-i18n="tab_lg_s"></span></a>
+  <a class="btab" href="#rest" data-s="rest" data-i18n-attr="aria-label:tab_r"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 3.6 5.5 3.6 8.5s-1 5.9-3.6 8.5c-2.6-2.6-3.6-5.5-3.6-8.5s1-5.9 3.6-8.5z"/></svg><span data-i18n="tab_r_s"></span></a>
+  <button class="btab" type="button" id="moreBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="moreSheet"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg><span data-i18n="tab_more"></span></button>
+</nav>
+<div class="moreback" id="moreBack" hidden></div>
+<div class="moresheet" id="moreSheet" role="dialog" aria-modal="true" aria-labelledby="more-h" tabindex="-1" hidden>
+  <button type="button" class="mclose" id="moreClose" data-i18n-attr="aria-label:close">×</button>
+  <h2 id="more-h" data-i18n="more_h"></h2>
+  <h3 class="mh" id="more-th" data-i18n="more_theme"></h3>
+  <div class="mseg" role="group" aria-labelledby="more-th">
+    <button type="button" class="mbtn" data-th="light" aria-pressed="false" data-i18n="theme_light"></button>
+    <button type="button" class="mbtn" data-th="dark" aria-pressed="false" data-i18n="theme_dark"></button>
+  </div>
+  <h3 class="mh" id="more-lg" data-i18n="lang_group"></h3>
+  <div class="mseg" role="group" aria-labelledby="more-lg">
+    <button type="button" class="mbtn" data-l="nl" lang="nl" aria-pressed="false" aria-label="Nederlands">Nederlands</button>
+    <button type="button" class="mbtn" data-l="en" lang="en" aria-pressed="false" aria-label="English">English</button>
+    <button type="button" class="mbtn" data-l="es" lang="es" aria-pressed="false" aria-label="Español">Español</button>
+  </div>
+  <div id="moreHelp"></div>
+  <p class="mh2"><a class="morelink" id="moreSrc" href="#bronnen" data-i18n="more_src"></a></p>
+</div>
 
 <script src="app.js"></script>
 </body>

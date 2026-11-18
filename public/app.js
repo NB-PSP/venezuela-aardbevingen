@@ -23,11 +23,14 @@ const I18N = {
     tab_ov: 'Overzicht', tab_ov_s: 'Overzicht', tab_lg: 'La Guaira', tab_lg_s: 'La Guaira', tab_r: 'Rest van Venezuela', tab_r_s: 'Rest',
     theme_aria: 'Wissel tussen licht en donker thema', theme_to_light: 'Schakel naar licht thema', theme_to_dark: 'Schakel naar donker thema',
     lang_group: 'Taal',
+    tab_more: 'Meer', more_h: 'Thema, taal en uitleg', more_theme: 'Thema', theme_light: 'Licht', theme_dark: 'Donker', more_src: 'Bronnen en toelichting',
+    chips_aria: 'Snel naar een onderdeel', chip_off: 'Officieel', chip_rep: 'Weekrapporten', chip_cmp: 'Vergelijking', chip_list: 'Lijst',
+    flt_aria: 'Lijst filteren', flt_all: 'Alles', flt_m3: 'M ≥ 3', flt_w7: 'Laatste 7 dagen', list_empty: 'Geen bevingen die aan dit filter voldoen.',
     kicker_ov: 'Overzicht', h1: 'Aardbevingen Venezuela',
     lead_ov: 'Gegevens van FUNVISIS (Venezolaanse seismologische dienst). De officiële totalen tellen vanaf de hoofdbevingen van {since}; de losse lijst met bevingen op deze pagina loopt vanaf {first}, de eerste beving in de gegevens.',
     loading: 'Gegevens laden…',
     help_sum: 'Zo gebruik je deze pagina',
-    help_1: 'Gebruik de knoppen bovenaan om naar een deel te springen.',
+    help_1: 'Kies een deel met de knoppen onderaan het scherm (op een computer: bovenaan): Overzicht, La Guaira of Rest. In La Guaira en Rest springt de rij knoppen onder de titel naar een onderdeel. Thema en taal staan onder Meer (op een computer rechtsboven). De terugknop van je browser gaat terug naar het vorige deel.',
     help_2: '<strong>La Guaira</strong>: alle bevingen binnen {R} km van {c}, met kaart, grafieken per week en maand en een volledige lijst.',
     help_3: '<strong>Rest van Venezuela</strong>: alles daarbuiten, plus de officiële totalen van FUNVISIS.',
     help_4: 'Tik op een punt op de kaart of een staaf in een grafiek voor details (op een computer werkt ook de muisaanwijzer). Op de kaart zoom je met de knoppen + en −, met twee vingers of door te dubbelklikken, en je sleept om te verschuiven. Met het toetsenbord: Tab naar de kaart of grafiek en gebruik de pijltjestoetsen (kaart: + en − om te zoomen, Esc om het detailvenster te sluiten).',
@@ -114,13 +117,16 @@ const I18N = {
     skip: 'Skip to content',
     nav_aria: 'Page sections',
     lang_group: 'Language',
+    tab_more: 'More', more_h: 'Theme, language and help', more_theme: 'Theme', theme_light: 'Light', theme_dark: 'Dark', more_src: 'Sources and notes',
+    chips_aria: 'Jump to a section', chip_off: 'Official', chip_rep: 'Weekly reports', chip_cmp: 'Comparison', chip_list: 'List',
+    flt_aria: 'Filter the list', flt_all: 'All', flt_m3: 'M ≥ 3', flt_w7: 'Last 7 days', list_empty: 'No earthquakes match this filter.',
     tab_ov: 'Overview', tab_ov_s: 'Overview', tab_lg: 'La Guaira', tab_lg_s: 'La Guaira', tab_r: 'Rest of Venezuela', tab_r_s: 'Rest',
     theme_aria: 'Switch between light and dark theme', theme_to_light: 'Switch to light theme', theme_to_dark: 'Switch to dark theme',
     kicker_ov: 'Overview', h1: 'Earthquakes in Venezuela',
     lead_ov: 'Data from FUNVISIS (the Venezuelan seismological service). The official totals count from the main shocks of {since}; the detailed list of earthquakes on this page starts on {first}, the first earthquake in the data.',
     loading: 'Loading data…',
     help_sum: 'How to use this page',
-    help_1: 'Use the buttons at the top to jump to a section.',
+    help_1: 'Pick a part with the buttons at the bottom of the screen (on a computer: at the top): Overview, La Guaira or Rest. In La Guaira and Rest, the row of buttons below the title jumps to a topic. Theme and language are under More (on a computer, top right). The back button of your browser returns to the previous part.',
     help_2: '<strong>La Guaira</strong>: all earthquakes within {R} km of {c}, with a map, charts by week and month, and a full list.',
     help_3: '<strong>Rest of Venezuela</strong>: everything else, plus the official FUNVISIS totals.',
     help_4: 'Tap a point on the map or a bar in a chart for details (on a computer, hovering also works). On the map, zoom with the + and − buttons, with two fingers or by double-clicking, and drag to pan. With the keyboard: Tab to the map or chart and use the arrow keys (map: + and − to zoom, Esc to close the details panel).',
@@ -209,11 +215,14 @@ const I18N = {
     tab_ov: 'Resumen', tab_ov_s: 'Resumen', tab_lg: 'La Guaira', tab_lg_s: 'La Guaira', tab_r: 'Resto de Venezuela', tab_r_s: 'Resto',
     theme_aria: 'Cambiar entre tema claro y oscuro', theme_to_light: 'Cambiar a tema claro', theme_to_dark: 'Cambiar a tema oscuro',
     lang_group: 'Idioma',
+    tab_more: 'Más', more_h: 'Tema, idioma y ayuda', more_theme: 'Tema', theme_light: 'Claro', theme_dark: 'Oscuro', more_src: 'Fuentes y notas',
+    chips_aria: 'Ir a una sección', chip_off: 'Oficial', chip_rep: 'Informes semanales', chip_cmp: 'Comparación', chip_list: 'Lista',
+    flt_aria: 'Filtrar la lista', flt_all: 'Todo', flt_m3: 'M ≥ 3', flt_w7: 'Últimos 7 días', list_empty: 'Ningún sismo cumple este filtro.',
     kicker_ov: 'Resumen', h1: 'Sismos en Venezuela',
     lead_ov: 'Datos de FUNVISIS (Fundación Venezolana de Investigaciones Sismológicas). Los totales oficiales cuentan desde los sismos principales del {since}; la lista detallada de esta página comienza el {first}, el primer sismo de los datos.',
     loading: 'Cargando datos…',
     help_sum: 'Cómo usar esta página',
-    help_1: 'Usa los botones de arriba para saltar a una sección.',
+    help_1: 'Elige una parte con los botones de la parte inferior de la pantalla (en un computador: arriba): Resumen, La Guaira o Resto. En La Guaira y Resto, la fila de botones bajo el título salta a un tema. El tema y el idioma están en Más (en un computador, arriba a la derecha). El botón Atrás del navegador vuelve a la parte anterior.',
     help_2: '<strong>La Guaira</strong>: todos los sismos a menos de {R} km de {c}, con mapa, gráficos por semana y por mes, y una lista completa.',
     help_3: '<strong>Resto de Venezuela</strong>: todo lo demás, más los totales oficiales de FUNVISIS.',
     help_4: 'Toca un punto del mapa o una barra de un gráfico para ver los detalles (en un computador también funciona pasar el cursor). En el mapa puedes acercar con los botones + y −, con dos dedos o con doble clic, y arrastrar para desplazarlo. Con el teclado: Tab hasta el mapa o el gráfico y usa las flechas (mapa: + y − para acercar o alejar, Esc para cerrar el panel de detalles).',
@@ -413,21 +422,17 @@ function table(el, heads, rows) {
     h('tbody', {}, rows.map((r) => h('tr', {}, r.map((c, i) => h('td', { class: i === 0 ? 'l' : null }, c)))))));
 }
 
-/* Lijst van bevingen: tabel op computer, compacte uitklapbare rijen op telefoon. */
-function listTable(el, evs) {
+/* Lijst van bevingen: tabel op computer, compacte uitklapbare rijen op telefoon. Met filterknoppen (één tegelijk) en 50 per keer. */
+const LISTFLT = { all: () => true, m3: (e) => e.mag >= 3, w7: (e) => e.datum_hlv >= isoDay(parseD(D.today) - 6 * DAY) }; // laatste 7 dagen = vandaag en de 6 dagen ervoor (HLV)
+const listFilter = {}; // gekozen filter per lijst (blijft staan bij taalwissel)
+function listTable(el, all, filters = true) {
   clear(el);
-  if (!evs.length) { el.append(h('p', { class: 'note' }, t('none'))); return; }
-  const phone = mq.phone.matches, size = phone ? 20 : 100;
-  let shown = 0, body;
+  if (!all.length) { el.append(h('p', { class: 'note' }, t('none'))); return; }
+  const phone = mq.phone.matches, size = phone ? 50 : 100;
+  let evs = all, shown = 0, body;
   const more = h('button', { type: 'button', class: 'more' });
-  if (phone) {
-    body = h('ul', { class: 'evlist' });
-  } else {
-    const heads = [t('th_date'), t('th_time'), t('th_mag'), t('th_depth'), t('th_dist'), t('th_place'), t('th_lat'), t('th_lon'), t('th_rep')];
-    body = h('tbody');
-    el.append(h('div', { class: 'tablewrap' }, h('table', {},
-      h('thead', {}, h('tr', {}, heads.map((x, i) => h('th', { class: i === 0 || i === 5 ? 'l' : null, scope: 'col', title: i === 4 ? t('th_dist_t', { c: P.c }) : null }, x)))), body)));
-  }
+  const wrap = h('div'), cnt = h('p', { class: 'note', 'aria-live': 'polite' }), empty = h('p', { class: 'note' }, t('list_empty'));
+  const btns = Object.keys(LISTFLT).map((k) => h('button', { type: 'button', class: 'fchip', 'data-f': k, onclick: () => { listFilter[el.id] = k; start(); } }, t(`flt_${k}`)));
   const row = (e) => (phone
     ? h('li', {}, h('details', {},
       h('summary', {},
@@ -449,9 +454,25 @@ function listTable(el, evs) {
     more.textContent = t('more', { n: fi(evs.length - shown) });
   };
   more.addEventListener('click', render);
-  if (phone) el.append(body);
-  el.append(h('p', { class: 'note' }, t('count_list', { n: fi(evs.length), c: P.c })), more);
-  render();
+  const start = () => { // (opnieuw) beginnen met het gekozen filter: paginering terug naar het begin
+    const k = filters ? listFilter[el.id] || 'all' : 'all';
+    evs = all.filter(LISTFLT[k]); shown = 0;
+    for (const b of btns) b.setAttribute('aria-pressed', String(b.dataset.f === k));
+    cnt.textContent = t('count_list', { n: fi(evs.length), c: P.c });
+    empty.hidden = evs.length > 0; more.hidden = true;
+    clear(wrap);
+    if (phone) { body = h('ul', { class: 'evlist' }); wrap.append(body); } else {
+      const heads = [t('th_date'), t('th_time'), t('th_mag'), t('th_depth'), t('th_dist'), t('th_place'), t('th_lat'), t('th_lon'), t('th_rep')];
+      body = h('tbody');
+      wrap.append(h('div', { class: 'tablewrap' }, h('table', {},
+        h('thead', {}, h('tr', {}, heads.map((x, i) => h('th', { class: i === 0 || i === 5 ? 'l' : null, scope: 'col', title: i === 4 ? t('th_dist_t', { c: P.c }) : null }, x)))), body)));
+    }
+    wrap.hidden = !evs.length;
+    if (evs.length) render();
+  };
+  if (filters) el.append(h('div', { class: 'fbar', role: 'group', 'aria-label': t('flt_aria') }, btns));
+  el.append(cnt, wrap, empty, more);
+  start();
 }
 
 function legend(el) {
@@ -477,7 +498,7 @@ function showDetail(el, e) {
       h('dt', {}, t('det_place')), h('dd', {}, e.plaats),
       h('dt', {}, t('det_src')), h('dd', {}, h('a', { href: e.rapport, rel: 'noopener' }, t('det_report')))));
 }
-document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeSheet(); });
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') { closeSheet(); closeMore(); } });
 /* Paginazoom op telefoons blokkeren. Safari (iOS) negeert user-scalable=no en touch-action op de pagina,
    dus: geen gesture-events, geen bewegingen met twee vingers en geen dubbeltik buiten de kaarten.
    De kaarten zoomen zelf via pointer-events; die blijven werken omdat alleen de standaardactie wordt tegengehouden. */
@@ -1095,7 +1116,7 @@ function renderRest() {
 
   drawRest(); track(charts, drawRest);
   periodBlock('r', rest);
-  const drawL = () => listTable($('r-list'), rest), drawN = () => listTable($('r-neigh'), buur);
+  const drawL = () => listTable($('r-list'), rest), drawN = () => listTable($('r-neigh'), buur, false);
   track(lists, drawL, drawN); drawL(); drawN();
 }
 
@@ -1108,8 +1129,7 @@ function renderAll() {
   renderOverview();
   legend($('lg-legend')); legend($('r-legend'));
   $('lg-sat').checked = sat.lg; $('r-sat').checked = sat.r;
-  drawLG();
-  track(charts, () => mapLG($('lg-map'), $('lg-detail'), periodInfo('lg', D.lg).sub));
+  drawLG(); track(charts, drawLG);
   periodBlock('lg', D.lg);
   const drawL = () => listTable($('lg-list'), D.lg);
   track(lists, drawL); drawL();
@@ -1120,57 +1140,111 @@ function renderAll() {
 
 /* ---------- besturing ---------- */
 let refreshThemeBtn = null;
+let showSection = () => {}, closeMore = () => {};
 function initChrome() {
-  const root = document.documentElement, btn = $('themeBtn');
+  const root = document.documentElement, btn = $('themeBtn'), thBtns = [...document.querySelectorAll('[data-th]')];
   try { const x = localStorage.getItem('thema'); if (x === 'light' || x === 'dark') root.dataset.theme = x; } catch { /* geen opslag */ }
   const eff = effTheme;
   refreshThemeBtn = () => {
     btn.textContent = eff() === 'dark' ? '☀' : '☾';
     btn.title = eff() === 'dark' ? t('theme_to_light') : t('theme_to_dark');
     btn.setAttribute('aria-label', btn.title);
+    for (const b of thBtns) b.setAttribute('aria-pressed', String(b.dataset.th === eff())); // thema-keuze in het Meer-paneel
     for (const m of document.querySelectorAll('meta[name="theme-color"]')) m.setAttribute('content', eff() === 'dark' ? '#19212b' : '#ffffff'); // kopbalk volgt het gekozen thema
   };
-  btn.addEventListener('click', () => { root.dataset.theme = eff() === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('thema', root.dataset.theme); } catch { /* */ } refreshThemeBtn(); runFor(mapTiles); });
+  const setTheme = (v) => { root.dataset.theme = v; try { localStorage.setItem('thema', v); } catch { /* */ } refreshThemeBtn(); runFor(mapTiles); };
+  btn.addEventListener('click', () => setTheme(eff() === 'dark' ? 'light' : 'dark'));
+  for (const b of thBtns) b.addEventListener('click', () => setTheme(b.dataset.th));
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { refreshThemeBtn(); runFor(mapTiles); });
 
   for (const b of document.querySelectorAll('[data-l]')) b.addEventListener('click', () => {
     if (b.dataset.l === lang) return;
     lang = b.dataset.l;
     try { localStorage.setItem('taal', lang); } catch { /* */ }
+    try { const u = new URL(location.href); if (u.searchParams.has('lang')) { u.searchParams.set('lang', lang); history.replaceState(history.state, '', u); } } catch { /* */ } // ?lang= in de link volgt de keuze, anders wint die bij herladen
     renderAll(); // zet ook document.documentElement.lang en aria-pressed
   });
 
-  /* Overzicht staat altijd bovenaan; daaronder is maar één deel zichtbaar (La Guaira of rest), gekozen via tab of #hash. */
-  const tabs = [...document.querySelectorAll('.tab')];
-  const mark = (id) => tabs.forEach((x) => x.setAttribute('aria-current', String(x.dataset.s === id)));
-  let pair = 'la-guaira', io = null;
-  const observe = () => {
-    if (!('IntersectionObserver' in window)) return;
-    io?.disconnect();
-    io = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) mark(x.target.id === 'overzicht' ? 'overzicht' : pair); }), { rootMargin: '-35% 0px -60% 0px' });
-    for (const id of ['overzicht', pair]) io.observe($(id)); // alleen zichtbare delen observeren
+  /* ---- "Meer"-paneel (telefoon): thema, taal, uitleg, bronnen. De uitleg (#help) bestaat maar één keer en verhuist mee. ---- */
+  const sheet = $('moreSheet'), back = $('moreBack'), mbtn = $('moreBtn'), help = $('help');
+  const placeHelp = () => (mq.sheet.matches ? $('moreHelp') : $('ovHelp')).append(help);
+  closeMore = (restore = true) => {
+    if (sheet.hidden) return;
+    sheet.hidden = back.hidden = true; mbtn.setAttribute('aria-expanded', 'false');
+    if (restore) mbtn.focus();
   };
-  const fromHash = () => { const x = decodeURIComponent(location.hash.slice(1)); return x === 'rest' || x === 'la-guaira' ? x : null; };
-  showSection = (id, { scroll = true, hash = true } = {}) => {
-    pair = id;
-    $('la-guaira').hidden = id !== 'la-guaira'; $('rest').hidden = id !== 'rest';
-    closeSheet();
-    const sec = id === 'rest' ? 'r' : 'lg';
-    if (D && stale[sec]) { stale[sec] = false; for (const f of [...charts, ...lists]) if (f.sec === sec) f(); } // nu zichtbaar, dus meetbaar
-    mark(id); observe();
-    if (hash) try { history.replaceState(null, '', '#' + id); } catch { /* */ }
-    if (scroll) $(id).scrollIntoView();
+  const openMore = () => { closeSheet(); sheet.hidden = back.hidden = false; mbtn.setAttribute('aria-expanded', 'true'); sheet.focus(); };
+  mbtn.addEventListener('click', () => (sheet.hidden ? openMore() : closeMore()));
+  $('moreClose').addEventListener('click', () => closeMore());
+  back.addEventListener('click', () => closeMore());
+  sheet.addEventListener('keydown', (ev) => { // focus blijft binnen het paneel
+    if (ev.key !== 'Tab') return;
+    const f = [...sheet.querySelectorAll('button, a[href], summary')].filter((x) => x.offsetParent), first = f[0], last = f[f.length - 1];
+    if (ev.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { ev.preventDefault(); last.focus(); }
+    else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+  });
+  $('moreSrc').addEventListener('click', (ev) => { ev.preventDefault(); closeMore(false); $('bronnen').scrollIntoView(); });
+  placeHelp();
+  mq.sheet.addEventListener('change', () => { closeMore(false); placeHelp(); });
+  $('skipLink').addEventListener('click', (ev) => { ev.preventDefault(); $('main').focus(); });
+
+  /* ---- drie weergaven: Overzicht, La Guaira en Rest; precies één is zichtbaar, elk met eigen scrollpositie ---- */
+  const VIEWS = ['overzicht', 'la-guaira', 'rest'], SECKEY = { 'la-guaira': 'lg', rest: 'r' };
+  const tabs = [...document.querySelectorAll('[data-s]')], pos = {}, reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  let cur = null;
+  try { history.scrollRestoration = 'manual'; } catch { /* */ } // wij herstellen de scrollpositie zelf per weergave
+  const mark = (id) => tabs.forEach((x) => { if (x.dataset.s === id) x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current'); });
+  const fromHash = () => { let x = ''; try { x = decodeURIComponent(location.hash.slice(1)); } catch { /* */ } return VIEWS.includes(x) ? x : null; };
+  const toTop = () => scrollTo({ top: 0, behavior: reduce.matches ? 'auto' : 'smooth' });
+  showSection = (id) => {
+    if (id === cur) return false;
+    if (cur) pos[cur] = scrollY; // scrollpositie van de weergave die we verlaten (voordat hij verborgen wordt)
+    cur = id;
+    for (const v of VIEWS) $(v).hidden = v !== id;
+    closeSheet(); closeMore(false);
+    const sec = SECKEY[id];
+    if (D && sec && stale[sec]) { stale[sec] = false; for (const f of [...charts, ...lists]) if (f.sec === sec) f(); } // nu zichtbaar, dus meetbaar
+    mark(id);
+    scrollTo({ top: pos[id] || 0, behavior: 'instant' });
+    spy();
+    return true;
   };
   for (const a of tabs) a.addEventListener('click', (ev) => {
     ev.preventDefault();
-    if (a.dataset.s === 'overzicht') { scrollTo(0, 0); mark('overzicht'); return; }
-    showSection(a.dataset.s);
+    const id = a.dataset.s;
+    if (id === cur) { toTop(); return; } // tik op de actieve tab: soepel naar boven
+    showSection(id);
+    try { history.pushState(null, '', `${location.pathname}${location.search}#${id}`); } catch { /* */ } // ?lang= blijft behouden
   });
-  addEventListener('hashchange', () => { const x = fromHash(); if (x) showSection(x, { hash: false }); });
-  showSection(fromHash() || 'la-guaira', { scroll: false, hash: false });
-  initialHash = fromHash();
+  const onNav = () => showSection(fromHash() || 'overzicht');
+  addEventListener('popstate', onNav);
+  addEventListener('hashchange', onNav);
+
+  /* ---- snelkoppelingen binnen La Guaira en Rest: tik = scrollen (geen geschiedenisstap), scrollspy markeert de actieve chip ---- */
+  let raf = 0;
+  function spy() {
+    raf = 0;
+    const nav = document.querySelector(`#${cur} .chips`);
+    if (!nav) return;
+    const lim = nav.getBoundingClientRect().bottom + 24;
+    let act = null;
+    for (const a of nav.children) if ($(a.hash.slice(1)).getBoundingClientRect().top <= lim) act = a;
+    if (act === nav._act) return;
+    for (const a of nav.children) { if (a === act) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); }
+    nav._act = act;
+    if (act) nav.scrollTo({ left: act.offsetLeft - (nav.clientWidth - act.offsetWidth) / 2, behavior: reduce.matches ? 'auto' : 'smooth' }); // chip in beeld in de rij
+  }
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(spy); }, { passive: true });
+  addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(spy); });
+  for (const a of document.querySelectorAll('.chips a')) a.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    const target = $(a.hash.slice(1));
+    target.scrollIntoView({ block: 'start', behavior: reduce.matches ? 'auto' : 'smooth' });
+    target.focus({ preventScroll: true });
+  });
+
+  showSection(fromHash() || 'overzicht'); // geen hash = Overzicht; geen geschiedenisstap bij het laden
 }
-let showSection = () => {}, initialHash = null;
 
 function initControls() {
   // periodekiezer: Alles / Maand / Week plus ‹ ›
@@ -1193,9 +1267,9 @@ function initControls() {
   let lastW = 0, timer = 0;
   const onResize = () => {
     clearTimeout(timer);
-    timer = setTimeout(() => { const w = Math.round($('overzicht').clientWidth); if (w && w !== lastW) { lastW = w; runFor(charts); } }, 150);
+    timer = setTimeout(() => { const w = Math.round(document.querySelector('main').clientWidth); if (w && w !== lastW) { lastW = w; runFor(charts); } }, 150);
   };
-  lastW = Math.round($('overzicht').clientWidth);
+  lastW = Math.round(document.querySelector('main').clientWidth);
   if ('ResizeObserver' in window) new ResizeObserver(onResize).observe(document.querySelector('main')); else addEventListener('resize', onResize);
   mq.phone.addEventListener('change', () => { runFor(lists); runFor(charts); });
 }
@@ -1208,7 +1282,6 @@ load().then(([cfg, events, off, meta, geo]) => {
   D = derive(cfg, events, off, meta, geo);
   initControls();
   renderAll();
-  if (initialHash) $(initialHash).scrollIntoView(); // gedeelde link met #rest of #la-guaira: pas scrollen als de inhoud er staat
 }).catch((err) => {
   console.error(err);
   clear($('ov-cards')).append(h('div', { class: 'warn', role: 'alert' }, t('err', { m: err.message })));

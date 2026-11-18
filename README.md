@@ -1,6 +1,6 @@
 # Aardbevingen Venezuela – dashboard
 
-Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de openbare tabellen van FUNVISIS. De site werkt zichzelf automatisch bij via GitHub Actions en wordt gepubliceerd door [statichost.eu](https://www.statichost.eu) (Zweeds, binnen de EU, gratis Hobby-abonnement) op https://venezuela-earthquakes.statichost.page. De site is drietalig: Nederlands, Engels en Spaans (taalkeuze rechtsboven; standaard volgt de site de browsertaal, met Engels als terugval). Ze is ontworpen voor gebruik op een telefoon en werkt ook op een computer.
+Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de openbare tabellen van FUNVISIS. De site werkt zichzelf automatisch bij via GitHub Actions en wordt gepubliceerd door [statichost.eu](https://www.statichost.eu) (Zweeds, binnen de EU, gratis Hobby-abonnement) op https://venezuela-earthquakes.statichost.page. De site is drietalig: Nederlands, Engels en Spaans (taalkeuze rechtsboven, op een telefoon onder Meer; standaard volgt de site de browsertaal, met Engels als terugval). Ze is ontworpen voor gebruik op een telefoon en werkt ook op een computer.
 
 ## Wat het systeem doet
 
@@ -80,10 +80,14 @@ In `data/config.json` staat onder `la_guaira` het middelpunt (`lat`, `lon`), de 
 
 ## Gebruik op telefoon
 
+- **Navigatie:** op een telefoon (smaller dan 820 px) staat onderin een vaste tabbalk met Overzicht, La Guaira, Rest en Meer. **Meer** opent een paneel met de themakeuze (licht/donker), de taalkeuze, de uitleg "Zo gebruik je deze pagina" en een link naar de bronnen. Op een computer staan tabs, thema en taal bovenaan en staat de uitleg in het Overzicht (het is hetzelfde stuk tekst; het verhuist naar het paneel bij een smal scherm).
+- **Drie weergaven:** Overzicht, La Guaira en Rest zijn aparte weergaven; er is er steeds maar één zichtbaar. Elke weergave onthoudt waar je was gebleven. Tik je op de actieve tab, dan scrolt de pagina soepel naar boven. Een tabwissel is een stap in de browsergeschiedenis (`#overzicht`, `#la-guaira`, `#rest`), dus de terugknop werkt; links met `#la-guaira` of `#rest` blijven werken en `?lang=` blijft behouden.
+- **Snelkoppelingen:** in La Guaira en Rest staat onder de titel een scrollbare rij knoppen (Kaart, Per week, Per maand, Lijst; bij Rest ook Officieel, Weekrapporten, Vergelijking). Die rij blijft zichtbaar tijdens het scrollen en markeert het onderdeel waar je bent. Dit maakt geen geschiedenisstappen.
+- **Lijst "Alle bevingen":** filter met Alles, M ≥ 3 of Laatste 7 dagen (één tegelijk), met het aantal resultaten; "Toon meer" laadt 50 bevingen per keer op een telefoon (100 op een computer).
 - Alle knoppen hebben een tikgebied van minstens 44 px; de periodekiezer (Alles / Maand / Week met ‹ ›) vervangt de lange keuzelijst.
-- Op de kaarten kun je inzoomen met + / − / ↺, met twee vingers (knijpen), met dubbeltikken en slepen. Zolang je niet ingezoomd bent blijft de pagina gewoon scrollbaar; ingezoomd verschuift een veeg de kaart (gebruik ↺ of de ruimte naast de kaart om weer te scrollen). Een tik op een punt kiest de dichtstbijzijnde beving binnen ca. 22 px; de details verschijnen op een telefoon als paneel onderin het scherm (sluiten met × of Esc).
-- Lijsten met bevingen zijn op een telefoon compacte rijen (tik om coördinaten en het FUNVISIS-rapport te zien, 20 per keer); week- en maandtabellen staan achter "Toon als tabel".
-- Toetsenbord: Tab naar een kaart, dan pijltjestoetsen (volgende/vorige beving), + en − (zoomen), 0 (terugzetten), Esc (detailpaneel sluiten).
+- Op de kaarten kun je inzoomen met + / − / ↺, met twee vingers (knijpen), met dubbeltikken en slepen. Zolang je niet ingezoomd bent blijft de pagina gewoon scrollbaar; ingezoomd verschuift een veeg de kaart (gebruik ↺ of de ruimte naast de kaart om weer te scrollen). Een tik op een punt kiest de dichtstbijzijnde beving binnen ca. 22 px; de details verschijnen op een telefoon als paneel onderin het scherm, boven de tabbalk (sluiten met × of Esc).
+- Lijsten met bevingen zijn op een telefoon compacte rijen (tik om coördinaten en het FUNVISIS-rapport te zien); week- en maandtabellen staan achter "Toon als tabel".
+- Toetsenbord: Tab naar een kaart, dan pijltjestoetsen (volgende/vorige beving), + en − (zoomen), 0 (terugzetten), Esc (detailpaneel of Meer-paneel sluiten).
 
 ## Wat te doen bij een foutmail
 
