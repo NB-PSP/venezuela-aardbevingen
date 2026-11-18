@@ -1,5 +1,57 @@
 [
   {
+    "id": "29578",
+    "datum_hlv": "2026-11-18",
+    "tijd_hlv": "00:56",
+    "utc": "2026-11-18T04:56:00Z",
+    "lat": 9.82,
+    "lon": -69.89,
+    "diepte_km": 4.4,
+    "mag": 2.3,
+    "plaats": "11. km al noroeste de El Tocuyo",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29578.gif",
+    "eerst_gezien": "2026-11-18"
+  },
+  {
+    "id": "29577",
+    "datum_hlv": "2026-11-17",
+    "tijd_hlv": "21:30",
+    "utc": "2026-11-18T01:30:00Z",
+    "lat": 10.35,
+    "lon": -62.37,
+    "diepte_km": 1.7,
+    "mag": 2.4,
+    "plaats": "35. km al sureste de Irapa",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29577.gif",
+    "eerst_gezien": "2026-11-18"
+  },
+  {
+    "id": "29576",
+    "datum_hlv": "2026-11-17",
+    "tijd_hlv": "20:09",
+    "utc": "2026-11-18T00:09:00Z",
+    "lat": 11.15,
+    "lon": -62.38,
+    "diepte_km": 15.6,
+    "mag": 3.2,
+    "plaats": "55. km al norte de Guiria",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29576.gif",
+    "eerst_gezien": "2026-11-18"
+  },
+  {
+    "id": "29575",
+    "datum_hlv": "2026-11-17",
+    "tijd_hlv": "18:51",
+    "utc": "2026-11-17T22:51:00Z",
+    "lat": 6.97,
+    "lon": -73.06,
+    "diepte_km": 161,
+    "mag": 3.2,
+    "plaats": "17. km al sureste de Bucaramanga",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29575.gif",
+    "eerst_gezien": "2026-11-18"
+  },
+  {
     "id": "29574",
     "datum_hlv": "2026-11-17",
     "tijd_hlv": "16:47",
