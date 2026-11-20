@@ -376,6 +376,23 @@ function haversine(lat1, lon1, lat2, lon2) {
   return 6371.0088 * 2 * Math.asin(Math.sqrt(a));
 }
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+/* Plaatsomschrijving van FUNVISIS ("4. km al oeste de La Guaira") in de gekozen taal. Vangt ook de
+   gangbare tikfouten op (kn/k, sl/val, sur oeste, soreste, e in plaats van de); onherkenbaar blijft Spaans. */
+const PLACE_DIR = { norte: 'n', sur: 's', su: 's', este: 'e', oeste: 'w', noreste: 'ne', noroeste: 'nw', sureste: 'se', soreste: 'se', suroeste: 'sw' };
+const PLACE_TXT = {
+  nl: { n: 'ten noorden van', s: 'ten zuiden van', e: 'ten oosten van', w: 'ten westen van', ne: 'ten noordoosten van', nw: 'ten noordwesten van', se: 'ten zuidoosten van', sw: 'ten zuidwesten van' },
+  en: { n: 'north of', s: 'south of', e: 'east of', w: 'west of', ne: 'northeast of', nw: 'northwest of', se: 'southeast of', sw: 'southwest of' },
+  es: { n: 'al norte de', s: 'al sur de', e: 'al este de', w: 'al oeste de', ne: 'al noreste de', nw: 'al noroeste de', se: 'al sureste de', sw: 'al suroeste de' },
+};
+const PLACE_RE = /^(\d+(?:[.,]\d+)?)\.?\s*(?:km|kn|k)\.?\s+(?:(?:al|sl|val)\s+)?(nor|sur)?[\s-]?(norte|sur|su|este|oeste|noreste|noroeste|sureste|soreste|suroeste)\s+(?:de|e)\s+(.+)$/i;
+const placeTxt = (s) => {
+  const m = PLACE_RE.exec((s ?? '').trim());
+  if (!m) return s;
+  const dir = PLACE_DIR[((m[2] ?? '') + m[3]).toLowerCase()];
+  if (!dir) return s;
+  const km = lang === 'en' ? m[1].replace(',', '.') : m[1].replace('.', ',');
+  return `${km} km ${PLACE_TXT[lang][dir]} ${m[4].trim()}`;
+};
 const depthClass = (d) => (d < 20 ? 'd1' : d < 70 ? 'd2' : d < 150 ? 'd3' : 'd4');
 const coordTxt = (lat, lon) => `${f2(Math.abs(lat))}° ${lat >= 0 ? t('dir_n') : t('dir_s')}, ${f2(Math.abs(lon))}° ${lon >= 0 ? t('dir_e') : t('dir_w')}`;
 
@@ -437,13 +454,13 @@ function listTable(el, all, filters = true) {
     ? h('li', {}, h('details', {},
       h('summary', {},
         h('span', { class: `mag ${depthClass(e.diepte_km)}` }, `M${f1(e.mag)}`),
-        h('span', { class: 'evtxt' }, h('b', {}, `${fmtD(e.datum_hlv)} ${e.tijd_hlv}`), h('span', { class: 'pl' }, e.plaats),
+        h('span', { class: 'evtxt' }, h('b', {}, `${fmtD(e.datum_hlv)} ${e.tijd_hlv}`), h('span', { class: 'pl' }, placeTxt(e.plaats)),
           h('span', { class: 'mt' }, `${t('ev_depth', { v: f1(e.diepte_km) })}${e.diepte_vast ? t('fixed_s') : ''} · ${t('ev_dist', { v: f1(e.afstand) })}`))),
       h('div', { class: 'evbody' }, h('p', {}, `${t('det_coord')}: ${coordTxt(e.lat, e.lon)}`), h('p', {}, h('a', { href: e.rapport, rel: 'noopener' }, t('ev_link'))))))
     : h('tr', {},
       h('td', { class: 'l' }, fmtD(e.datum_hlv)), h('td', {}, e.tijd_hlv), h('td', {}, f1(e.mag)),
       h('td', {}, f1(e.diepte_km) + (e.diepte_vast ? t('fixed_s') : '')), h('td', {}, f1(e.afstand)),
-      h('td', { class: 'l' }, e.plaats), h('td', {}, f2(e.lat)), h('td', {}, f2(e.lon)),
+      h('td', { class: 'l' }, placeTxt(e.plaats)), h('td', {}, f2(e.lat)), h('td', {}, f2(e.lon)),
       h('td', {}, h('a', { href: e.rapport, rel: 'noopener' }, t('rep_link')))));
   const render = () => {
     const frag = document.createDocumentFragment();
@@ -495,7 +512,7 @@ function showDetail(el, e) {
       h('dt', {}, t('det_depth')), h('dd', {}, `${f1(e.diepte_km)} km${e.diepte_vast ? t('fixed') : ''}`),
       h('dt', {}, t('det_dist')), h('dd', {}, t('det_dist_v', { d: f1(e.afstand), c: P.c })),
       h('dt', {}, t('det_coord')), h('dd', {}, coordTxt(e.lat, e.lon)),
-      h('dt', {}, t('det_place')), h('dd', {}, e.plaats),
+      h('dt', {}, t('det_place')), h('dd', {}, placeTxt(e.plaats)),
       h('dt', {}, t('det_src')), h('dd', {}, h('a', { href: e.rapport, rel: 'noopener' }, t('det_report')))));
 }
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') { closeSheet(); closeMore(); } });
@@ -968,7 +985,7 @@ function statCards(el, st, since, extra = []) {
   clear(el).append(
     card(t('stat_n'), fi(st.n), since),
     m ? card(t('stat_max'), `M ${f1(m.mag)}`, t('stat_max_sub', { when: `${fmtD(m.datum_hlv)} ${m.tijd_hlv}`, depth: f1(m.diepte_km), dist: f1(m.afstand), c: P.c })) : card(t('stat_max'), '–'),
-    l ? card(t('stat_last'), `M ${f1(l.mag)}`, t('stat_last_sub', { when: `${fmtD(l.datum_hlv)} ${l.tijd_hlv}`, depth: f1(l.diepte_km), place: l.plaats })) : card(t('stat_last'), '–'),
+    l ? card(t('stat_last'), `M ${f1(l.mag)}`, t('stat_last_sub', { when: `${fmtD(l.datum_hlv)} ${l.tijd_hlv}`, depth: f1(l.diepte_km), place: placeTxt(l.plaats) })) : card(t('stat_last'), '–'),
     ...extra);
 }
 
