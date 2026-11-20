@@ -1,5 +1,31 @@
 [
   {
+    "id": "29604",
+    "datum_hlv": "2026-11-20",
+    "tijd_hlv": "15:01",
+    "utc": "2026-11-20T19:01:00Z",
+    "lat": 9.59,
+    "lon": -70.03,
+    "diepte_km": 6.9,
+    "mag": 2.1,
+    "plaats": "26. km al norte de Biscucuy",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29604.gif",
+    "eerst_gezien": "2026-11-20"
+  },
+  {
+    "id": "29603",
+    "datum_hlv": "2026-11-20",
+    "tijd_hlv": "13:37",
+    "utc": "2026-11-20T17:37:00Z",
+    "lat": 10.74,
+    "lon": -67.83,
+    "diepte_km": 2.3,
+    "mag": 2.5,
+    "plaats": "35. km al noreste de Moron",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29603.gif",
+    "eerst_gezien": "2026-11-20"
+  },
+  {
     "id": "29602",
     "datum_hlv": "2026-11-20",
     "tijd_hlv": "06:23",
