@@ -5,8 +5,8 @@ Een gratis, openbaar dashboard met aardbevingen in Venezuela, op basis van de op
 ## Wat het systeem doet
 
 1. **GitHub Actions** draait `scripts/scrape_funvisis.mjs`:
-   - **elke dag om 00:00 en 12:00 Nederlandse tijd** (het hele jaar door, ook bij zomer- en wintertijd; de workflow staat op twee UTC-tijden per run en slaat de verkeerde over);
-   - op de **laatste avond van elke maand** (23:45 Venezolaanse tijd, via cron `45 3 1 * *`, plus een extra ronde via `0 2 28-31 * *`); deze twee lopen altijd, ook buiten 00:00/12:00 Nederlandse tijd;
+   - **vier keer per dag** (cron `17 23,5,11,17 * * *` in UTC: ongeveer 00:17, 06:17, 12:17 en 18:17 Nederlandse wintertijd). GitHub start geplande runs vaak uren te laat; daarom is er geen controle op het exacte uur meer (die liet op 18-20 nov 2026 alle runs vallen). De tijd "laatst bijgewerkt" ververst bij elke run, ook zonder nieuwe bevingen;
+   - op de **laatste avond van elke maand** (23:45 Venezolaanse tijd, via cron `45 3 1 * *`, plus een extra ronde via `0 2 28-31 * *`); deze twee lopen altijd;
    - en **handmatig** (zie hieronder).
 2. Het script haalt de vorige en de lopende maand op bij FUNVISIS, voegt nieuwe bevingen toe aan `data/events.json` en werkt gewijzigde bevingen bij (met een `gewijzigd`-datum). Er wordt **nooit iets gewist**.
 3. Is er iets veranderd, dan commit de Action de gegevens naar `main`. **statichost.eu bouwt en publiceert dan automatisch opnieuw** (via een GitHub-webhook bij elke push).

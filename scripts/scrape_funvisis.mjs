@@ -20,7 +20,7 @@ const UA = 'venezuela-aardbevingen-dashboard/1.0 (open-source hobbyproject; lees
 const TIMEOUT_MS = 30000;
 const PAUZE_MS = 5000;
 const EERSTE_MAAND = '2026-01'; // gegevens worden bijgehouden vanaf 1-1-2026
-const META_VERVERS_MS = 20 * 3600 * 1000; // meta.json hoogstens 1x per dag herschrijven als er niets nieuws is (20 uur: marge voor de dagelijkse run, waarvan de starttijd bij GitHub wat kan schuiven)
+const META_VERVERS_MS = 5 * 3600 * 1000; // meta.json (tijd "laatst bijgewerkt") per geplande run verversen ook als er niets nieuws is; runs liggen ongeveer 6 uur uit elkaar, 5 uur geeft marge
 
 const args = process.argv.slice(2);
 const droog = args.includes('--droog');

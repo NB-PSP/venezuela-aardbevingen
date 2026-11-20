@@ -2,10 +2,11 @@ name: Gegevens bijwerken
 
 on:
   schedule:
-    # Elke dag om 00:00 en 12:00 Nederlandse tijd, het hele jaar door. GitHub-cron is UTC,
-    # dus er staan twee tijden per run; de stap "Controleer tijdstip" laat alleen de juiste door.
-    - cron: '0 22,23 * * *'  # 00:00 NL (22:00 UTC in de zomer, 23:00 UTC in de winter)
-    - cron: '0 10,11 * * *'  # 12:00 NL (10:00 UTC in de zomer, 11:00 UTC in de winter)
+    # Vier keer per dag, zonder controle op het exacte uur. GitHub start geplande runs vaak
+    # uren te laat of slaat er een over; een uurcontrole liet daardoor alle runs vallen
+    # (18-20 nov 2026). Het script commit alleen bij nieuwe bevingen, dus extra runs kunnen geen kwaad.
+    # Minuut 17 in plaats van :00, want op het hele uur is GitHub het drukst.
+    - cron: '17 23,5,11,17 * * *'  # 00:17, 06:17, 12:17, 18:17 NL (wintertijd; zomertijd een uur later)
     - cron: '45 3 1 * *'     # 23:45 HLV op de laatste dag van de vorige maand (loopt altijd)
     - cron: '0 2 28-31 * *'  # 22:00 HLV op de avond vóór dag 28-31 (extra zekerheid bij maandwissel; loopt altijd)
   workflow_dispatch:
@@ -27,38 +28,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Controleer tijdstip
-        id: tijd
-        env:
-          EVENT: ${{ github.event_name }}
-          SCHEMA: ${{ github.event.schedule }}
-        run: |
-          run=true
-          if [ "$EVENT" = "schedule" ] && [ "$SCHEMA" != "45 3 1 * *" ] && [ "$SCHEMA" != "0 2 28-31 * *" ]; then
-            uur=$(TZ=Europe/Amsterdam date +%H)
-            if [ "$uur" != "00" ] && [ "$uur" != "12" ]; then
-              run=false
-              echo "Het is $uur uur in Nederland, geen 00:00 of 12:00; deze run wordt overgeslagen."
-            fi
-          fi
-          echo "run=$run" >> "$GITHUB_OUTPUT"
-
       - uses: actions/checkout@v4
-        if: steps.tijd.outputs.run == 'true'
 
       - uses: actions/setup-node@v4
-        if: steps.tijd.outputs.run == 'true'
         with:
           node-version: 22
 
       - name: Test of funvisis.gob.ve bereikbaar is vanaf GitHub
-        if: steps.tijd.outputs.run == 'true'
         run: |
           curl -sS -m 30 -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" http://www.funvisis.gob.ve/old/sis_mes.php \
             || echo "::warning::funvisis.gob.ve lijkt niet bereikbaar vanaf GitHub-servers; zie README voor het alternatief (Taakplanner)."
 
       - name: FUNVISIS ophalen
-        if: steps.tijd.outputs.run == 'true'
         run: |
           for i in 1 2 3; do
             node scripts/scrape_funvisis.mjs ${{ inputs.forceer && '--forceer' || '' }} && exit 0
@@ -68,7 +49,6 @@ jobs:
           done
 
       - name: Committen als er iets veranderd is
-        if: steps.tijd.outputs.run == 'true'
         run: |
           if [ -n "$(git status --porcelain data/)" ]; then
             # Onder de naam van de repo-eigenaar; sinds statichost.eu niet meer strikt nodig, maar onschadelijk
