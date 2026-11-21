@@ -1,5 +1,57 @@
 [
   {
+    "id": "29608",
+    "datum_hlv": "2026-11-20",
+    "tijd_hlv": "23:44",
+    "utc": "2026-11-21T03:44:00Z",
+    "lat": 9.82,
+    "lon": -72.86,
+    "diepte_km": 3.2,
+    "mag": 2.2,
+    "plaats": "44. km al suroeste de Machiques",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29608.gif",
+    "eerst_gezien": "2026-11-21"
+  },
+  {
+    "id": "29607",
+    "datum_hlv": "2026-11-20",
+    "tijd_hlv": "23:03",
+    "utc": "2026-11-21T03:03:00Z",
+    "lat": 6.71,
+    "lon": -73.12,
+    "diepte_km": 140,
+    "mag": 2.4,
+    "plaats": "45. km al sur de Bucaramanga",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29607.gif",
+    "eerst_gezien": "2026-11-21"
+  },
+  {
+    "id": "29606",
+    "datum_hlv": "2026-11-20",
+    "tijd_hlv": "22:31",
+    "utc": "2026-11-21T02:31:00Z",
+    "lat": 10.58,
+    "lon": -68.56,
+    "diepte_km": 6.9,
+    "mag": 2,
+    "plaats": "31. km al suroeste de Boca de Aroa",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29606.gif",
+    "eerst_gezien": "2026-11-21"
+  },
+  {
+    "id": "29605",
+    "datum_hlv": "2026-11-20",
+    "tijd_hlv": "21:57",
+    "utc": "2026-11-21T01:57:00Z",
+    "lat": 9.77,
+    "lon": -72.79,
+    "diepte_km": 4.7,
+    "mag": 3.2,
+    "plaats": "42. km al suroeste de Machiques",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29605.gif",
+    "eerst_gezien": "2026-11-21"
+  },
+  {
     "id": "29604",
     "datum_hlv": "2026-11-20",
     "tijd_hlv": "15:01",
