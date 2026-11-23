@@ -1,5 +1,18 @@
 [
   {
+    "id": "29633",
+    "datum_hlv": "2026-11-22",
+    "tijd_hlv": "22:45",
+    "utc": "2026-11-23T02:45:00Z",
+    "lat": 10.44,
+    "lon": -67.66,
+    "diepte_km": 5.1,
+    "mag": 1.9,
+    "plaats": "22. km al noroeste de Maracay",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29633.gif",
+    "eerst_gezien": "2026-11-23"
+  },
+  {
     "id": "29632",
     "datum_hlv": "2026-11-22",
     "tijd_hlv": "17:45",
