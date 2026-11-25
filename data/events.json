@@ -1,5 +1,44 @@
 [
   {
+    "id": "29655",
+    "datum_hlv": "2026-11-24",
+    "tijd_hlv": "18:00",
+    "utc": "2026-11-24T22:00:00Z",
+    "lat": 9.9,
+    "lon": -69.71,
+    "diepte_km": 9.6,
+    "mag": 2.4,
+    "plaats": "10. km al suroeste de Quibor",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29655.gif",
+    "eerst_gezien": "2026-11-25"
+  },
+  {
+    "id": "29654",
+    "datum_hlv": "2026-11-24",
+    "tijd_hlv": "16:54",
+    "utc": "2026-11-24T20:54:00Z",
+    "lat": 10.62,
+    "lon": -62,
+    "diepte_km": 26.8,
+    "mag": 3.3,
+    "plaats": "10. km al suroeste de Macuro",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29654.gif",
+    "eerst_gezien": "2026-11-25"
+  },
+  {
+    "id": "29653",
+    "datum_hlv": "2026-11-24",
+    "tijd_hlv": "15:54",
+    "utc": "2026-11-24T19:54:00Z",
+    "lat": 10.05,
+    "lon": -67.28,
+    "diepte_km": 1.2,
+    "mag": 2,
+    "plaats": "18. km al noreste de San Juan de los Morros",
+    "rapport": "http://www.funvisis.gob.ve/old/images/reportes/2026/11/reporte_29653.gif",
+    "eerst_gezien": "2026-11-25"
+  },
+  {
     "id": "29652",
     "datum_hlv": "2026-11-24",
     "tijd_hlv": "09:35",
