@@ -1,8 +1,8 @@
 {
-  "laatste_controle_utc": "2026-11-27T15:04:09Z",
-  "laatste_wijziging_utc": "2026-11-27T15:04:09Z",
-  "aantal_events": 4586,
-  "nieuwste_beving_utc": "2026-11-27T14:09:00Z",
+  "laatste_controle_utc": "2026-11-28T00:36:45Z",
+  "laatste_wijziging_utc": "2026-11-28T00:36:45Z",
+  "aantal_events": 4590,
+  "nieuwste_beving_utc": "2026-11-27T22:21:00Z",
   "controle_per_maand": {
     "2026-01": {
       "funvisis_teller": 132,
@@ -65,9 +65,9 @@
       "klopt": true
     },
     "2026-11": {
-      "funvisis_teller": 298,
-      "geparsed": 298,
-      "unieke_ids": 298,
+      "funvisis_teller": 302,
+      "geparsed": 302,
+      "unieke_ids": 302,
       "klopt": true
     }
   },
